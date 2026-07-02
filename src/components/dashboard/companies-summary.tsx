@@ -28,6 +28,7 @@ export function CompaniesSummary() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -75,6 +76,7 @@ export function CompaniesSummary() {
             ))}
           </TableBody>
         </Table>
+        </div>
       </CardContent>
     </Card>
   )

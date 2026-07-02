@@ -157,24 +157,24 @@ function NettingResultDialog({ open, onClose }: DialogProps) {
           <CardContent className="space-y-5">
             {/* Stats strip */}
             <div className="grid grid-cols-3 divide-x divide-x-reverse divide-border rounded-lg border bg-muted/30 text-center">
-              <div className="px-3 py-3">
-                <p className="text-2xl font-bold tabular-nums text-emerald-600">
+              <div className="px-2 py-3">
+                <p className="text-xl font-bold tabular-nums text-emerald-600 sm:text-2xl">
                   {(COUNT_BEFORE - COUNT_AFTER).toLocaleString('ar-SA')}
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   تحويلات محذوفة
                 </p>
               </div>
-              <div className="px-3 py-3">
-                <p className="text-2xl font-bold tabular-nums text-primary">
+              <div className="px-2 py-3">
+                <p className="text-xl font-bold tabular-nums text-primary sm:text-2xl">
                   {formatSar(VOLUME_SAVED, true)}
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   حجم موفّر
                 </p>
               </div>
-              <div className="px-3 py-3">
-                <p className="text-2xl font-bold tabular-nums">
+              <div className="px-2 py-3">
+                <p className="text-xl font-bold tabular-nums sm:text-2xl">
                   {VOLUME_REDUCTION_PCT.toLocaleString('ar-SA')}%
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">

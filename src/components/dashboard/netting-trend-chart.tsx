@@ -38,8 +38,8 @@ export function NettingTrendChart() {
           الحجم الإجمالي مقابل الحجم بعد المقاصة والتوفير
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[280px] w-full">
+      <CardContent className="overflow-hidden">
+        <ChartContainer config={chartConfig} className="h-[260px] w-full sm:h-[280px]">
           <AreaChart data={monthlyTrend}>
             <defs>
               <linearGradient id="fillNetted" x1="0" y1="0" x2="0" y2="1">

@@ -328,7 +328,9 @@ export function DebtsPage() {
         </CardHeader>
 
         <CardContent>
-          <DebtTable rows={filtered} />
+          <div className="overflow-x-auto">
+            <DebtTable rows={filtered} />
+          </div>
         </CardContent>
       </Card>
     </div>

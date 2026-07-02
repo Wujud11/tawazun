@@ -46,6 +46,7 @@ export function DebtSummary() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -76,6 +77,7 @@ export function DebtSummary() {
             ))}
           </TableBody>
         </Table>
+        </div>
       </CardContent>
     </Card>
   )

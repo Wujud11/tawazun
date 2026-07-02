@@ -34,8 +34,8 @@ export function CompanyDebtChart() {
           مقارنة المبالغ المستحقة الدفع والقبض
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[280px] w-full">
+      <CardContent className="overflow-hidden">
+        <ChartContainer config={chartConfig} className="h-[260px] w-full sm:h-[280px]">
           <BarChart data={companyDebtShares} barGap={4}>
             <CartesianGrid vertical={false} strokeDasharray="3 3" />
             <XAxis

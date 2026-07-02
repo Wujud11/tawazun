@@ -269,7 +269,9 @@ export function CompaniesPage() {
           )}
         </CardHeader>
         <CardContent>
-          <CompaniesTable rows={filtered} />
+          <div className="overflow-x-auto">
+            <CompaniesTable rows={filtered} />
+          </div>
         </CardContent>
       </Card>
     </div>
