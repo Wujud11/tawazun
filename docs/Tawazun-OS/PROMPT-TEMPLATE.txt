@@ -1,0 +1,71 @@
+Mission ID
+----------
+[MXX — Mission Title]
+
+
+Goal
+----
+[One or two sentences describing the single outcome this mission must achieve.]
+
+
+Context
+-------
+[Brief description of where this mission sits in the project lifecycle.
+What state is the project in before this mission starts?]
+
+
+Files to Read
+-------------
+[List every file the AI must read before making any changes.
+Example:
+- src/components/example.tsx
+- docs/Tawazun-OS/Missions/MXX.md]
+
+
+Files Allowed to Modify
+-----------------------
+[Explicit list of files or folders the AI is permitted to change during this mission.
+Example:
+- src/components/example.tsx
+- src/pages/example.tsx]
+
+
+Files Forbidden to Modify
+-------------------------
+[Explicit list of files or folders the AI must never touch during this mission.
+Example:
+- package.json
+- src/data/
+- docs/]
+
+
+Implementation Tasks
+--------------------
+[Numbered, ordered list of exact steps the AI must execute.
+1. 
+2. 
+3. ]
+
+
+Validation Steps
+----------------
+[Numbered checklist to confirm the mission was completed correctly.
+These must map directly to the linked test file (TXX.md).
+1. 
+2. 
+3. ]
+
+
+Expected Output
+---------------
+[Describe the exact state of the project after a successful mission.
+List which files were created, modified, or deleted.]
+
+
+Stop Condition
+--------------
+Stop here.
+Do not continue to the next mission.
+Do not suggest next steps.
+Do not make any additional changes.
+Wait for the user to reply with one of: Done / Retry / Rollback.
