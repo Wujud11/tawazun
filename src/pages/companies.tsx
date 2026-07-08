@@ -30,6 +30,7 @@ import {
 import { companies } from '@/data/dashboard-mock'
 import { formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 import type { Company } from '@/types/dashboard'
 
 type CompanyStatus = 'creditor' | 'debtor' | 'balanced'
@@ -53,12 +54,12 @@ const totalPayable = companies.reduce((s, c) => s + c.totalPayable, 0)
 const totalReceivable = companies.reduce((s, c) => s + c.totalReceivable, 0)
 const totalNet = companies.reduce((s, c) => s + c.netBalance, 0)
 
-const summaryCards = [
+const summaryCards: StatCard[] = [
   {
     id: 'count',
     label: 'عدد الشركات',
     value: companies.length.toLocaleString('ar-SA'),
-    suffix: 'شركة في الشبكة',
+    sub: 'شركة في الشبكة',
     icon: Building2,
     colorClass: 'bg-primary/10 text-primary',
   },
@@ -66,7 +67,7 @@ const summaryCards = [
     id: 'payable',
     label: 'إجمالي المستحق الدفع',
     value: formatSar(totalPayable, true),
-    suffix: 'على جميع الشركات',
+    sub: 'على جميع الشركات',
     icon: TrendingDown,
     colorClass: 'bg-red-500/10 text-red-600',
   },
@@ -74,7 +75,7 @@ const summaryCards = [
     id: 'receivable',
     label: 'إجمالي المستحق القبض',
     value: formatSar(totalReceivable, true),
-    suffix: 'لجميع الشركات',
+    sub: 'لجميع الشركات',
     icon: TrendingUp,
     colorClass: 'bg-emerald-500/10 text-emerald-600',
   },
@@ -82,7 +83,7 @@ const summaryCards = [
     id: 'net',
     label: 'الصافي الإجمالي للشبكة',
     value: formatSar(Math.abs(totalNet), true),
-    suffix: totalNet <= 0 ? 'صافي مدين' : 'صافي دائن',
+    sub: totalNet <= 0 ? 'صافي مدين' : 'صافي دائن',
     icon: Wallet,
     colorClass:
       totalNet < 0
@@ -90,32 +91,6 @@ const summaryCards = [
         : 'bg-emerald-500/10 text-emerald-600',
   },
 ]
-
-function CompanySummaryCards() {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {summaryCards.map((card) => {
-        const Icon = card.icon
-        return (
-          <Card key={card.id} className="shadow-sm">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                {card.label}
-              </CardTitle>
-              <div className={cn('rounded-lg p-2', card.colorClass)}>
-                <Icon className="size-4" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold tracking-tight">{card.value}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{card.suffix}</p>
-            </CardContent>
-          </Card>
-        )
-      })}
-    </div>
-  )
-}
 
 function CompanyStatusBadge({ company }: { company: Company }) {
   const status = getStatus(company.netBalance)
@@ -229,7 +204,7 @@ export function CompaniesPage() {
         </p>
       </div>
 
-      <CompanySummaryCards />
+      <StatCardGrid cards={summaryCards} />
 
       <Card className="shadow-sm">
         <CardHeader>

@@ -36,6 +36,7 @@ import {
 } from '@/data/debts-mock'
 import { formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 
 // ─── constants ────────────────────────────────────────────────────────────────
 
@@ -65,7 +66,7 @@ const totalValue = debtRecords.reduce((s, d) => s + d.amount, 0)
 const avgValue = Math.round(totalValue / debtRecords.length)
 const maxValue = Math.max(...debtRecords.map((d) => d.amount))
 
-const kpiCards = [
+const kpiCards: StatCard[] = [
   {
     id: 'total-value',
     label: 'إجمالي قيمة الديون',
@@ -101,32 +102,6 @@ const kpiCards = [
 ]
 
 // ─── sub-components ───────────────────────────────────────────────────────────
-
-function KpiCards() {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {kpiCards.map((card) => {
-        const Icon = card.icon
-        return (
-          <Card key={card.id} className="shadow-sm">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                {card.label}
-              </CardTitle>
-              <div className={cn('rounded-lg p-2', card.colorClass)}>
-                <Icon className="size-4" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold tracking-tight">{card.value}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{card.sub}</p>
-            </CardContent>
-          </Card>
-        )
-      })}
-    </div>
-  )
-}
 
 function DebtStatusBadge({ status }: { status: DebtRecordStatus }) {
   const { label, variant, icon: Icon } = statusConfig[status]
@@ -263,7 +238,7 @@ export function DebtsPage() {
       </div>
 
       {/* KPI Cards */}
-      <KpiCards />
+      <StatCardGrid cards={kpiCards} />
 
       {/* Table Card */}
       <Card className="shadow-sm">

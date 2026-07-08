@@ -35,6 +35,7 @@ import {
 } from '@/data/netting-mock'
 import { formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 
 // ─── types ────────────────────────────────────────────────────────────────────
 
@@ -45,7 +46,7 @@ type DialogProps = {
 
 // ─── KPI data ─────────────────────────────────────────────────────────────────
 
-const kpiCards = [
+const kpiCards: StatCard[] = [
   {
     id: 'before',
     label: 'التحويلات قبل المقاصة',
@@ -401,27 +402,7 @@ export function NettingPage() {
       </div>
 
       {/* KPI cards */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {kpiCards.map((card) => {
-          const Icon = card.icon
-          return (
-            <Card key={card.id} className="shadow-sm">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {card.label}
-                </CardTitle>
-                <div className={cn('rounded-lg p-2', card.colorClass)}>
-                  <Icon className="size-4" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-2xl font-bold tracking-tight">{card.value}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{card.sub}</p>
-              </CardContent>
-            </Card>
-          )
-        })}
-      </div>
+      <StatCardGrid cards={kpiCards} />
 
       {/* Before / After panels */}
       <div className="grid gap-6 xl:grid-cols-2">
