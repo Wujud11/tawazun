@@ -1,37 +1,23 @@
-export type NettingTx = {
-  id: string
-  from: string
-  to: string
-  amount: number
-}
+import { debtRecords } from '@/data/debts-mock'
+import { deriveNetting } from '@/lib/derive'
 
-// ─── Before netting ───────────────────────────────────────────────────────────
-export const beforeNetting: NettingTx[] = [
-  { id: 'b1', from: 'شركة ألف للتجارة', to: 'شركة باء القابضة', amount: 850_000 },
-  { id: 'b2', from: 'شركة باء القابضة', to: 'شركة جيم للمقاولات', amount: 620_000 },
-  { id: 'b3', from: 'شركة جيم للمقاولات', to: 'شركة ألف للتجارة', amount: 480_000 },
-  { id: 'b4', from: 'شركة دال للخدمات', to: 'شركة باء القابضة', amount: 320_000 },
-  { id: 'b5', from: 'شركة هـ للتمويل', to: 'شركة واو للتوريد', amount: 230_000 },
-  { id: 'b6', from: 'شركة واو للتوريد', to: 'شركة دال للخدمات', amount: 195_000 },
-]
+// NettingTx is defined in derive.ts; re-exported here so existing consumers
+// (netting.tsx) continue to import it from this module without changes.
+export type { NettingTx } from '@/lib/derive'
 
-// ─── After netting (AI-optimised) ────────────────────────────────────────────
-// Cycle ألف/باء/جيم is resolved; chain واو/دال offset applied
-export const afterNetting: NettingTx[] = [
-  { id: 'a1', from: 'شركة ألف للتجارة', to: 'شركة باء القابضة', amount: 370_000 },
-  { id: 'a2', from: 'شركة باء القابضة', to: 'شركة جيم للمقاولات', amount: 140_000 },
-  { id: 'a3', from: 'شركة هـ للتمويل', to: 'شركة دال للخدمات', amount: 125_000 },
-]
+// ─── Deterministic net settlement from active debtRecords ─────────────────────
+// Active records: 11 obligations, 4,743,000 SAR gross volume
+// Result        : 7 settlement transfers, 1,820,000 SAR net volume (62% reduction)
 
-// ─── Derived stats ────────────────────────────────────────────────────────────
-export const VOLUME_BEFORE = beforeNetting.reduce((s, t) => s + t.amount, 0) // 2,695,000
-export const VOLUME_AFTER = afterNetting.reduce((s, t) => s + t.amount, 0)   // 635,000
-export const VOLUME_SAVED = VOLUME_BEFORE - VOLUME_AFTER                      // 2,060,000
-export const COUNT_BEFORE = beforeNetting.length                              // 6
-export const COUNT_AFTER = afterNetting.length                                // 3
-export const COUNT_REDUCTION_PCT = Math.round(
-  (1 - COUNT_AFTER / COUNT_BEFORE) * 100,
-)                                                                             // 50
-export const VOLUME_REDUCTION_PCT = Math.round(
-  (1 - VOLUME_AFTER / VOLUME_BEFORE) * 100,
-)                                                                             // 76
+const result = deriveNetting(debtRecords)
+
+export const beforeNetting = result.beforeTxs
+export const afterNetting = result.afterTxs
+
+export const VOLUME_BEFORE = result.volumeBefore    // 4,743,000
+export const VOLUME_AFTER = result.volumeAfter      // 1,820,000
+export const VOLUME_SAVED = result.volumeSaved      // 2,923,000
+export const COUNT_BEFORE = result.countBefore      // 11
+export const COUNT_AFTER = result.countAfter        // 7
+export const COUNT_REDUCTION_PCT = result.countReductionPct   // 36
+export const VOLUME_REDUCTION_PCT = result.volumeReductionPct // 62

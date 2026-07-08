@@ -16,7 +16,7 @@ export function formatPercent(value: number): string {
 
 export function formatRelativeTime(isoDate: string): string {
   const date = new Date(isoDate)
-  const now = new Date('2026-06-29T12:00:00')
+  const now = new Date()
   const diffMs = now.getTime() - date.getTime()
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
 
