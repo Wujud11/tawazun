@@ -6,15 +6,11 @@ import type {
   KpiMetric,
   TransferComparison,
 } from '@/types/dashboard'
+import { computeNetTransfers, type NettingTx } from './netting-core'
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
 
-export type NettingTx = {
-  id: string
-  from: string
-  to: string
-  amount: number
-}
+export type { NettingTx }
 
 export type CompanyMeta = {
   id: string
@@ -109,7 +105,8 @@ export function deriveCompanyDebtShares(
  * Output : 7 settlement transfers → net volume 1,820,000 SAR (62% reduction)
  */
 export function deriveNetting(records: DebtRecord[]): NettingResult {
-  const active = records.filter(isActive)
+  const { active, netTransfers: afterTxs } = computeNetTransfers(records)
+
   const volumeBefore = active.reduce((s, r) => s + r.amount, 0)
   const countBefore = active.length
 
@@ -119,39 +116,6 @@ export function deriveNetting(records: DebtRecord[]): NettingResult {
     to: r.creditor,
     amount: r.amount,
   }))
-
-  // Compute net balance per company (positive = net creditor, negative = net debtor)
-  const balances = new Map<string, number>()
-  for (const r of active) {
-    balances.set(r.creditor, (balances.get(r.creditor) ?? 0) + r.amount)
-    balances.set(r.debtor, (balances.get(r.debtor) ?? 0) - r.amount)
-  }
-
-  const credQueue = [...balances.entries()]
-    .filter(([, b]) => b > 0)
-    .map(([name, amount]) => ({ name, amount }))
-    .sort((a, b) => b.amount - a.amount)
-
-  const debtQueue = [...balances.entries()]
-    .filter(([, b]) => b < 0)
-    .map(([name, amount]) => ({ name, amount: -amount }))
-    .sort((a, b) => b.amount - a.amount)
-
-  const afterTxs: NettingTx[] = []
-  let txId = 1
-  let ci = 0
-  let di = 0
-
-  while (ci < credQueue.length && di < debtQueue.length) {
-    const cred = credQueue[ci]
-    const debt = debtQueue[di]
-    const amount = Math.min(cred.amount, debt.amount)
-    afterTxs.push({ id: `n${txId++}`, from: debt.name, to: cred.name, amount })
-    cred.amount -= amount
-    debt.amount -= amount
-    if (cred.amount === 0) ci++
-    if (debt.amount === 0) di++
-  }
 
   const volumeAfter = afterTxs.reduce((s, t) => s + t.amount, 0)
 

@@ -1,0 +1,130 @@
+Mission ID
+----------
+M01 — Project Audit
+
+
+Goal
+----
+Audit the current Tawazun prototype and produce a factual written report.
+Do not change any application code. Do not install anything.
+
+
+Context
+-------
+This is the first mission. The project is a React + TypeScript + Vite prototype
+built for a hackathon. It contains mock data and a frontend-only implementation.
+The audit establishes a verified baseline before any feature development begins.
+
+
+Files to Read
+-------------
+- package.json
+- package-lock.json
+- vite.config.ts
+- tsconfig.json
+- tsconfig.app.json
+- tsconfig.node.json
+- components.json
+- index.html
+- src/styles/globals.css
+- src/routes/router.tsx
+- src/main.tsx
+- src/App.tsx
+- src/pages/dashboard.tsx
+- src/pages/companies.tsx
+- src/pages/debts.tsx
+- src/pages/netting.tsx
+- src/pages/index.ts
+- src/components/layout/app-layout.tsx
+- src/components/layout/sidebar.tsx
+- src/components/layout/header.tsx
+- src/components/layout/root-layout.tsx
+- src/components/dashboard/kpi-cards.tsx
+- src/components/dashboard/netting-trend-chart.tsx
+- src/components/dashboard/company-debt-chart.tsx
+- src/components/dashboard/debt-summary.tsx
+- src/components/dashboard/companies-summary.tsx
+- src/components/dashboard/recent-activity.tsx
+- src/components/dashboard/transfers-comparison.tsx
+- src/data/dashboard-mock.ts
+- src/data/debts-mock.ts
+- src/data/netting-mock.ts
+- src/types/dashboard.ts
+- src/types/index.ts
+- src/lib/utils.ts
+- src/lib/format.ts
+- src/lib/motion.ts
+- src/providers/direction-provider.tsx
+- src/providers/direction-context.ts
+- docs/Tawazun-OS/Missions/M01.md
+
+
+Files Allowed to Modify
+-----------------------
+- docs/Tawazun-OS/Missions/M01.md
+  (append the audit report under the heading "## Audit Report" at the end of the file)
+
+
+Files Forbidden to Modify
+-------------------------
+- Everything inside src/
+- package.json
+- package-lock.json
+- vite.config.ts
+- tsconfig.json, tsconfig.app.json, tsconfig.node.json
+- components.json
+- index.html
+- public/
+- Any other file not listed above
+
+
+Implementation Tasks
+--------------------
+1. Read every file listed in "Files to Read" above.
+2. Run the build command and record the result:
+   npm run build
+3. Check for TypeScript errors:
+   npx tsc --noEmit
+4. Inspect the project structure and identify:
+   a. All pages and their routes
+   b. All components and their roles
+   c. All data files — confirm whether data is mock/hardcoded or real
+   d. All type definitions
+   e. All utility and helper files
+   f. All providers and context
+5. Review package.json for:
+   a. Confirmed installed dependencies and their versions
+   b. Any unused or dead dependencies
+   c. Available scripts (dev, build, lint, preview)
+6. Check for missing environment variables or .env files.
+7. Identify any broken imports, missing files, or dead code.
+8. Identify high-risk areas for future development.
+9. Append the full audit report to docs/Tawazun-OS/Missions/M01.md
+   under the heading "## Audit Report".
+
+
+Validation Steps
+----------------
+1. Confirm docs/Tawazun-OS/Missions/M01.md contains a section "## Audit Report".
+2. Confirm the build result is recorded in the report.
+3. Confirm the TypeScript check result is recorded in the report.
+4. Confirm no application files were modified (git status should show only M01.md changed).
+5. Confirm no packages were installed.
+See Tests/T01.md for the full test checklist.
+
+
+Expected Output
+---------------
+- docs/Tawazun-OS/Missions/M01.md is updated with "## Audit Report" appended at the end.
+- All other files remain unchanged.
+- No new files created.
+- No packages installed.
+
+
+Stop Condition
+--------------
+Stop here.
+Do not continue to M02.
+Do not suggest next steps.
+Do not make any additional changes.
+Wait for the user to reply with one of: Done / Retry / Rollback.

@@ -1,0 +1,157 @@
+Mission ID
+----------
+M03 — Code Cleanup and Reusable Components
+
+
+Goal
+----
+Extract the duplicated KPI stat card grid pattern from three page files into a
+single shared component. Do not change any UI behaviour, styling, or data.
+
+
+Context
+-------
+The M01 audit confirmed that the following three pages each contain their own
+independent implementation of the same KPI card grid pattern:
+
+  src/pages/debts.tsx
+    - Local `kpiCards` array (lines ~68–101): { id, label, value, sub, icon, colorClass }
+    - Local `KpiCards` function component (lines ~105–129)
+    - Renders a 4-column grid of Cards: icon header + large value + small sub-label
+
+  src/pages/netting.tsx
+    - Local `kpiCards` array (lines ~48–81): same shape
+    - Inline KPI render inside NettingPage (lines ~404–424): same grid structure
+
+  src/pages/companies.tsx
+    - Local `summaryCards` array (lines ~56–92): { id, label, value, suffix, icon, colorClass }
+      (key is `suffix` instead of `sub` — treat as equivalent)
+    - Local `CompanySummaryCards` function (lines ~94–118): same grid structure
+
+The existing shared component src/components/dashboard/kpi-cards.tsx is
+dashboard-specific (bound to dashboardKpis data, has change-percentage indicator)
+and must NOT be modified or used as the basis for this extraction.
+
+
+Files to Read
+-------------
+- src/pages/debts.tsx
+- src/pages/netting.tsx
+- src/pages/companies.tsx
+- src/components/dashboard/kpi-cards.tsx  (reference only — do not modify)
+- src/components/ui/card.tsx              (reference for Card primitives)
+
+
+Files Allowed to Modify
+-----------------------
+- src/components/ui/stat-cards.tsx   (new — create this file)
+- src/pages/debts.tsx
+- src/pages/netting.tsx
+- src/pages/companies.tsx
+
+
+Files Forbidden to Modify
+-------------------------
+- src/components/dashboard/kpi-cards.tsx
+- src/components/dashboard/index.ts
+- Any other existing file in src/components/
+- src/pages/dashboard.tsx
+- src/pages/index.ts
+- src/data/ (all files)
+- src/types/ (all files)
+- src/lib/ (all files)
+- src/routes/ (all files)
+- src/providers/ (all files)
+- src/hooks/ (all files)
+- src/main.tsx
+- src/App.tsx
+- src/styles/globals.css
+- package.json, package-lock.json
+- vite.config.ts
+- tsconfig.json, tsconfig.app.json, tsconfig.node.json
+- index.html, components.json
+- docs/ (all files)
+
+
+Implementation Tasks
+--------------------
+1. Read all files listed in "Files to Read" above.
+
+2. Create src/components/ui/stat-cards.tsx.
+   Define a StatCard type:
+     type StatCard = {
+       id: string
+       label: string
+       value: string
+       sub: string
+       icon: React.ElementType
+       colorClass: string
+     }
+   Export a StatCardGrid component:
+     - Props: { cards: StatCard[] }
+     - Renders: <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+     - Each card: Card > CardHeader (label left, icon right) > CardContent (value, sub)
+     - Match the exact className values used in the three page implementations.
+
+3. Update src/pages/debts.tsx.
+   - Import StatCardGrid from '@/components/ui/stat-cards'.
+   - Replace the local `KpiCards` function component and `kpiCards` array with
+     a `kpiCards` const of type StatCard[] (same data, `sub` key unchanged).
+   - Replace <KpiCards /> in the JSX with <StatCardGrid cards={kpiCards} />.
+   - Remove any imports that are no longer used after this change.
+
+4. Update src/pages/netting.tsx.
+   - Import StatCardGrid from '@/components/ui/stat-cards'.
+   - The existing `kpiCards` array already uses `sub` — keep it, add StatCard type.
+   - Replace the inline KPI card grid in NettingPage JSX with
+     <StatCardGrid cards={kpiCards} />.
+   - Remove any imports that are no longer used after this change.
+
+5. Update src/pages/companies.tsx.
+   - Import StatCardGrid from '@/components/ui/stat-cards'.
+   - Rename the `summaryCards` array entries: `suffix` → `sub`.
+   - Replace the local `CompanySummaryCards` function with
+     <StatCardGrid cards={summaryCards} /> inline at the call site.
+   - Remove any imports that are no longer used after this change.
+
+6. Run the build:
+   npm run build
+
+7. Run the TypeScript check:
+   npx tsc --noEmit
+
+8. If either check fails, fix only the allowed files until both pass.
+
+
+Validation Steps
+----------------
+1. Confirm src/components/ui/stat-cards.tsx exists and exports StatCardGrid.
+2. Confirm src/pages/debts.tsx has no local KpiCards function or kpiCards array
+   definition (only an import from stat-cards and a data const).
+3. Confirm src/pages/netting.tsx has no inline KPI grid div block.
+4. Confirm src/pages/companies.tsx has no local CompanySummaryCards function.
+5. Confirm src/components/dashboard/kpi-cards.tsx is byte-for-byte unchanged.
+6. Run npm run build — must pass with exit code 0.
+7. Run npx tsc --noEmit — must pass with 0 errors.
+8. Open all four pages in the browser and confirm KPI cards render identically.
+See Tests/T03.md for the full test checklist.
+
+
+Expected Output
+---------------
+- src/components/ui/stat-cards.tsx created (new file, ~40 lines)
+- src/pages/debts.tsx modified (local KpiCards replaced)
+- src/pages/netting.tsx modified (inline KPI grid replaced)
+- src/pages/companies.tsx modified (local CompanySummaryCards replaced)
+- No other files created or modified.
+- No packages installed.
+- All pages render identically.
+
+
+Stop Condition
+--------------
+Stop here.
+Do not continue to M04.
+Do not suggest next steps.
+Do not make any additional changes.
+Wait for the user to reply with one of: Done / Retry / Rollback.

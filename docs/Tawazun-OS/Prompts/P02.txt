@@ -1,0 +1,155 @@
+Mission ID
+----------
+M02 — Mock Data Consistency and Cleanup
+
+
+Goal
+----
+Fix two confirmed data inconsistencies in dashboard-mock.ts:
+1. Add the two missing companies (شركة زين للتطوير and شركة حاء للاستشارات) to the
+   companies array so every company referenced in debts-mock.ts exists in the
+   canonical company list.
+2. Remove the dead formatSar and formatCompactSar exports from dashboard-mock.ts.
+Do not change any other file.
+
+
+Context
+-------
+The M01 audit confirmed:
+- debts-mock.ts references شركة زين للتطوير and شركة حاء للاستشارات in debt records.
+- Neither company appears in the companies array in dashboard-mock.ts.
+- dashboard-mock.ts exports formatSar and formatCompactSar which are never imported
+  by any file — the canonical versions live in src/lib/format.ts.
+- All other files are clean and must not be touched.
+
+
+Files to Read
+-------------
+- src/data/dashboard-mock.ts
+- src/data/debts-mock.ts
+- src/data/netting-mock.ts
+- src/types/dashboard.ts
+- src/lib/format.ts
+- src/pages/companies.tsx
+- src/pages/debts.tsx
+- src/components/dashboard/companies-summary.tsx
+- src/components/dashboard/debt-summary.tsx
+- docs/Tawazun-OS/Missions/M02.md
+
+
+Files Allowed to Modify
+-----------------------
+- src/data/dashboard-mock.ts
+
+
+Files Forbidden to Modify
+-------------------------
+- src/data/debts-mock.ts
+- src/data/netting-mock.ts
+- src/lib/format.ts
+- src/lib/utils.ts
+- src/lib/motion.ts
+- src/types/ (all files)
+- src/components/ (all files)
+- src/pages/ (all files)
+- src/providers/ (all files)
+- src/routes/ (all files)
+- src/hooks/ (all files)
+- src/main.tsx
+- src/App.tsx
+- src/styles/globals.css
+- package.json
+- package-lock.json
+- vite.config.ts
+- tsconfig.json, tsconfig.app.json, tsconfig.node.json
+- index.html
+- components.json
+- docs/ (all files)
+
+
+Implementation Tasks
+--------------------
+1. Read all files listed in "Files to Read" above.
+
+2. From debts-mock.ts, extract every unique company name that appears as
+   creditor or debtor. Identify which ones are absent from the companies array
+   in dashboard-mock.ts.
+
+   Confirmed missing companies:
+   - شركة زين للتطوير  (appears in dt-06 as creditor, dt-09 as debtor, dt-14 as creditor)
+   - شركة حاء للاستشارات (appears in dt-07 as creditor, dt-13 as debtor)
+
+3. Add شركة زين للتطوير to the companies array in dashboard-mock.ts.
+   Derive realistic mock values from its active debt records in debts-mock.ts:
+   - dt-06: زين is creditor for 175,000 (overdue)
+   - dt-09: باء is creditor, زين is debtor for 1,200,000 (pending)
+   - dt-14: زين is creditor for 88,000 (pending)
+   Use:
+     id: 'c7'
+     name: 'شركة زين للتطوير'
+     nameEn: 'Zain Development'
+     sector: 'تطوير'
+     totalReceivable: 263,000  (175,000 + 88,000)
+     totalPayable: 1,200,000
+     netBalance: -937,000  (263,000 - 1,200,000)
+     activeDebts: 3
+
+4. Add شركة حاء للاستشارات to the companies array in dashboard-mock.ts.
+   Derive realistic mock values from its active (non-settled) debt records:
+   - dt-07: حاء is creditor for 490,000 (pending — active)
+   - dt-13: حاء is debtor for 540,000 (settled — excluded)
+   Use:
+     id: 'c8'
+     name: 'شركة حاء للاستشارات'
+     nameEn: 'Haa Consulting'
+     sector: 'استشارات'
+     totalReceivable: 490,000
+     totalPayable: 0
+     netBalance: 490,000
+     activeDebts: 1
+
+5. Remove the dead formatSar function export from dashboard-mock.ts.
+
+6. Remove the dead formatCompactSar function export from dashboard-mock.ts.
+
+7. Run the build:
+   npm run build
+
+8. Run the TypeScript check:
+   npx tsc --noEmit
+
+9. If either check fails, fix only dashboard-mock.ts until both pass.
+
+
+Validation Steps
+----------------
+1. Confirm every company name in debts-mock.ts exists in the companies array
+   in dashboard-mock.ts.
+2. Confirm formatSar is no longer exported from dashboard-mock.ts.
+3. Confirm formatCompactSar is no longer exported from dashboard-mock.ts.
+4. Confirm no other exports or data were removed from dashboard-mock.ts.
+5. Run npm run build — must pass.
+6. Run npx tsc --noEmit — must pass with 0 errors.
+7. Open the browser and verify all four pages load without errors.
+See Tests/T02.md for the full test checklist.
+
+
+Expected Output
+---------------
+- src/data/dashboard-mock.ts is modified:
+  - companies array now contains 8 entries (previously 6)
+  - formatSar export removed
+  - formatCompactSar export removed
+  - All other content unchanged
+- No other files modified.
+- No new files created.
+- No packages installed.
+
+
+Stop Condition
+--------------
+Stop here.
+Do not continue to M03.
+Do not suggest next steps.
+Do not make any additional changes.
+Wait for the user to reply with one of: Done / Retry / Rollback.
