@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: tawazun-api
+    runtime: node
+    buildCommand: npm install && npm run render:build
+    startCommand: npm run server:start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false

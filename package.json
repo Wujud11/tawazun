@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "server:dev": "tsx watch server/index.ts",
     "server:build": "tsc -p server/tsconfig.json",
-    "server:start": "node dist/server/index.js"
+    "server:start": "node dist/server/index.js",
+    "render:build": "npm run server:build"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.2.0",

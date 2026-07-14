@@ -28,6 +28,7 @@ import { debtRecords } from '@/data/debts-mock'
 import { formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
+import { API_BASE } from '@/lib/api'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -576,7 +577,7 @@ export function NettingPage() {
     setApiError(null)
 
     try {
-      const res = await fetch('/api/ai/netting-analysis', {
+      const res = await fetch(`${API_BASE}/api/ai/netting-analysis`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ companies, debtRecords }),
