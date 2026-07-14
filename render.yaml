@@ -3,7 +3,7 @@ services:
     name: tawazun-api
     runtime: node
     buildCommand: npm install && npm run render:build
-    startCommand: npm run server:start
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
