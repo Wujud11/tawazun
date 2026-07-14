@@ -6,6 +6,7 @@ import type {
   KpiMetric,
   TransferComparison,
 } from '@/types/dashboard'
+import { formatNumber, formatPercent, formatSar } from './format'
 import { computeNetTransfers, type NettingTx } from './netting-core'
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
@@ -158,28 +159,28 @@ export function deriveDashboardKpis(
     {
       id: 'total-debts',
       label: 'إجمالي الديون',
-      value: netting.volumeBefore.toLocaleString('ar-SA'),
+      value: formatSar(netting.volumeBefore),
       change: 12.4,
       changeLabel: 'مقارنة بالشهر الماضي',
     },
     {
       id: 'active-companies',
       label: 'الشركات النشطة',
-      value: activeCompanies.size.toLocaleString('ar-SA'),
+      value: formatNumber(activeCompanies.size),
       change: 8.3,
       changeLabel: 'شركة جديدة هذا الربع',
     },
     {
       id: 'netting-efficiency',
       label: 'كفاءة المقاصة',
-      value: `${netting.volumeReductionPct.toLocaleString('ar-SA')}%`,
+      value: formatPercent(netting.volumeReductionPct),
       change: netting.volumeReductionPct,
       changeLabel: 'تحسن بعد المقاصة الذكية',
     },
     {
       id: 'saved-transfers',
       label: 'تحويلات تم توفيرها',
-      value: savedTransfers.toLocaleString('ar-SA'),
+      value: formatNumber(savedTransfers),
       change: netting.countReductionPct,
       changeLabel: 'تقليل عدد التحويلات',
     },

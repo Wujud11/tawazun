@@ -15,12 +15,12 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { companies } from '@/data/dashboard-mock'
-import { formatSar } from '@/lib/format'
+import { formatNumber, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
 export function CompaniesSummary() {
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card">
       <CardHeader>
         <CardTitle>ملخص الشركات</CardTitle>
         <CardDescription>
@@ -69,7 +69,7 @@ export function CompaniesSummary() {
                   {formatSar(Math.abs(company.netBalance))}
                 </TableCell>
                 <TableCell className="text-center">
-                  {company.activeDebts.toLocaleString('ar-SA')}
+                  {formatNumber(company.activeDebts)}
                 </TableCell>
               </TableRow>
             ))}

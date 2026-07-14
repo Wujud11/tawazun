@@ -15,7 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { debts } from '@/data/dashboard-mock'
-import { formatSar } from '@/lib/format'
+import { formatDate, formatNumber, formatSar } from '@/lib/format'
 import type { DebtStatus } from '@/types/dashboard'
 
 const statusLabels: Record<DebtStatus, string> = {
@@ -37,11 +37,11 @@ export function DebtSummary() {
   const total = debts.reduce((sum, debt) => sum + debt.amount, 0)
 
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card">
       <CardHeader>
         <CardTitle>ملخص الديون</CardTitle>
         <CardDescription>
-          {debts.length.toLocaleString('ar-SA')} ديون نشطة — إجمالي{' '}
+          {formatNumber(debts.length)} ديون نشطة — إجمالي{' '}
           {formatSar(total)}
         </CardDescription>
       </CardHeader>
@@ -65,7 +65,7 @@ export function DebtSummary() {
                   {formatSar(debt.amount)}
                 </TableCell>
                 <TableCell className="text-muted-foreground">
-                  {new Date(debt.dueDate).toLocaleDateString('ar-SA')}
+                  {formatDate(debt.dueDate)}
                 </TableCell>
                 <TableCell>
                   <Badge variant={statusVariants[debt.status]}>

@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as RechartsPrimitive from 'recharts'
 
 import { cn } from '@/lib/utils'
+import { formatNumber } from '@/lib/format'
 
 const THEMES = { light: '', dark: '.dark' } as const
 
@@ -165,7 +166,7 @@ function ChartTooltipContent({
                 </span>
                 <span className="font-mono font-medium tabular-nums text-foreground">
                   {typeof item.value === 'number'
-                    ? item.value.toLocaleString('ar-SA')
+                    ? formatNumber(item.value)
                     : item.value}
                 </span>
               </div>

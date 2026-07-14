@@ -2,18 +2,21 @@ import {
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
+  Download,
+  FileText,
   Lightbulb,
   Loader2,
   Minus,
+  ShieldAlert,
   Sparkles,
   TrendingDown,
   TrendingUp,
+  X,
   Zap,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ElementType, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -22,10 +25,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { companies } from '@/data/dashboard-mock'
 import { debtRecords } from '@/data/debts-mock'
-import { formatSar } from '@/lib/format'
+import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 import { API_BASE } from '@/lib/api'
@@ -71,6 +73,7 @@ type DialogProps = {
   analysis: NettingAnalysisResult | null
   apiError: string | null
   countBefore: number
+  grossVolume: number
 }
 
 // ─── "Before" state — derived from debtRecords, no API required ───────────────
@@ -86,6 +89,25 @@ const beforeTxs: TxItem[] = activeRecords.map((r) => ({
 
 const grossVolume = activeRecords.reduce((s, r) => s + r.amount, 0)
 const countBefore = activeRecords.length
+
+const SEVERITY_STYLES: Record<RiskFlag['severity'], string> = {
+  high: 'border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30',
+  medium:
+    'border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/30',
+  low: 'border-border bg-muted/30',
+}
+
+const SEVERITY_BADGE: Record<RiskFlag['severity'], string> = {
+  high: 'text-red-700 bg-red-100 dark:text-red-400 dark:bg-red-950',
+  medium: 'text-amber-700 bg-amber-100 dark:text-amber-400 dark:bg-amber-950',
+  low: 'text-muted-foreground bg-muted',
+}
+
+const SEVERITY_LABEL: Record<RiskFlag['severity'], string> = {
+  high: 'عالي',
+  medium: 'متوسط',
+  low: 'منخفض',
+}
 
 // ─── TxRow ────────────────────────────────────────────────────────────────────
 
@@ -133,151 +155,369 @@ function TxRow({
 
 // ─── NettingResultDialog ──────────────────────────────────────────────────────
 
+function SectionCard({
+  icon: Icon,
+  title,
+  description,
+  children,
+  accentClass = 'text-primary',
+}: {
+  icon: ElementType
+  title: string
+  description?: string
+  children: ReactNode
+  accentClass?: string
+}) {
+  return (
+    <Card className="border-border/60 shadow-none">
+      <CardHeader className="pb-3">
+        <CardTitle className="flex items-center gap-2.5 text-base font-semibold">
+          <span
+            className={cn(
+              'flex size-8 items-center justify-center rounded-lg bg-muted',
+              accentClass,
+            )}
+          >
+            <Icon className="size-4" />
+          </span>
+          {title}
+        </CardTitle>
+        {description && <CardDescription>{description}</CardDescription>}
+      </CardHeader>
+      <CardContent className="pt-0">{children}</CardContent>
+    </Card>
+  )
+}
+
 function NettingResultDialog({
   open,
   onClose,
   analysis,
   apiError,
   countBefore: before,
+  grossVolume,
 }: DialogProps) {
+  const [isExporting, setIsExporting] = useState(false)
+
   useEffect(() => {
     if (!open) return
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
     }
-  }, [open])
+  }, [open, onClose])
 
   if (!open) return null
-
-  const afterTxs: TxItem[] = (analysis?.nettingOpportunities ?? []).map(
-    (op, i) => ({
-      id: `n${i + 1}`,
-      from: op.companies[0] ?? '',
-      to: op.companies[1] ?? '',
-      amount: op.netAmount,
-    }),
-  )
 
   const countAfter = analysis?.metrics.recommendedTransactions ?? 0
   const savedTransfers = before - countAfter
   const volumeSaved = analysis?.metrics.estimatedSavings ?? 0
   const efficiencyPct = analysis?.metrics.efficiencyPct ?? 0
   const volumeAfter = analysis?.metrics.totalNetVolume ?? 0
+  const countReduction =
+    before > 0 ? Math.round((1 - countAfter / before) * 100) : 0
+
+  async function handleExportPdf() {
+    if (!analysis || isExporting) return
+    setIsExporting(true)
+    try {
+      const { exportNettingPdf } = await import('@/lib/export-netting-pdf')
+      await exportNettingPdf({
+        analysis,
+        companies,
+        countBefore: before,
+        grossVolume,
+      })
+    } catch (err) {
+      console.error('[netting] PDF export failed', err)
+    } finally {
+      setIsExporting(false)
+    }
+  }
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/55 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Panel */}
-      <div className="relative z-10 w-full max-w-md">
-        <Card className="shadow-2xl">
-          {/* Header */}
-          <CardHeader className="pb-4 text-center">
-            <div
-              className={cn(
-                'mx-auto mb-3 flex size-14 items-center justify-center rounded-full',
-                apiError
-                  ? 'bg-red-100 dark:bg-red-950'
-                  : 'bg-emerald-100 dark:bg-emerald-950',
-              )}
-            >
-              {apiError ? (
-                <AlertTriangle className="size-7 text-red-600" />
-              ) : (
-                <CheckCircle2 className="size-7 text-emerald-600" />
-              )}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="netting-dialog-title"
+        className="relative z-10 flex w-full max-w-2xl flex-col overflow-hidden rounded-xl border bg-card shadow-2xl lg:max-w-3xl"
+        style={{ maxHeight: 'min(85vh, 820px)' }}
+      >
+        {/* Fixed header */}
+        <div className="shrink-0 border-b bg-card px-6 py-5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div
+                className={cn(
+                  'flex size-11 shrink-0 items-center justify-center rounded-xl',
+                  apiError
+                    ? 'bg-red-500/10 text-red-600'
+                    : 'bg-emerald-500/10 text-emerald-600',
+                )}
+              >
+                {apiError ? (
+                  <AlertTriangle className="size-5" />
+                ) : (
+                  <CheckCircle2 className="size-5" />
+                )}
+              </div>
+              <div>
+                <h2
+                  id="netting-dialog-title"
+                  className="text-lg font-bold tracking-tight"
+                >
+                  {apiError ? 'فشل تحليل المقاصة' : 'تقرير تحليل المقاصة'}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {apiError
+                    ? apiError
+                    : 'تحليل تنفيذي مدعوم بالذكاء الاصطناعي'}
+                </p>
+              </div>
             </div>
-            <CardTitle className="text-xl">
-              {apiError ? 'فشل تحليل المقاصة' : 'اكتملت عملية المقاصة'}
-            </CardTitle>
-            <CardDescription>
-              {apiError
-                ? apiError
-                : (analysis?.summary ?? 'تم حساب التحويلات المقترحة بعد تنفيذ المقاصة')}
-            </CardDescription>
-          </CardHeader>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="shrink-0"
+              onClick={onClose}
+              aria-label="إغلاق"
+            >
+              <X className="size-4" />
+            </Button>
+          </div>
+        </div>
 
-          {!apiError && analysis && (
-            <CardContent className="space-y-5">
-              {/* Stats strip */}
-              <div className="grid grid-cols-3 divide-x divide-x-reverse divide-border rounded-lg border bg-muted/30 text-center">
-                <div className="px-3 py-3">
-                  <p className="text-2xl font-bold tabular-nums text-emerald-600">
-                    {savedTransfers.toLocaleString('ar-SA')}
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto px-6 py-5">
+          {apiError || !analysis ? (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <AlertTriangle className="mb-4 size-10 text-muted-foreground/50" />
+              <p className="text-sm text-muted-foreground">
+                {apiError ?? 'تعذّر جلب نتائج التحليل'}
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Key metrics */}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div className="rounded-lg border bg-muted/30 p-3 text-center">
+                  <p className="text-[11px] font-medium text-muted-foreground">
+                    قبل المقاصة
                   </p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    تحويلات محذوفة
+                  <p className="mt-1 text-xl font-bold tabular-nums text-red-600">
+                    {formatNumber(before)}
                   </p>
+                  <p className="text-[10px] text-muted-foreground">تحويل</p>
                 </div>
-                <div className="px-3 py-3">
-                  <p className="text-2xl font-bold tabular-nums text-primary">
+                <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-3 text-center dark:border-emerald-900 dark:bg-emerald-950/30">
+                  <p className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400">
+                    بعد المقاصة
+                  </p>
+                  <p className="mt-1 text-xl font-bold tabular-nums text-emerald-600">
+                    {formatNumber(countAfter)}
+                  </p>
+                  <p className="text-[10px] text-muted-foreground">تحويل</p>
+                </div>
+                <div className="rounded-lg border bg-muted/30 p-3 text-center">
+                  <p className="text-[11px] font-medium text-muted-foreground">
+                    التوفير
+                  </p>
+                  <p className="mt-1 text-base font-bold tabular-nums text-primary">
                     {formatSar(volumeSaved, true)}
                   </p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    حجم موفّر
-                  </p>
                 </div>
-                <div className="px-3 py-3">
-                  <p className="text-2xl font-bold tabular-nums">
-                    {efficiencyPct.toLocaleString('ar-SA')}%
+                <div className="rounded-lg border bg-muted/30 p-3 text-center">
+                  <p className="text-[11px] font-medium text-muted-foreground">
+                    الكفاءة
                   </p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    تخفيض الحجم
+                  <p className="mt-1 text-xl font-bold tabular-nums">
+                    {formatPercent(efficiencyPct)}
                   </p>
                 </div>
               </div>
 
-              <Separator />
-
-              {/* Resulting transactions */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium">التحويلات بعد المقاصة</p>
-                  <Badge variant="success">
-                    {countAfter.toLocaleString('ar-SA')} تحويلات
-                  </Badge>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-lg border bg-primary/5 px-4 py-3">
+                  <p className="text-xs text-muted-foreground">الحجم الإجمالي</p>
+                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums">
+                    {formatSar(grossVolume)}
+                  </p>
                 </div>
-                <div className="space-y-2">
-                  {afterTxs.map((tx) => (
-                    <TxRow key={tx.id} tx={tx} variant="success" />
-                  ))}
+                <div className="rounded-lg border bg-primary/5 px-4 py-3">
+                  <p className="text-xs text-muted-foreground">الحجم الصافي</p>
+                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums text-primary">
+                    {formatSar(volumeAfter)}
+                  </p>
+                </div>
+                <div className="rounded-lg border bg-emerald-500/5 px-4 py-3">
+                  <p className="text-xs text-muted-foreground">تحويلات محذوفة</p>
+                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums text-emerald-600">
+                    {formatNumber(savedTransfers)} ({formatPercent(countReduction)})
+                  </p>
                 </div>
               </div>
 
-              <Separator />
-
-              {/* Footer */}
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-muted-foreground">
-                  المبلغ المتبقي للتحويل:{' '}
-                  <span className="font-mono font-medium text-foreground">
-                    {formatSar(volumeAfter, true)}
-                  </span>
+              <SectionCard
+                icon={FileText}
+                title="الملخص التنفيذي"
+                description="نظرة شاملة على نتائج المقاصة"
+              >
+                <p className="text-sm leading-relaxed text-foreground/90">
+                  {analysis.summary}
                 </p>
-                <Button onClick={onClose} size="sm">
-                  حسناً
-                </Button>
-              </div>
-            </CardContent>
-          )}
+              </SectionCard>
 
-          {(apiError || !analysis) && (
-            <CardContent>
-              <div className="flex justify-center pb-2">
-                <Button onClick={onClose} size="sm">
-                  إغلاق
-                </Button>
-              </div>
-            </CardContent>
+              {analysis.riskFlags.length > 0 && (
+                <SectionCard
+                  icon={ShieldAlert}
+                  title="مؤشرات المخاطر"
+                  description={`${formatNumber(analysis.riskFlags.length)} شركة تستدعي المتابعة`}
+                  accentClass="text-amber-600"
+                >
+                  <div className="space-y-2">
+                    {analysis.riskFlags.map((flag, i) => (
+                      <div
+                        key={i}
+                        className={cn(
+                          'flex items-start justify-between gap-3 rounded-lg border px-4 py-3 text-sm',
+                          SEVERITY_STYLES[flag.severity],
+                        )}
+                      >
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium">{flag.companyName}</p>
+                          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                            {flag.description}
+                          </p>
+                        </div>
+                        <span
+                          className={cn(
+                            'shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium',
+                            SEVERITY_BADGE[flag.severity],
+                          )}
+                        >
+                          {SEVERITY_LABEL[flag.severity]}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </SectionCard>
+              )}
+
+              {analysis.nettingOpportunities.length > 0 && (
+                <SectionCard
+                  icon={CheckCircle2}
+                  title="التوصيات"
+                  description="تحويلات مقترحة بعد المقاصة"
+                  accentClass="text-emerald-600"
+                >
+                  <div className="space-y-2">
+                    {analysis.nettingOpportunities.map((op, i) => (
+                      <div
+                        key={i}
+                        className="rounded-lg border border-emerald-200 bg-emerald-50/40 px-4 py-3 dark:border-emerald-900 dark:bg-emerald-950/20"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex min-w-0 items-center gap-2 text-sm">
+                            <span className="truncate font-medium">
+                              {op.companies[0]}
+                            </span>
+                            <ArrowRight className="size-3.5 shrink-0 text-muted-foreground" />
+                            <span className="truncate text-muted-foreground">
+                              {op.companies[1]}
+                            </span>
+                          </div>
+                          <span className="shrink-0 font-mono text-sm font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
+                            {formatSar(op.netAmount)}
+                          </span>
+                        </div>
+                        {op.recommendation && (
+                          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                            {op.recommendation}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </SectionCard>
+              )}
+
+              {analysis.insights.length > 0 && (
+                <SectionCard
+                  icon={Lightbulb}
+                  title="رؤى مالية"
+                  description="تحليل مدعوم بـ GPT-4o"
+                  accentClass="text-amber-500"
+                >
+                  <div className="space-y-2">
+                    {analysis.insights.map((insight, i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-3 rounded-lg border bg-muted/30 px-4 py-3 text-sm"
+                      >
+                        <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                          {formatNumber(i + 1)}
+                        </span>
+                        <p className="leading-relaxed">{insight}</p>
+                      </div>
+                    ))}
+                  </div>
+                </SectionCard>
+              )}
+            </div>
           )}
-        </Card>
+        </div>
+
+        {/* Fixed footer */}
+        <div className="shrink-0 border-t bg-card px-6 py-4">
+          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-center text-xs text-muted-foreground sm:text-start">
+              {!apiError && analysis && (
+                <>
+                  المبلغ المتبقي:{' '}
+                  <span className="font-mono font-medium text-foreground">
+                    {formatSar(volumeAfter)}
+                  </span>
+                </>
+              )}
+            </p>
+            <div className="flex gap-2">
+              {!apiError && analysis && (
+                <Button
+                  variant="outline"
+                  className="flex-1 gap-2 sm:flex-none"
+                  onClick={handleExportPdf}
+                  disabled={isExporting}
+                >
+                  {isExporting ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <Download className="size-4" />
+                  )}
+                  تنزيل التقرير PDF
+                </Button>
+              )}
+              <Button
+                className="flex-1 sm:flex-none"
+                onClick={onClose}
+              >
+                إغلاق
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>,
     document.body,
@@ -288,7 +528,7 @@ function NettingResultDialog({
 
 function BeforePanel() {
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div>
@@ -304,7 +544,7 @@ function BeforePanel() {
           </div>
           <div className="text-end">
             <p className="text-lg font-bold tabular-nums text-red-600">
-              {countBefore.toLocaleString('ar-SA')}
+              {formatNumber(countBefore)}
             </p>
             <p className="text-xs text-muted-foreground">تحويل</p>
           </div>
@@ -351,7 +591,7 @@ function AfterPanel({
   return (
     <Card
       className={cn(
-        'shadow-sm transition-opacity duration-300',
+        'treasury-card transition-opacity duration-300',
         !done && 'opacity-60',
       )}
     >
@@ -371,7 +611,7 @@ function AfterPanel({
           {done && analysis && (
             <div className="text-end">
               <p className="text-lg font-bold tabular-nums text-emerald-600">
-                {countAfter.toLocaleString('ar-SA')}
+                {formatNumber(countAfter)}
               </p>
               <p className="text-xs text-muted-foreground">تحويل</p>
             </div>
@@ -400,7 +640,7 @@ function AfterPanel({
                 <CheckCircle2 className="size-4 text-emerald-600" />
                 <span className="font-medium text-emerald-700 dark:text-emerald-400">
                   وُفِّر {formatSar(volumeSaved, true)} —{' '}
-                  {efficiencyPct.toLocaleString('ar-SA')}% تخفيض في الحجم
+                  {formatPercent(efficiencyPct)} تخفيض في الحجم
                 </span>
               </div>
             </div>
@@ -431,38 +671,19 @@ function AfterPanel({
 
 // ─── AiInsightsSection ────────────────────────────────────────────────────────
 
-const SEVERITY_STYLES: Record<RiskFlag['severity'], string> = {
-  high: 'border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30',
-  medium:
-    'border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/30',
-  low: 'border-border bg-muted/30',
-}
-
-const SEVERITY_BADGE: Record<RiskFlag['severity'], string> = {
-  high: 'text-red-700 bg-red-100 dark:text-red-400 dark:bg-red-950',
-  medium: 'text-amber-700 bg-amber-100 dark:text-amber-400 dark:bg-amber-950',
-  low: 'text-muted-foreground bg-muted',
-}
-
-const SEVERITY_LABEL: Record<RiskFlag['severity'], string> = {
-  high: 'عالي',
-  medium: 'متوسط',
-  low: 'منخفض',
-}
-
 function AiInsightsSection({ analysis }: { analysis: NettingAnalysisResult }) {
   return (
     <div className="space-y-4">
       {/* Risk flags */}
       {analysis.riskFlags.length > 0 && (
-        <Card className="shadow-sm">
+        <Card className="treasury-card">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base">
               <AlertTriangle className="size-4 text-amber-500" />
               مؤشرات المخاطر
             </CardTitle>
             <CardDescription>
-              {analysis.riskFlags.length} شركة تستدعي المتابعة
+              {formatNumber(analysis.riskFlags.length)} شركة تستدعي المتابعة
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -496,7 +717,7 @@ function AiInsightsSection({ analysis }: { analysis: NettingAnalysisResult }) {
 
       {/* Insights */}
       {analysis.insights.length > 0 && (
-        <Card className="shadow-sm">
+        <Card className="treasury-card">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base">
               <Lightbulb className="size-4 text-primary" />
@@ -511,7 +732,7 @@ function AiInsightsSection({ analysis }: { analysis: NettingAnalysisResult }) {
                 className="flex items-start gap-3 rounded-lg border bg-muted/30 px-4 py-3 text-sm"
               >
                 <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                  {i + 1}
+                  {formatNumber(i + 1)}
                 </span>
                 <p>{insight}</p>
               </div>
@@ -540,7 +761,7 @@ export function NettingPage() {
     {
       id: 'before',
       label: 'التحويلات قبل المقاصة',
-      value: countBefore.toLocaleString('ar-SA'),
+      value: formatNumber(countBefore),
       sub: 'تحويل في الشبكة',
       icon: TrendingUp,
       colorClass: 'bg-red-500/10 text-red-600',
@@ -548,7 +769,7 @@ export function NettingPage() {
     {
       id: 'after',
       label: 'التحويلات بعد المقاصة',
-      value: analysis ? countAfter.toLocaleString('ar-SA') : '—',
+      value: analysis ? formatNumber(countAfter) : '—',
       sub: 'تحويل بعد المقاصة',
       icon: TrendingDown,
       colorClass: 'bg-emerald-500/10 text-emerald-600',
@@ -556,7 +777,7 @@ export function NettingPage() {
     {
       id: 'reduction',
       label: 'نسبة التخفيض',
-      value: analysis ? `${countReductionPct.toLocaleString('ar-SA')}%` : '—',
+      value: analysis ? formatPercent(countReductionPct) : '—',
       sub: 'تقليل في عدد التحويلات',
       icon: Minus,
       colorClass: 'bg-primary/10 text-primary',
@@ -677,6 +898,7 @@ export function NettingPage() {
         analysis={analysis}
         apiError={apiError}
         countBefore={countBefore}
+        grossVolume={grossVolume}
       />
     </div>
   )

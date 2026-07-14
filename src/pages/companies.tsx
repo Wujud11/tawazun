@@ -28,7 +28,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { companies } from '@/data/dashboard-mock'
-import { formatSar } from '@/lib/format'
+import { formatNumber, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 import type { Company } from '@/types/dashboard'
@@ -58,7 +58,7 @@ const summaryCards: StatCard[] = [
   {
     id: 'count',
     label: 'عدد الشركات',
-    value: companies.length.toLocaleString('ar-SA'),
+    value: formatNumber(companies.length),
     sub: 'شركة في الشبكة',
     icon: Building2,
     colorClass: 'bg-primary/10 text-primary',
@@ -164,7 +164,7 @@ function CompaniesTable({ rows }: { rows: Company[] }) {
               </TableCell>
               <TableCell className="text-center">
                 <span className="tabular-nums">
-                  {company.activeDebts.toLocaleString('ar-SA')}
+                  {formatNumber(company.activeDebts)}
                 </span>
               </TableCell>
               <TableCell>
@@ -212,7 +212,7 @@ export function CompaniesPage() {
             <div>
               <CardTitle>قائمة الشركات</CardTitle>
               <CardDescription className="mt-1">
-                {companies.length.toLocaleString('ar-SA')} شركة —&nbsp;
+                {formatNumber(companies.length)} شركة —&nbsp;
                 <span className="text-emerald-600">{creditors} دائن</span>
                 &nbsp;·&nbsp;
                 <span className="text-red-600">{debtors} مدين</span>
@@ -238,8 +238,8 @@ export function CompaniesPage() {
           {query && (
             <div className="flex items-center gap-1.5 pt-1 text-xs text-muted-foreground">
               <Minus className="size-3" />
-              {filtered.length.toLocaleString('ar-SA')} نتيجة من أصل{' '}
-              {companies.length.toLocaleString('ar-SA')}
+              {formatNumber(filtered.length)} نتيجة من أصل{' '}
+              {formatNumber(companies.length)}
             </div>
           )}
         </CardHeader>

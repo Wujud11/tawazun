@@ -13,6 +13,7 @@ import {
   type ChartConfig,
 } from '@/components/ui/chart'
 import { monthlyTrend } from '@/data/dashboard-mock'
+import { formatAxisMillions } from '@/lib/format'
 
 const chartConfig = {
   grossVolume: {
@@ -31,7 +32,7 @@ const chartConfig = {
 
 export function NettingTrendChart() {
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card">
       <CardHeader>
         <CardTitle>اتجاه المقاصة الشهري</CardTitle>
         <CardDescription>
@@ -77,9 +78,7 @@ export function NettingTrendChart() {
             <YAxis
               tickLine={false}
               axisLine={false}
-              tickFormatter={(v: number) =>
-                `${(v / 1_000_000).toLocaleString('ar-SA')}M`
-              }
+              tickFormatter={(v: number) => formatAxisMillions(v)}
             />
             <ChartTooltip />
             <Area

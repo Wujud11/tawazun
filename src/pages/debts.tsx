@@ -34,7 +34,7 @@ import {
   type DebtRecord,
   type DebtRecordStatus,
 } from '@/data/debts-mock'
-import { formatSar } from '@/lib/format'
+import { formatDate, formatNumber, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 
@@ -71,14 +71,14 @@ const kpiCards: StatCard[] = [
     id: 'total-value',
     label: 'إجمالي قيمة الديون',
     value: formatSar(totalValue, true),
-    sub: `${debtRecords.length.toLocaleString('ar-SA')} سجل`,
+    sub: `${formatNumber(debtRecords.length)} سجل`,
     icon: TrendingUp,
     colorClass: 'bg-primary/10 text-primary',
   },
   {
     id: 'count',
     label: 'عدد سجلات الدين',
-    value: debtRecords.length.toLocaleString('ar-SA'),
+    value: formatNumber(debtRecords.length),
     sub: 'سجل نشط',
     icon: FileText,
     colorClass: 'bg-blue-500/10 text-blue-600',
@@ -142,7 +142,7 @@ function DebtTable({ rows }: { rows: DebtRecord[] }) {
         {rows.map((debt, index) => (
           <TableRow key={debt.id}>
             <TableCell className="text-xs text-muted-foreground tabular-nums">
-              {(index + 1).toLocaleString('ar-SA')}
+              {formatNumber(index + 1)}
             </TableCell>
             <TableCell>
               <span className="font-medium">{debt.creditor}</span>
@@ -167,7 +167,7 @@ function DebtTable({ rows }: { rows: DebtRecord[] }) {
                     : 'text-muted-foreground',
                 )}
               >
-                {new Date(debt.dueDate).toLocaleDateString('ar-SA', {
+                {formatDate(debt.dueDate, {
                   year: 'numeric',
                   month: 'short',
                   day: 'numeric',
@@ -248,8 +248,8 @@ export function DebtsPage() {
               <CardTitle>سجلات الديون</CardTitle>
               <CardDescription>
                 {isFiltered
-                  ? `${filtered.length.toLocaleString('ar-SA')} نتيجة من أصل ${debtRecords.length.toLocaleString('ar-SA')}`
-                  : `${debtRecords.length.toLocaleString('ar-SA')} سجل إجمالي`}
+                  ? `${formatNumber(filtered.length)} نتيجة من أصل ${formatNumber(debtRecords.length)}`
+                  : `${formatNumber(debtRecords.length)} سجل إجمالي`}
               </CardDescription>
             </div>
 

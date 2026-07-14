@@ -3,35 +3,38 @@ import { Bell, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { formatDate } from '@/lib/format'
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-14 items-center justify-between px-6">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+      <div className="flex h-14 items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-3">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-sm">
             <Sparkles className="size-4" />
           </div>
           <div>
-            <p className="text-sm font-bold leading-none">توازن</p>
-            <p className="text-[10px] text-muted-foreground">Tawazun</p>
+            <p className="text-sm font-bold leading-none tracking-tight">توازن</p>
+            <p className="text-[10px] font-medium text-muted-foreground">
+              Tawazun Treasury
+            </p>
           </div>
-          <Separator orientation="vertical" className="mx-1 h-6" />
-          <Badge variant="secondary" className="hidden sm:inline-flex">
+          <Separator orientation="vertical" className="mx-1 hidden h-6 sm:block" />
+          <Badge variant="secondary" className="hidden font-normal sm:inline-flex">
             منصة المقاصة الذكية
           </Badge>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="hidden text-xs text-muted-foreground md:inline">
-            {new Date('2026-06-29').toLocaleDateString('ar-SA', {
+            {formatDate(new Date('2026-06-29'), {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
           </span>
-          <Button variant="ghost" size="icon" aria-label="الإشعارات">
+          <Button variant="ghost" size="icon" className="rounded-lg" aria-label="الإشعارات">
             <Bell className="size-4" />
           </Button>
         </div>

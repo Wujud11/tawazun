@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { transferComparison } from '@/data/dashboard-mock'
-import { formatPercent, formatSar } from '@/lib/format'
+import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 
 export function TransfersComparison() {
   const {
@@ -28,7 +28,7 @@ export function TransfersComparison() {
   const savedVolume = beforeVolume - afterVolume
 
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card h-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <ArrowLeftRight className="size-5 text-primary" />
@@ -45,7 +45,7 @@ export function TransfersComparison() {
               قبل المقاصة
             </p>
             <p className="mt-2 text-3xl font-bold tabular-nums">
-              {beforeCount.toLocaleString('ar-SA')}
+              {formatNumber(beforeCount)}
             </p>
             <p className="text-sm text-muted-foreground">تحويل</p>
             <Separator className="my-3" />
@@ -58,7 +58,7 @@ export function TransfersComparison() {
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
             <p className="text-sm font-medium text-primary">بعد المقاصة</p>
             <p className="mt-2 text-3xl font-bold tabular-nums text-primary">
-              {afterCount.toLocaleString('ar-SA')}
+              {formatNumber(afterCount)}
             </p>
             <p className="text-sm text-muted-foreground">تحويل</p>
             <Separator className="my-3" />

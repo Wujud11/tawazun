@@ -18,18 +18,28 @@ const sectionVariants = {
 
 export function DashboardPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
         transition={defaultTransition}
       >
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold tracking-tight">لوحة التحكم</h1>
-          <p className="text-sm text-muted-foreground">
-            نظرة شاملة على شبكة الديون والمقاصة الذكية — يونيو ٢٠٢٦
-          </p>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70">
+              Treasury Operations
+            </p>
+            <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+              لوحة التحكم
+            </h1>
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              نظرة شاملة على شبكة الديون والمقاصة الذكية — يونيو 2026
+            </p>
+          </div>
+          <div className="hidden rounded-lg border bg-muted/40 px-4 py-2 text-xs text-muted-foreground sm:block">
+            آخر تحديث: 29 يونيو 2026
+          </div>
         </div>
       </motion.div>
 

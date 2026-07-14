@@ -47,7 +47,7 @@ const activityConfig: Record<
 
 export function RecentActivity() {
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card h-full">
       <CardHeader>
         <CardTitle>النشاط الأخير</CardTitle>
         <CardDescription>

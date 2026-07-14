@@ -28,9 +28,9 @@ const navItems = [
 
 export function Sidebar() {
   return (
-    <aside className="hidden w-64 shrink-0 border-e border-border bg-sidebar md:block">
+    <aside className="hidden w-64 shrink-0 border-e border-sidebar-border bg-sidebar md:block">
       <nav className="flex flex-col gap-1 p-4">
-        <p className="mb-2 px-3 text-xs font-medium text-muted-foreground">
+        <p className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
           القائمة الرئيسية
         </p>
         {navItems.map((item) => (
@@ -40,10 +40,10 @@ export function Sidebar() {
             end
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150',
                 isActive
-                  ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                  : 'text-sidebar-foreground hover:bg-sidebar-accent/50',
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-sidebar-foreground hover:bg-sidebar-accent hover:shadow-sm',
               )
             }
           >
@@ -52,6 +52,14 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
+
+      <div className="mx-4 mt-6 rounded-xl border border-sidebar-border bg-sidebar-accent/50 p-4">
+        <p className="text-xs font-semibold text-foreground">كفاءة المقاصة</p>
+        <p className="mt-1 text-2xl font-bold tabular-nums text-primary">62%</p>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          توفير 2,923,000 ريال هذا الشهر
+        </p>
+      </div>
     </aside>
   )
 }

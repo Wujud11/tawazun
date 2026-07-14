@@ -13,6 +13,7 @@ import {
   type ChartConfig,
 } from '@/components/ui/chart'
 import { companyDebtShares } from '@/data/dashboard-mock'
+import { formatAxisThousands } from '@/lib/format'
 
 const chartConfig = {
   payable: {
@@ -27,7 +28,7 @@ const chartConfig = {
 
 export function CompanyDebtChart() {
   return (
-    <Card className="shadow-sm">
+    <Card className="treasury-card">
       <CardHeader>
         <CardTitle>توزيع الديون حسب الشركة</CardTitle>
         <CardDescription>
@@ -47,9 +48,7 @@ export function CompanyDebtChart() {
             <YAxis
               tickLine={false}
               axisLine={false}
-              tickFormatter={(v: number) =>
-                `${(v / 1000).toLocaleString('ar-SA')}K`
-              }
+              tickFormatter={(v: number) => formatAxisThousands(v)}
             />
             <ChartTooltip />
             <Bar
