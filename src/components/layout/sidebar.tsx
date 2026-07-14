@@ -52,14 +52,6 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
-
-      <div className="mx-4 mt-6 rounded-xl border border-sidebar-border bg-sidebar-accent/50 p-4">
-        <p className="text-xs font-semibold text-foreground">كفاءة المقاصة</p>
-        <p className="mt-1 text-2xl font-bold tabular-nums text-primary">62%</p>
-        <p className="mt-1 text-[11px] text-muted-foreground">
-          توفير 2,923,000 ريال هذا الشهر
-        </p>
-      </div>
     </aside>
   )
 }

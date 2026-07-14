@@ -6,7 +6,7 @@ import type {
   KpiMetric,
   TransferComparison,
 } from '@/types/dashboard'
-import { formatNumber, formatPercent, formatSar } from './format'
+import { formatNumber, formatSar } from './format'
 import { computeNetTransfers, type NettingTx } from './netting-core'
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
@@ -146,7 +146,7 @@ export function deriveTransferComparison(
   }
 }
 
-/** Derive the four dashboard KPI metrics from active records and netting results. */
+/** Derive the three dashboard KPI metrics from active records and netting results. */
 export function deriveDashboardKpis(
   records: DebtRecord[],
   netting: NettingResult,
@@ -169,13 +169,6 @@ export function deriveDashboardKpis(
       value: formatNumber(activeCompanies.size),
       change: 8.3,
       changeLabel: 'شركة جديدة هذا الربع',
-    },
-    {
-      id: 'netting-efficiency',
-      label: 'كفاءة المقاصة',
-      value: formatPercent(netting.volumeReductionPct),
-      change: netting.volumeReductionPct,
-      changeLabel: 'تحسن بعد المقاصة الذكية',
     },
     {
       id: 'saved-transfers',

@@ -2,7 +2,6 @@ import {
   ArrowDownLeft,
   ArrowUpRight,
   Building2,
-  Sparkles,
   TrendingUp,
 } from 'lucide-react'
 
@@ -19,27 +18,24 @@ import { cn } from '@/lib/utils'
 const iconMap = {
   'total-debts': TrendingUp,
   'active-companies': Building2,
-  'netting-efficiency': Sparkles,
   'saved-transfers': ArrowDownLeft,
 } as const
 
 const accentMap: Record<string, string> = {
   'total-debts': 'from-blue-500/10 to-blue-600/5 border-blue-200/50 dark:border-blue-900/50',
   'active-companies': 'from-violet-500/10 to-violet-600/5 border-violet-200/50 dark:border-violet-900/50',
-  'netting-efficiency': 'from-emerald-500/10 to-emerald-600/5 border-emerald-200/50 dark:border-emerald-900/50',
   'saved-transfers': 'from-amber-500/10 to-amber-600/5 border-amber-200/50 dark:border-amber-900/50',
 }
 
 const iconColorMap: Record<string, string> = {
   'total-debts': 'bg-blue-500/15 text-blue-600 dark:text-blue-400',
   'active-companies': 'bg-violet-500/15 text-violet-600 dark:text-violet-400',
-  'netting-efficiency': 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400',
   'saved-transfers': 'bg-amber-500/15 text-amber-600 dark:text-amber-400',
 }
 
 export function KpiCards() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {dashboardKpis.map((kpi) => {
         const Icon = iconMap[kpi.id as keyof typeof iconMap] ?? TrendingUp
         const isPositive = kpi.change >= 0
