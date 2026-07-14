@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import { AppLayout, RootLayout } from '@/components/layout'
-import { CompaniesPage, DashboardPage, DebtsPage, NettingPage, AboutPage } from '@/pages'
+import { CompaniesPage, DashboardPage, DebtsPage, NettingPage } from '@/pages'
 
 export const router = createBrowserRouter([
   {
@@ -26,10 +26,6 @@ export const router = createBrowserRouter([
           {
             path: 'netting',
             element: <NettingPage />,
-          },
-          {
-            path: 'about',
-            element: <AboutPage />,
           },
         ],
       },

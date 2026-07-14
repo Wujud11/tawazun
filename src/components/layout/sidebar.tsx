@@ -1,4 +1,4 @@
-import { Building2, FileText, Info, LayoutDashboard, Sparkles } from 'lucide-react'
+import { Building2, FileText, LayoutDashboard, Sparkles } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -25,11 +25,6 @@ const navItems = [
     to: '/netting',
     label: 'المقاصة الذكية',
     icon: Sparkles,
-  },
-  {
-    to: '/about',
-    label: 'عن المنصة',
-    icon: Info,
   },
 ] as const
 
