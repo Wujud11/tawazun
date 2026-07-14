@@ -11,6 +11,7 @@
     "server:dev": "tsx watch server/index.ts",
     "server:build": "tsc -p server/tsconfig.json",
     "server:start": "node dist/server/index.js",
+    "start": "node dist/server/index.js",
     "render:build": "npm run server:build"
   },
   "dependencies": {
