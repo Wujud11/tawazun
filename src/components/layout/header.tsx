@@ -1,10 +1,9 @@
-import { Bell, ExternalLink, Sparkles } from 'lucide-react'
+import { Bell, Sparkles } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { formatDate } from '@/lib/format'
-import { LIVE_DEMO_URL } from '@/lib/site'
 
 export function Header() {
   return (
@@ -27,17 +26,6 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="hidden gap-1.5 sm:inline-flex"
-          >
-            <a href={LIVE_DEMO_URL} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="size-3.5" />
-              تجربة مباشرة
-            </a>
-          </Button>
           <span className="hidden text-xs text-muted-foreground md:inline">
             {formatDate(new Date('2026-06-29'), {
               weekday: 'long',
