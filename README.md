@@ -1,75 +1,46 @@
-# React + TypeScript + Vite
+# توازن | Tawazun
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+منصة مقاصة ذكية متعددة الأطراف لشبكات الديون المؤسسية — تجمع بين خوارزمية تسوية حتمية وتحليل تنفيذي مدعوم بالذكاء الاصطناعي.
 
-Currently, two official plugins are available:
+## التجربة المباشرة
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**[تجربة مباشرة — المقاصة الذكية](https://tawazun-production-e0ed.up.railway.app/netting)**
 
-## React Compiler
+| الرابط | الوصف |
+|--------|--------|
+| [المقاصة الذكية](https://tawazun-production-e0ed.up.railway.app/netting) | صفحة المقاصة والتحليل التنفيذي |
+| [لوحة التحكم](https://tawazun-production-e0ed.up.railway.app/) | نظرة شاملة على شبكة الديون |
+| [فحص الصحة](https://tawazun-production-e0ed.up.railway.app/health) | حالة الخادم |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## الكود المصدري
 
-## Expanding the ESLint configuration
+[github.com/Wujud11/tawazun](https://github.com/Wujud11/tawazun)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## الميزات
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **مقاصة متعددة الأطراف** — تجميع المراكز الصافية وتسوية ثنائية محسّنة
+- **تحليل GPT-4o** — ملخص تنفيذي، مؤشرات مخاطر، توصيات، ورؤى مالية
+- **تقرير PDF** — تصدير تقرير مالي تنفيذي من واجهة المقاصة
+- **لوحة خزينة** — مؤشرات أداء، رسوم بيانية، وملخص الشركات
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## التشغيل المحلي
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev          # الواجهة على http://localhost:5173
+npm run server:dev   # الخادم على http://localhost:3001
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+انسخ `.env.example` إلى `.env` وأضف `OPENAI_API_KEY`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## البناء
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
+npm run server:build
+npm start
 ```
+
+## التقنيات
+
+React 19 · TypeScript · Vite · Express · Tailwind CSS · OpenAI GPT-4o · Recharts

@@ -1,3 +1,4 @@
+export { AboutPage } from './about'
 export { CompaniesPage } from './companies'
 export { DashboardPage } from './dashboard'
 export { DebtsPage } from './debts'

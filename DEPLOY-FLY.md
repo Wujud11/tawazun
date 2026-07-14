@@ -2,11 +2,20 @@
 
 Single-service deployment: Express serves the React build and the API from the same origin.
 
+## Production (Railway)
+
 ```
-https://tawazun.fly.dev/          → React app
-https://tawazun.fly.dev/netting   → React app (client-side routing)
-https://tawazun.fly.dev/health    → API health check
-https://tawazun.fly.dev/api/ai/*  → API routes
+https://tawazun-production-e0ed.up.railway.app/          → React app
+https://tawazun-production-e0ed.up.railway.app/netting   → Smart netting (live demo)
+https://tawazun-production-e0ed.up.railway.app/health    → API health check
+https://tawazun-production-e0ed.up.railway.app/api/ai/*  → API routes
+```
+
+## Legacy Fly.io reference
+
+```
+https://tawazun.fly.dev/          → React app (deprecated)
+https://tawazun.fly.dev/netting   → React app (deprecated)
 ```
 
 ---
@@ -84,7 +93,7 @@ fly deploy
 fly open
 ```
 
-Or visit: `https://tawazun.fly.dev`
+Or visit: `https://tawazun-production-e0ed.up.railway.app/netting`
 
 ### 6. Keep the machine warm for demos (optional)
 
@@ -199,7 +208,7 @@ Leave `VITE_API_URL` unset locally. The Vite dev-server proxy handles `/api/*`.
 
 ## Final Verification Checklist
 
-Replace `<domain>` with your Fly URL (e.g. `tawazun.fly.dev`):
+Replace `<domain>` with your production URL (e.g. `tawazun-production-e0ed.up.railway.app`):
 
 - [ ] `GET https://<domain>/health` returns `200` with `{"status":"ok","timestamp":"..."}`
 - [ ] `GET https://<domain>/` returns `200` and loads the React app
