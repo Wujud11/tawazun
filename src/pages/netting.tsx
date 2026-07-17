@@ -20,6 +20,7 @@ import { createPortal } from 'react-dom'
 import { useSearchParams } from 'react-router-dom'
 
 import { SettlementWorkflow } from '@/components/netting/settlement-workflow'
+import { EnterpriseNettingSessionPanel } from '@/components/netting/enterprise-session-panel'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -784,6 +785,7 @@ export function NettingPage() {
   const [workflowOpen, setWorkflowOpen] = useState(
     () => searchParams.get('workflow') === '1',
   )
+  const [sessionResetToken, setSessionResetToken] = useState(0)
 
   const workflowStep = parseWorkflowStep(searchParams.get('step'))
   const workflowOpportunityId =
@@ -876,6 +878,7 @@ export function NettingPage() {
     setDialogOpen(false)
     setAnalysis(null)
     setApiError(null)
+    setSessionResetToken((token) => token + 1)
   }
 
   function openWorkflow(step: WorkflowStepId = 'notification') {
@@ -926,48 +929,22 @@ export function NettingPage() {
               إعادة التعيين
             </Button>
           )}
-          <Button
-            onClick={handleRunNetting}
-            disabled={isRunning || nettingDone}
-            className="gap-2"
-          >
-            {isRunning ? (
-              <>
-                <Loader2 className="size-4 animate-spin" />
-                جارٍ التحليل…
-              </>
-            ) : nettingDone ? (
-              <>
-                <CheckCircle2 className="size-4" />
-                تمّت المقاصة
-              </>
-            ) : (
-              <>
-                <Sparkles className="size-4" />
-                تشغيل المقاصة
-              </>
-            )}
-          </Button>
         </div>
       </div>
 
-      <Card className="border-primary/20 bg-primary/[0.03] shadow-none">
-        <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold">
-              مسار التسوية متعددة الأطراف
-            </p>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              إشعار → مراجعة الفرصة → موافقات الشركات → تنفيذ التسوية → التقرير
-              التنفيذي
-            </p>
-          </div>
-          <Button size="sm" className="gap-1.5" onClick={() => openWorkflow('opportunity')}>
-            ابدأ المراجعة
-            <ArrowRight className="size-3.5" />
-          </Button>
-        </CardContent>
-      </Card>
+      <EnterpriseNettingSessionPanel
+        companies={companies.map((c) => ({
+          id: c.id,
+          name: c.name,
+          nameEn: c.nameEn,
+        }))}
+        isExecuting={isRunning}
+        nettingDone={nettingDone}
+        resetToken={sessionResetToken}
+        onExecute={() => {
+          void handleRunNetting()
+        }}
+      />
 
       {/* KPI cards */}
       <StatCardGrid cards={kpiCards} />
