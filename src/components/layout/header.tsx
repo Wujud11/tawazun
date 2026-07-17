@@ -1,7 +1,7 @@
-import { Bell, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 
+import { NotificationCenter } from '@/components/layout/notification-center'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { formatDate } from '@/lib/format'
 
@@ -34,9 +34,7 @@ export function Header() {
               day: 'numeric',
             })}
           </span>
-          <Button variant="ghost" size="icon" className="rounded-lg" aria-label="الإشعارات">
-            <Bell className="size-4" />
-          </Button>
+          <NotificationCenter />
         </div>
       </div>
     </header>
