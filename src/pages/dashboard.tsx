@@ -7,6 +7,7 @@ import {
   KpiCards,
   NettingTrendChart,
   RecentActivity,
+  SettlementOpportunities,
   TransfersComparison,
 } from '@/components/dashboard'
 import { defaultTransition } from '@/lib/motion'
@@ -50,6 +51,15 @@ export function DashboardPage() {
         transition={{ ...defaultTransition, delay: 0.05 }}
       >
         <KpiCards />
+      </motion.div>
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
+        transition={{ ...defaultTransition, delay: 0.08 }}
+      >
+        <SettlementOpportunities />
       </motion.div>
 
       <div className="grid gap-6 xl:grid-cols-3">
