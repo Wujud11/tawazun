@@ -52,6 +52,12 @@ const SEVERITY_LABEL: Record<RiskFlag['severity'], string> = {
   low: 'منخفض',
 }
 
+const SEVERITY_STYLE: Record<RiskFlag['severity'], string> = {
+  high: 'background:#fef2f2;border-color:#fecaca;color:#991b1b;',
+  medium: 'background:#fffbeb;border-color:#fde68a;color:#92400e;',
+  low: 'background:#f9fafb;border-color:#e5e7eb;color:#374151;',
+}
+
 function buildReportHtml(data: NettingPdfInput): string {
   const { analysis, companies, countBefore, grossVolume } = data
   const { metrics, nettingOpportunities, riskFlags, insights } = analysis
@@ -63,12 +69,12 @@ function buildReportHtml(data: NettingPdfInput): string {
 
   const companyRows = companies
     .map(
-      (c) => `
-      <tr>
-        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">${c.name}</td>
-        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:center;">${c.sector}</td>
-        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:left;font-family:monospace;">${formatSar(c.totalPayable)}</td>
-        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:left;font-family:monospace;">${formatSar(c.totalReceivable)}</td>
+      (c, i) => `
+      <tr style="background:${i % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+        <td style="padding:9px 10px;border-bottom:1px solid #e5e7eb;">${c.name}</td>
+        <td style="padding:9px 10px;border-bottom:1px solid #e5e7eb;text-align:center;color:#4b5563;">${c.sector}</td>
+        <td style="padding:9px 10px;border-bottom:1px solid #e5e7eb;text-align:left;font-family:ui-monospace,monospace;">${formatSar(c.totalPayable)}</td>
+        <td style="padding:9px 10px;border-bottom:1px solid #e5e7eb;text-align:left;font-family:ui-monospace,monospace;">${formatSar(c.totalReceivable)}</td>
       </tr>`,
     )
     .join('')
@@ -78,12 +84,12 @@ function buildReportHtml(data: NettingPdfInput): string {
       ? riskFlags
           .map(
             (f) => `
-        <div style="margin-bottom:10px;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa;">
+        <div style="margin-bottom:10px;padding:12px 14px;border:1px solid;border-radius:10px;${SEVERITY_STYLE[f.severity]}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
             <strong style="font-size:13px;">${f.companyName}</strong>
-            <span style="font-size:11px;padding:2px 8px;border-radius:12px;background:#fee2e2;color:#991b1b;">${SEVERITY_LABEL[f.severity]}</span>
+            <span style="font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,0.7);font-weight:600;">${SEVERITY_LABEL[f.severity]}</span>
           </div>
-          <p style="margin:0;font-size:12px;color:#4b5563;line-height:1.6;">${f.description}</p>
+          <p style="margin:0;font-size:12px;line-height:1.7;opacity:0.9;">${f.description}</p>
         </div>`,
           )
           .join('')
@@ -92,13 +98,13 @@ function buildReportHtml(data: NettingPdfInput): string {
   const recommendationRows = nettingOpportunities
     .map(
       (op, i) => `
-      <div style="margin-bottom:10px;padding:12px;border:1px solid #d1fae5;border-radius:8px;background:#ecfdf5;">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+      <div style="margin-bottom:10px;padding:12px 14px;border:1px solid #a7f3d0;border-radius:10px;background:linear-gradient(180deg,#ecfdf5 0%,#f0fdf4 100%);">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;gap:12px;">
           <strong style="font-size:13px;">${i + 1}. ${op.direction}</strong>
-          <span style="font-family:monospace;font-size:12px;font-weight:600;color:#047857;">${formatSar(op.netAmount)}</span>
+          <span style="font-family:ui-monospace,monospace;font-size:12px;font-weight:700;color:#047857;white-space:nowrap;">${formatSar(op.netAmount)}</span>
         </div>
-        <p style="margin:0 0 4px;font-size:11px;color:#6b7280;">توفير ثنائي: ${formatSar(op.savings)}</p>
-        <p style="margin:0;font-size:12px;color:#374151;">${op.recommendation}</p>
+        <p style="margin:0 0 4px;font-size:11px;color:#059669;">توفير ثنائي: ${formatSar(op.savings)}</p>
+        <p style="margin:0;font-size:12px;color:#374151;line-height:1.6;">${op.recommendation}</p>
       </div>`,
     )
     .join('')
@@ -106,101 +112,104 @@ function buildReportHtml(data: NettingPdfInput): string {
   const insightRows = insights
     .map(
       (insight, i) => `
-      <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;">
-        <span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#eff6ff;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;">${i + 1}</span>
-        <p style="margin:0;font-size:12px;line-height:1.6;color:#374151;">${insight}</p>
+      <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;">
+        <span style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#1e3a5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;">${i + 1}</span>
+        <p style="margin:0;font-size:12px;line-height:1.7;color:#374151;">${insight}</p>
       </div>`,
     )
     .join('')
 
   return `
-    <div dir="rtl" style="width:794px;padding:40px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#111827;background:#fff;line-height:1.5;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1e3a5f;padding-bottom:20px;margin-bottom:24px;">
+    <div dir="rtl" style="width:794px;padding:36px 40px;font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#111827;background:#fff;line-height:1.5;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1e3a5f;padding-bottom:18px;margin-bottom:22px;">
         <div>
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#1e3a5f,#2563eb);display:flex;align-items:center;justify-content:center;">
+            <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#1e3a5f,#2563eb);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(30,58,95,0.25);">
               <span style="color:#fff;font-size:18px;font-weight:700;">ت</span>
             </div>
             <div>
               <h1 style="margin:0;font-size:24px;font-weight:700;color:#1e3a5f;">توازن</h1>
-              <p style="margin:0;font-size:11px;color:#6b7280;letter-spacing:0.05em;">TAWAZUN — منصة المقاصة الذكية</p>
+              <p style="margin:0;font-size:11px;color:#6b7280;letter-spacing:0.06em;">TAWAZUN TREASURY — MULTILATERAL NETTING</p>
             </div>
           </div>
-          <p style="margin:8px 0 0;font-size:13px;color:#4b5563;">تقرير تحليل المقاصة المالية</p>
+          <p style="margin:10px 0 0;font-size:15px;font-weight:700;color:#111827;">التقرير التنفيذي لتحليل المقاصة</p>
+          <p style="margin:4px 0 0;font-size:12px;color:#6b7280;">دورة تسوية متعددة الأطراف — عرض للمستثمرين والإدارة المالية</p>
         </div>
-        <div style="text-align:left;font-size:11px;color:#6b7280;">
-          <p style="margin:0;">تاريخ الإصدار</p>
-          <p style="margin:4px 0 0;font-weight:600;color:#111827;">${formatDateTime()}</p>
+        <div style="text-align:left;font-size:11px;color:#6b7280;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px;background:#f8fafc;min-width:150px;">
+          <p style="margin:0;font-size:10px;text-transform:uppercase;letter-spacing:0.04em;">تاريخ الإصدار</p>
+          <p style="margin:4px 0 0;font-weight:700;color:#111827;font-size:12px;">${formatDateTime()}</p>
+          <p style="margin:8px 0 0;font-size:10px;">الحالة</p>
+          <p style="margin:2px 0 0;font-weight:600;color:#047857;">جاهز للمراجعة</p>
         </div>
       </div>
 
-      <h2 style="font-size:14px;font-weight:700;color:#1e3a5f;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">مؤشرات المقاصة</h2>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;">
-        <div style="padding:14px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;text-align:center;">
+      <h2 style="font-size:13px;font-weight:700;color:#1e3a5f;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;letter-spacing:0.02em;">مؤشرات المقاصة</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+        <div style="padding:14px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;text-align:center;">
           <p style="margin:0;font-size:10px;color:#6b7280;">قبل المقاصة</p>
-          <p style="margin:6px 0 2px;font-size:20px;font-weight:700;color:#dc2626;">${formatNumber(countBefore)}</p>
+          <p style="margin:6px 0 2px;font-size:22px;font-weight:700;color:#dc2626;">${formatNumber(countBefore)}</p>
           <p style="margin:0;font-size:10px;color:#9ca3af;">تحويل</p>
         </div>
-        <div style="padding:14px;border:1px solid #d1fae5;border-radius:8px;background:#ecfdf5;text-align:center;">
+        <div style="padding:14px;border:1px solid #a7f3d0;border-radius:10px;background:#ecfdf5;text-align:center;">
           <p style="margin:0;font-size:10px;color:#047857;">بعد المقاصة</p>
-          <p style="margin:6px 0 2px;font-size:20px;font-weight:700;color:#047857;">${formatNumber(countAfter)}</p>
+          <p style="margin:6px 0 2px;font-size:22px;font-weight:700;color:#047857;">${formatNumber(countAfter)}</p>
           <p style="margin:0;font-size:10px;color:#9ca3af;">تحويل</p>
         </div>
-        <div style="padding:14px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;text-align:center;">
+        <div style="padding:14px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;text-align:center;">
           <p style="margin:0;font-size:10px;color:#6b7280;">تخفيض التحويلات</p>
-          <p style="margin:6px 0 2px;font-size:20px;font-weight:700;color:#1e3a5f;">${formatPercent(countReduction)}</p>
+          <p style="margin:6px 0 2px;font-size:22px;font-weight:700;color:#1e3a5f;">${formatPercent(countReduction)}</p>
         </div>
-        <div style="padding:14px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;text-align:center;">
+        <div style="padding:14px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;text-align:center;">
           <p style="margin:0;font-size:10px;color:#6b7280;">كفاءة المقاصة</p>
-          <p style="margin:6px 0 2px;font-size:20px;font-weight:700;color:#2563eb;">${formatPercent(metrics.efficiencyPct)}</p>
+          <p style="margin:6px 0 2px;font-size:22px;font-weight:700;color:#2563eb;">${formatPercent(metrics.efficiencyPct)}</p>
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;">
-        <div style="padding:12px 14px;border-radius:8px;background:#1e3a5f;color:#fff;">
+        <div style="padding:14px 16px;border-radius:10px;background:#1e3a5f;color:#fff;">
           <p style="margin:0;font-size:10px;opacity:0.8;">الحجم الإجمالي</p>
-          <p style="margin:4px 0 0;font-size:16px;font-weight:700;font-family:monospace;">${formatSar(grossVolume)}</p>
+          <p style="margin:6px 0 0;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;">${formatSar(grossVolume)}</p>
         </div>
-        <div style="padding:12px 14px;border-radius:8px;background:#2563eb;color:#fff;">
+        <div style="padding:14px 16px;border-radius:10px;background:#2563eb;color:#fff;">
           <p style="margin:0;font-size:10px;opacity:0.8;">الحجم الصافي</p>
-          <p style="margin:4px 0 0;font-size:16px;font-weight:700;font-family:monospace;">${formatSar(metrics.totalNetVolume)}</p>
+          <p style="margin:6px 0 0;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;">${formatSar(metrics.totalNetVolume)}</p>
         </div>
-        <div style="padding:12px 14px;border-radius:8px;background:#047857;color:#fff;">
+        <div style="padding:14px 16px;border-radius:10px;background:#047857;color:#fff;">
           <p style="margin:0;font-size:10px;opacity:0.8;">التوفير المقدّر</p>
-          <p style="margin:4px 0 0;font-size:16px;font-weight:700;font-family:monospace;">${formatSar(metrics.estimatedSavings)}</p>
+          <p style="margin:6px 0 0;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;">${formatSar(metrics.estimatedSavings)}</p>
         </div>
       </div>
 
-      <h2 style="font-size:14px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">الملخص التنفيذي</h2>
-      <div style="padding:14px;border:1px solid #e5e7eb;border-radius:8px;background:#f8fafc;margin-bottom:24px;">
-        <p style="margin:0;font-size:13px;line-height:1.8;color:#374151;">${analysis.summary}</p>
+      <h2 style="font-size:13px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">الملخص التنفيذي</h2>
+      <div style="padding:16px;border:1px solid #dbeafe;border-radius:10px;background:linear-gradient(180deg,#f8fafc 0%,#eff6ff 100%);margin-bottom:24px;">
+        <p style="margin:0;font-size:13px;line-height:1.9;color:#1f2937;">${analysis.summary}</p>
       </div>
 
-      <h2 style="font-size:14px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">الشركات في الشبكة</h2>
-      <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:24px;">
+      <h2 style="font-size:13px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">الشركات في الشبكة</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:24px;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
         <thead>
-          <tr style="background:#f3f4f6;">
-            <th style="padding:8px 10px;text-align:right;font-weight:600;">الشركة</th>
-            <th style="padding:8px 10px;text-align:center;font-weight:600;">القطاع</th>
-            <th style="padding:8px 10px;text-align:left;font-weight:600;">مستحق الدفع</th>
-            <th style="padding:8px 10px;text-align:left;font-weight:600;">مستحق القبض</th>
+          <tr style="background:#1e3a5f;color:#fff;">
+            <th style="padding:10px;text-align:right;font-weight:600;">الشركة</th>
+            <th style="padding:10px;text-align:center;font-weight:600;">القطاع</th>
+            <th style="padding:10px;text-align:left;font-weight:600;">مستحق الدفع</th>
+            <th style="padding:10px;text-align:left;font-weight:600;">مستحق القبض</th>
           </tr>
         </thead>
         <tbody>${companyRows}</tbody>
       </table>
 
-      <h2 style="font-size:14px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">مؤشرات المخاطر</h2>
+      <h2 style="font-size:13px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">مؤشرات المخاطر</h2>
       <div style="margin-bottom:24px;">${riskRows}</div>
 
-      <h2 style="font-size:14px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">التوصيات</h2>
+      <h2 style="font-size:13px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">التوصيات</h2>
       <div style="margin-bottom:24px;">${recommendationRows}</div>
 
-      <h2 style="font-size:14px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">رؤى مالية</h2>
+      <h2 style="font-size:13px;font-weight:700;color:#1e3a5f;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb;">رؤى مالية</h2>
       <div style="margin-bottom:16px;">${insightRows}</div>
 
-      <div style="margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;font-size:10px;color:#9ca3af;">
-        <p style="margin:0;">تقرير صادر عن منصة توازن — تحليل مقاصة متعددة الأطراف</p>
-        <p style="margin:4px 0 0;">الأرقام محسوبة خوارزمياً — التحليل النوعي مدعوم بـ GPT-4o</p>
+      <div style="margin-top:28px;padding:14px 16px;border-top:1px solid #e5e7eb;background:#f8fafc;border-radius:10px;text-align:center;font-size:10px;color:#6b7280;">
+        <p style="margin:0;font-weight:600;color:#1e3a5f;">تقرير صادر عن منصة توازن — تحليل مقاصة متعددة الأطراف</p>
+        <p style="margin:4px 0 0;">الأرقام محسوبة خوارزمياً — التحليل النوعي مدعوم بـ GPT-4o — للاستخدام التجريبي والعرض التقديمي</p>
       </div>
     </div>
   `

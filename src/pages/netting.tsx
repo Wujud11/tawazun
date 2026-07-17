@@ -262,7 +262,7 @@ function NettingResultDialog({
         style={{ maxHeight: 'min(85vh, 820px)' }}
       >
         {/* Fixed header */}
-        <div className="shrink-0 border-b bg-card px-6 py-5">
+        <div className="shrink-0 border-b bg-gradient-to-l from-primary/[0.06] to-card px-6 py-5">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-start gap-3">
               <div
@@ -280,16 +280,19 @@ function NettingResultDialog({
                 )}
               </div>
               <div>
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-primary/70">
+                  Tawazun Executive Report
+                </p>
                 <h2
                   id="netting-dialog-title"
-                  className="text-lg font-bold tracking-tight"
+                  className="mt-0.5 text-lg font-bold tracking-tight"
                 >
-                  {apiError ? 'فشل تحليل المقاصة' : 'تقرير تحليل المقاصة'}
+                  {apiError ? 'فشل تحليل المقاصة' : 'التقرير التنفيذي للمقاصة'}
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {apiError
                     ? apiError
-                    : 'تحليل تنفيذي مدعوم بالذكاء الاصطناعي'}
+                    : 'ملخص مالي جاهز للمراجعة والتصدير PDF'}
                 </p>
               </div>
             </div>
@@ -317,59 +320,64 @@ function NettingResultDialog({
           ) : (
             <div className="space-y-4">
               {/* Key metrics */}
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div className="rounded-lg border bg-muted/30 p-3 text-center">
-                  <p className="text-[11px] font-medium text-muted-foreground">
-                    قبل المقاصة
-                  </p>
-                  <p className="mt-1 text-xl font-bold tabular-nums text-red-600">
-                    {formatNumber(before)}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground">تحويل</p>
-                </div>
-                <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-3 text-center dark:border-emerald-900 dark:bg-emerald-950/30">
-                  <p className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400">
-                    بعد المقاصة
-                  </p>
-                  <p className="mt-1 text-xl font-bold tabular-nums text-emerald-600">
-                    {formatNumber(countAfter)}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground">تحويل</p>
-                </div>
-                <div className="rounded-lg border bg-muted/30 p-3 text-center">
-                  <p className="text-[11px] font-medium text-muted-foreground">
-                    التوفير
-                  </p>
-                  <p className="mt-1 text-base font-bold tabular-nums text-primary">
-                    {formatSar(volumeSaved, true)}
-                  </p>
-                </div>
-                <div className="rounded-lg border bg-muted/30 p-3 text-center">
-                  <p className="text-[11px] font-medium text-muted-foreground">
-                    الكفاءة
-                  </p>
-                  <p className="mt-1 text-xl font-bold tabular-nums">
-                    {formatPercent(efficiencyPct)}
-                  </p>
+              <div className="rounded-xl border bg-muted/20 p-3">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  مؤشرات الدورة
+                </p>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  <div className="rounded-lg border bg-background p-3 text-center">
+                    <p className="text-[11px] font-medium text-muted-foreground">
+                      قبل المقاصة
+                    </p>
+                    <p className="mt-1 text-xl font-bold tabular-nums text-red-600">
+                      {formatNumber(before)}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">تحويل</p>
+                  </div>
+                  <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-3 text-center dark:border-emerald-900 dark:bg-emerald-950/30">
+                    <p className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400">
+                      بعد المقاصة
+                    </p>
+                    <p className="mt-1 text-xl font-bold tabular-nums text-emerald-600">
+                      {formatNumber(countAfter)}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">تحويل</p>
+                  </div>
+                  <div className="rounded-lg border bg-background p-3 text-center">
+                    <p className="text-[11px] font-medium text-muted-foreground">
+                      التوفير
+                    </p>
+                    <p className="mt-1 text-base font-bold tabular-nums text-primary">
+                      {formatSar(volumeSaved, true)}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border bg-background p-3 text-center">
+                    <p className="text-[11px] font-medium text-muted-foreground">
+                      الكفاءة
+                    </p>
+                    <p className="mt-1 text-xl font-bold tabular-nums">
+                      {formatPercent(efficiencyPct)}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-lg border bg-primary/5 px-4 py-3">
-                  <p className="text-xs text-muted-foreground">الحجم الإجمالي</p>
+                <div className="rounded-lg border border-slate-800/10 bg-slate-900 px-4 py-3 text-white dark:bg-slate-800">
+                  <p className="text-xs text-white/70">الحجم الإجمالي</p>
                   <p className="mt-1 font-mono text-sm font-semibold tabular-nums">
                     {formatSar(grossVolume)}
                   </p>
                 </div>
-                <div className="rounded-lg border bg-primary/5 px-4 py-3">
-                  <p className="text-xs text-muted-foreground">الحجم الصافي</p>
-                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums text-primary">
+                <div className="rounded-lg border bg-primary px-4 py-3 text-primary-foreground">
+                  <p className="text-xs text-primary-foreground/80">الحجم الصافي</p>
+                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums">
                     {formatSar(volumeAfter)}
                   </p>
                 </div>
-                <div className="rounded-lg border bg-emerald-500/5 px-4 py-3">
-                  <p className="text-xs text-muted-foreground">تحويلات محذوفة</p>
-                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums text-emerald-600">
+                <div className="rounded-lg border border-emerald-700/20 bg-emerald-700 px-4 py-3 text-white">
+                  <p className="text-xs text-white/80">تحويلات محذوفة</p>
+                  <p className="mt-1 font-mono text-sm font-semibold tabular-nums">
                     {formatNumber(savedTransfers)} ({formatPercent(countReduction)})
                   </p>
                 </div>
