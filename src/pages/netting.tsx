@@ -4,6 +4,7 @@ import {
   CheckCircle2,
   Download,
   FileText,
+  GitBranch,
   Lightbulb,
   Loader2,
   Minus,
@@ -16,7 +17,9 @@ import {
 } from 'lucide-react'
 import { useEffect, useState, type ElementType, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { useSearchParams } from 'react-router-dom'
 
+import { SettlementWorkflow } from '@/components/netting/settlement-workflow'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -27,10 +30,12 @@ import {
 } from '@/components/ui/card'
 import { companies } from '@/data/dashboard-mock'
 import { debtRecords } from '@/data/debts-mock'
+import { PRIMARY_OPPORTUNITY_ID } from '@/data/workflow-mock'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 import { API_BASE } from '@/lib/api'
+import type { WorkflowStepId } from '@/types/workflow'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -746,12 +751,41 @@ function AiInsightsSection({ analysis }: { analysis: NettingAnalysisResult }) {
 
 // ─── NettingPage ──────────────────────────────────────────────────────────────
 
+const WORKFLOW_STEPS: WorkflowStepId[] = [
+  'notification',
+  'opportunity',
+  'approvals',
+  'execution',
+  'report',
+]
+
+function parseWorkflowStep(value: string | null): WorkflowStepId {
+  if (value && WORKFLOW_STEPS.includes(value as WorkflowStepId)) {
+    return value as WorkflowStepId
+  }
+  return 'notification'
+}
+
 export function NettingPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [isRunning, setIsRunning] = useState(false)
   const [nettingDone, setNettingDone] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [analysis, setAnalysis] = useState<NettingAnalysisResult | null>(null)
   const [apiError, setApiError] = useState<string | null>(null)
+  const [workflowOpen, setWorkflowOpen] = useState(
+    () => searchParams.get('workflow') === '1',
+  )
+
+  const workflowStep = parseWorkflowStep(searchParams.get('step'))
+  const workflowOpportunityId =
+    searchParams.get('id') ?? PRIMARY_OPPORTUNITY_ID
+
+  useEffect(() => {
+    if (searchParams.get('workflow') === '1') {
+      setWorkflowOpen(true)
+    }
+  }, [searchParams])
 
   const countAfter = analysis?.metrics.recommendedTransactions ?? 0
   const countReductionPct =
@@ -836,6 +870,27 @@ export function NettingPage() {
     setApiError(null)
   }
 
+  function openWorkflow(step: WorkflowStepId = 'notification') {
+    setWorkflowOpen(true)
+    setSearchParams(
+      {
+        workflow: '1',
+        step,
+        id: workflowOpportunityId,
+      },
+      { replace: true },
+    )
+  }
+
+  function closeWorkflow() {
+    setWorkflowOpen(false)
+    const next = new URLSearchParams(searchParams)
+    next.delete('workflow')
+    next.delete('step')
+    next.delete('id')
+    setSearchParams(next, { replace: true })
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -848,7 +903,16 @@ export function NettingPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => openWorkflow('notification')}
+          >
+            <GitBranch className="size-4" />
+            مسار التسوية
+          </Button>
           {nettingDone && (
             <Button variant="outline" size="sm" onClick={handleReset}>
               إعادة التعيين
@@ -879,6 +943,24 @@ export function NettingPage() {
         </div>
       </div>
 
+      <Card className="border-primary/20 bg-primary/[0.03] shadow-none">
+        <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold">
+              مسار التسوية متعددة الأطراف
+            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              إشعار → مراجعة الفرصة → موافقات الشركات → تنفيذ التسوية → التقرير
+              التنفيذي
+            </p>
+          </div>
+          <Button size="sm" className="gap-1.5" onClick={() => openWorkflow('opportunity')}>
+            ابدأ المراجعة
+            <ArrowRight className="size-3.5" />
+          </Button>
+        </CardContent>
+      </Card>
+
       {/* KPI cards */}
       <StatCardGrid cards={kpiCards} />
 
@@ -899,6 +981,21 @@ export function NettingPage() {
         apiError={apiError}
         countBefore={countBefore}
         grossVolume={grossVolume}
+      />
+
+      <SettlementWorkflow
+        open={workflowOpen}
+        onClose={closeWorkflow}
+        opportunityId={workflowOpportunityId}
+        initialStep={workflowStep}
+        hasAnalysis={Boolean(analysis)}
+        isRunningNetting={isRunning}
+        onOpenReport={() => {
+          setDialogOpen(true)
+        }}
+        onRunNetting={() => {
+          void handleRunNetting()
+        }}
       />
     </div>
   )
