@@ -25,23 +25,25 @@ const presentationKpis = [
     id: 'companies',
     label: 'الشركات المشاركة',
     value: formatNumber(demoPortfolio.participatingCompanies),
-    change: 11.2,
-    changeLabel: 'في شبكة التسوية التجريبية',
+    change: demoPortfolio.markets,
+    changeLabel: 'قطاعات في الشبكة المحسوبة',
     icon: Building2,
     accent:
       'from-blue-500/10 to-blue-600/5 border-blue-200/50 dark:border-blue-900/50',
     iconColor: 'bg-blue-500/15 text-blue-600 dark:text-blue-400',
+    changeIsPercent: false,
   },
   {
     id: 'gross',
     label: 'إجمالي الديون',
     value: formatSar(demoPortfolio.grossDebtSar, true),
-    change: 9.6,
-    changeLabel: 'الحجم قبل المقاصة',
+    change: demoPortfolio.transfersBefore,
+    changeLabel: 'تحويل قبل المقاصة',
     icon: TrendingUp,
     accent:
       'from-rose-500/10 to-rose-600/5 border-rose-200/50 dark:border-rose-900/50',
     iconColor: 'bg-rose-500/15 text-rose-600 dark:text-rose-400',
+    changeIsPercent: false,
   },
   {
     id: 'net',
@@ -53,6 +55,7 @@ const presentationKpis = [
     accent:
       'from-sky-500/10 to-sky-600/5 border-sky-200/50 dark:border-sky-900/50',
     iconColor: 'bg-sky-500/15 text-sky-600 dark:text-sky-400',
+    changeIsPercent: true,
   },
   {
     id: 'savings',
@@ -64,6 +67,7 @@ const presentationKpis = [
     accent:
       'from-emerald-500/10 to-emerald-600/5 border-emerald-200/50 dark:border-emerald-900/50',
     iconColor: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400',
+    changeIsPercent: true,
   },
 ] as const
 
@@ -122,8 +126,9 @@ export function KpiCards() {
                       isPositive ? 'text-emerald-600' : 'text-red-500',
                     )}
                   >
-                    {isPositive ? '+' : ''}
-                    {formatPercent(Math.abs(kpi.change))}
+                    {kpi.changeIsPercent
+                      ? `${isPositive ? '+' : ''}${formatPercent(Math.abs(kpi.change))}`
+                      : formatNumber(kpi.change)}
                   </span>
                   <span className="text-muted-foreground">{kpi.changeLabel}</span>
                 </div>

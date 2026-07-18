@@ -31,7 +31,6 @@ import {
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  SAMPLE_PARTICIPANTS_LABEL_AR,
   demoDebtCompanyNames,
   demoDebtLedger,
   demoPortfolio,
@@ -217,8 +216,9 @@ export function DebtsPage() {
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight">الديون</h1>
         <p className="text-sm text-muted-foreground">
-          محفظة {formatNumber(demoPortfolio.participatingCompanies)} شركة — مؤشرات
-          من مصدر العرض الموحّد · الجدول {SAMPLE_PARTICIPANTS_LABEL_AR}
+          محفظة {formatNumber(demoPortfolio.participatingCompanies)} شركة و{' '}
+          {formatNumber(demoPortfolio.financialRelationships)} علاقة — مؤشرات
+          computeNetting() · الجدول عينة من أكبر الالتزامات
           &nbsp;·&nbsp;
           <span className="text-amber-600">{pendingCount} معلق</span>
           &nbsp;·&nbsp;
@@ -234,7 +234,7 @@ export function DebtsPage() {
         <CardHeader>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <CardTitle>{SAMPLE_PARTICIPANTS_LABEL_AR}</CardTitle>
+              <CardTitle>سجل الالتزامات</CardTitle>
               <CardDescription>
                 {isFiltered
                   ? `${formatNumber(filtered.length)} نتيجة من أصل ${formatNumber(demoDebtLedger.length)}`

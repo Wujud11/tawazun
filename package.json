@@ -12,7 +12,8 @@
     "server:build": "tsc -p server/tsconfig.json",
     "server:start": "node dist/server/index.js",
     "start": "node dist/server/index.js",
-    "fly:build": "npm run build && npm run server:build"
+    "fly:build": "npm run build && npm run server:build",
+    "demo:generate": "tsx scripts/generate-enterprise-demo.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.2.0",

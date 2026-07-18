@@ -30,9 +30,8 @@ import {
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  SAMPLE_PARTICIPANTS_LABEL_AR,
+  demoCompanies,
   demoPortfolio,
-  demoSampleCompanies,
 } from '@/data/demo-data'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
@@ -55,7 +54,7 @@ const statusConfig: Record<
   balanced: { label: 'متوازن', variant: 'secondary' },
 }
 
-const companies = demoSampleCompanies
+const companies = demoCompanies
 
 const summaryCards: StatCard[] = [
   {
@@ -200,8 +199,9 @@ export function CompaniesPage() {
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight">الشركات</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          محفظة تجريبية بـ {formatNumber(demoPortfolio.participatingCompanies)}{' '}
-          شركة — الجدول أدناه {SAMPLE_PARTICIPANTS_LABEL_AR}
+          محفظة محسوبة بـ {formatNumber(demoPortfolio.participatingCompanies)}{' '}
+          شركة و{formatNumber(demoPortfolio.financialRelationships)} علاقة مالية
+          — الأرصدة مشتقة من سجلات الديون النشطة
         </p>
       </div>
 
@@ -211,10 +211,9 @@ export function CompaniesPage() {
         <CardHeader>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <CardTitle>{SAMPLE_PARTICIPANTS_LABEL_AR}</CardTitle>
+              <CardTitle>شركات المحفظة</CardTitle>
               <CardDescription className="mt-1">
-                {formatNumber(companies.length)} من أصل{' '}
-                {formatNumber(demoPortfolio.participatingCompanies)} —&nbsp;
+                {formatNumber(companies.length)} شركة —&nbsp;
                 <span className="text-emerald-600">{creditors} دائن</span>
                 &nbsp;·&nbsp;
                 <span className="text-red-600">{debtors} مدين</span>

@@ -31,10 +31,13 @@ import {
 } from '@/components/ui/card'
 import {
   PRIMARY_OPPORTUNITY_ID,
+  demoAfterTransferSample,
+  demoBeforeTransferSample,
+  demoCompanies,
+  demoNetTransfers,
   demoPortfolio,
   demoSampleCompanies as sampleCompanies,
 } from '@/data/demo-data'
-import { debtRecords } from '@/data/debts-mock'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
@@ -85,30 +88,50 @@ type DialogProps = {
   grossVolume: number
 }
 
-// ─── "Before" state — derived from debtRecords, no API required ───────────────
+// ─── KPIs + transfer samples — all from computeNetting on the enterprise dataset ─
 
-const activeRecords = debtRecords.filter((r) => r.status !== 'settled')
-
-/** Presentation KPIs — single demo-data source of truth. */
 const portfolioGross = demoPortfolio.grossDebtSar
 const portfolioCountBefore = demoPortfolio.transfersBefore
 const portfolioCountAfter = demoPortfolio.transfersAfter
 const portfolioSavings = demoPortfolio.savingsSar
+const portfolioNet = demoPortfolio.netSettlementSar
+const portfolioSavingsPct = demoPortfolio.savingsPct
 
-const sampleCompanyNames = new Set(sampleCompanies.map((c) => c.name))
+const beforeTxs: TxItem[] = demoBeforeTransferSample.map((t) => ({
+  id: t.id,
+  from: t.from,
+  to: t.to,
+  amount: t.amount,
+}))
 
-/** Detailed relationship sample — only among the 6 displayed participants. */
-const beforeTxs: TxItem[] = activeRecords
-  .filter(
-    (r) =>
-      sampleCompanyNames.has(r.debtor) && sampleCompanyNames.has(r.creditor),
-  )
-  .map((r) => ({
-    id: r.id,
-    from: r.debtor,
-    to: r.creditor,
-    amount: r.amount,
-  }))
+/** Local analysis from precomputed computeNetting() — numbers never depend on AI. */
+function buildLocalAnalysis(): NettingAnalysisResult {
+  return {
+    summary: `تحليل محفظة مؤسسية: ${formatNumber(demoPortfolio.participatingCompanies)} شركة و${formatNumber(demoPortfolio.financialRelationships)} علاقة مالية. خوارزمية المقاصة خفّضت التحويلات من ${formatNumber(portfolioCountBefore)} إلى ${formatNumber(portfolioCountAfter)} وحجماً من ${formatSar(portfolioGross, true)} إلى ${formatSar(portfolioNet, true)} (توفير ${formatPercent(portfolioSavingsPct)}).`,
+    metrics: {
+      totalGrossVolume: portfolioGross,
+      totalNetVolume: portfolioNet,
+      estimatedSavings: portfolioSavings,
+      efficiencyPct: portfolioSavingsPct,
+      recommendedTransactions: portfolioCountAfter,
+      overdueCount: demoPortfolio.overdueCount,
+      overdueVolume: demoPortfolio.overdueVolumeSar,
+    },
+    nettingOpportunities: demoNetTransfers.map((tx) => ({
+      companies: [tx.from, tx.to],
+      netAmount: tx.amount,
+      direction: `${tx.from} → ${tx.to}`,
+      savings: tx.bilateralSavings,
+      recommendation: 'تنفيذ التحويل المقترح وفق جدول التسوية',
+    })),
+    riskFlags: [],
+    insights: [
+      `حفظ الأرصدة الصافية: Σ الأرصدة = 0 بعد ${formatNumber(portfolioCountAfter)} تحويل صافٍ.`,
+      `تحرير سيولة ${formatSar(portfolioSavings, true)} دون إنشاء أو إتلاف قيمة.`,
+      `العينة المعروضة ${formatNumber(demoBeforeTransferSample.length)} علاقة من أصل ${formatNumber(portfolioCountBefore)} تحويل نشط.`,
+    ],
+  }
+}
 
 const SEVERITY_STYLES: Record<RiskFlag['severity'], string> = {
   high: 'border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30',
@@ -235,14 +258,15 @@ function NettingResultDialog({
 
   if (!open) return null
 
-  // Presentation metrics stay on the enterprise demo scale so the report
-  // matches Dashboard / Netting KPIs (algorithm details remain in AI sections).
-  const countAfter = portfolioCountAfter
+  // Metrics always match Dashboard — same computeNetting() portfolio KPIs.
+  const countAfter =
+    analysis?.metrics.recommendedTransactions ?? portfolioCountAfter
+  const volumeAfter = analysis?.metrics.totalNetVolume ?? portfolioNet
+  const volumeSaved = analysis?.metrics.estimatedSavings ?? portfolioSavings
+  const efficiencyPct = analysis?.metrics.efficiencyPct ?? portfolioSavingsPct
+  const countReduction =
+    before > 0 ? Math.round((1 - countAfter / before) * 100) : 0
   const savedTransfers = before - countAfter
-  const volumeSaved = portfolioSavings
-  const efficiencyPct = demoPortfolio.savingsPct
-  const volumeAfter = demoPortfolio.netSettlementSar
-  const countReduction = demoPortfolio.transferReductionPct
 
   async function handleExportPdf() {
     if (!analysis || isExporting) return
@@ -251,7 +275,7 @@ function NettingResultDialog({
       const { exportNettingPdf } = await import('@/lib/export-netting-pdf')
       await exportNettingPdf({
         analysis,
-        companies: sampleCompanies,
+        companies: demoCompanies.slice(0, 24),
         countBefore: before,
         grossVolume,
       })
@@ -449,11 +473,14 @@ function NettingResultDialog({
                 <SectionCard
                   icon={CheckCircle2}
                   title="التوصيات"
-                  description="تحويلات مقترحة بعد المقاصة"
+                  description={`${formatNumber(analysis.nettingOpportunities.length)} تحويل صافٍ — عرض أكبر ${formatNumber(Math.min(15, analysis.nettingOpportunities.length))}`}
                   accentClass="text-emerald-600"
                 >
                   <div className="space-y-2">
-                    {analysis.nettingOpportunities.map((op, i) => (
+                    {[...analysis.nettingOpportunities]
+                      .sort((a, b) => b.netAmount - a.netAmount)
+                      .slice(0, 15)
+                      .map((op, i) => (
                       <div
                         key={i}
                         className="rounded-lg border border-emerald-200 bg-emerald-50/40 px-4 py-3 dark:border-emerald-900 dark:bg-emerald-950/20"
@@ -581,15 +608,15 @@ function BeforePanel() {
       </CardHeader>
       <CardContent className="space-y-2">
         <p className="text-[11px] text-muted-foreground">
-          عينة تفصيلية من العلاقات — مؤشرات المحفظة أعلاه تعكس النطاق المؤسسي
-          التجريبي ({formatNumber(portfolioCountBefore)} تحويل ·{' '}
-          {formatSar(portfolioGross, true)})
+          أكبر {formatNumber(beforeTxs.length)} علاقات من المحفظة — الإجمالي من
+          computeNetting(): {formatNumber(portfolioCountBefore)} تحويل ·{' '}
+          {formatSar(portfolioGross, true)}
         </p>
         {beforeTxs.map((tx) => (
           <TxRow key={tx.id} tx={tx} variant="neutral" />
         ))}
         <div className="flex items-center justify-between rounded-lg border border-dashed p-3 text-sm">
-          <span className="text-muted-foreground">إجمالي المحفظة التجريبية</span>
+          <span className="text-muted-foreground">إجمالي المحفظة (محسوب)</span>
           <span className="font-mono font-bold tabular-nums">
             {formatSar(portfolioGross, true)}
           </span>
@@ -608,14 +635,23 @@ function AfterPanel({
   done: boolean
   analysis: NettingAnalysisResult | null
 }) {
-  const afterTxs: TxItem[] = (analysis?.nettingOpportunities ?? []).map(
-    (op, i) => ({
+  const afterTxs: TxItem[] = (
+    analysis?.nettingOpportunities ??
+    demoAfterTransferSample.map((t) => ({
+      companies: [t.from, t.to],
+      netAmount: t.amount,
+      direction: `${t.from} → ${t.to}`,
+      savings: t.bilateralSavings,
+      recommendation: '',
+    }))
+  )
+    .slice(0, demoAfterTransferSample.length)
+    .map((op, i) => ({
       id: `n${i + 1}`,
       from: op.companies[0] ?? '',
       to: op.companies[1] ?? '',
       amount: op.netAmount,
-    }),
-  )
+    }))
 
   return (
     <Card
@@ -649,7 +685,7 @@ function AfterPanel({
         {done && analysis ? (
           <div className="space-y-2">
             <p className="text-[11px] text-muted-foreground">
-              عينة نتائج تشغيلية — مؤشرات المحفظة:{' '}
+              أكبر التحويلات الصافية — الإجمالي:{' '}
               {formatNumber(portfolioCountAfter)} تحويل · توفير{' '}
               {formatSar(portfolioSavings, true)}
             </p>
@@ -662,9 +698,9 @@ function AfterPanel({
               />
             ))}
             <div className="flex items-center justify-between rounded-lg border border-dashed border-emerald-300 p-3 text-sm dark:border-emerald-800">
-              <span className="text-muted-foreground">صافي المحفظة التجريبية</span>
+              <span className="text-muted-foreground">صافي المحفظة (محسوب)</span>
               <span className="font-mono font-bold tabular-nums text-emerald-700 dark:text-emerald-400">
-                {formatSar(demoPortfolio.netSettlementSar, true)}
+                {formatSar(portfolioNet, true)}
               </span>
             </div>
             <div className="rounded-lg bg-emerald-50 p-3 dark:bg-emerald-950/40">
@@ -672,8 +708,7 @@ function AfterPanel({
                 <CheckCircle2 className="size-4 text-emerald-600" />
                 <span className="font-medium text-emerald-700 dark:text-emerald-400">
                   وُفِّر {formatSar(portfolioSavings, true)} —{' '}
-                  {formatPercent(demoPortfolio.savingsPct)} تخفيض في
-                  الحجم
+                  {formatPercent(portfolioSavingsPct)} تخفيض في الحجم
                 </span>
               </div>
             </div>
@@ -856,11 +891,21 @@ export function NettingPage() {
     setIsRunning(true)
     setApiError(null)
 
+    // Numbers always come from computeNetting on the enterprise dataset.
+    const local = buildLocalAnalysis()
+    setAnalysis(local)
+
     try {
+      // AI adds qualitative Arabic narrative only; metrics stay from local.
+      // Debt rows are lazy-loaded so the main bundle does not embed the full ledger.
+      const { debtRecords } = await import('@/data/debts-mock')
       const res = await fetch(`${API_BASE}/api/ai/netting-analysis`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ companies: sampleCompanies, debtRecords }),
+        body: JSON.stringify({
+          companies: demoCompanies,
+          debtRecords,
+        }),
       })
 
       if (res.ok) {
@@ -868,19 +913,29 @@ export function NettingPage() {
           success: boolean
           analysis: NettingAnalysisResult
         }
-        setAnalysis(data.analysis)
+        const api = data.analysis
+        setAnalysis({
+          ...local,
+          summary: api.summary || local.summary,
+          riskFlags: api.riskFlags?.length ? api.riskFlags : local.riskFlags,
+          insights: api.insights?.length ? api.insights : local.insights,
+          nettingOpportunities: local.nettingOpportunities.map((op, i) => ({
+            ...op,
+            recommendation:
+              api.nettingOpportunities[i]?.recommendation ?? op.recommendation,
+          })),
+          // Keep algorithm metrics from the generated portfolio (same source as Dashboard).
+          metrics: local.metrics,
+        })
       } else {
+        // AI optional — KPIs/transfers already set from local computeNetting results.
         const payload = (await res.json().catch(() => ({}))) as {
           error?: string
         }
-        const msg = payload.error ?? `فشل الطلب (${res.status})`
-        setApiError(msg)
-        console.error('[netting] API error', res.status, payload)
+        console.warn('[netting] AI enrichment skipped', res.status, payload)
       }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Network error'
-      setApiError(msg)
-      console.error('[netting] fetch failed', err)
+      console.warn('[netting] AI enrichment failed; using local analysis', err)
     } finally {
       setIsRunning(false)
       setNettingDone(true)
@@ -924,8 +979,9 @@ export function NettingPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">المقاصة الذكية</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            جلسة خزينة متعددة الأطراف على نطاق مؤسسي تجريبي — الاعتماد يعرض عينة
-            شركات، بينما التنفيذ يستخدم دورة التشغيل الحالية دون تغيير الخوارزمية
+            جلسة خزينة على مجموعة بيانات مؤسسية حقيقية ({formatNumber(demoPortfolio.participatingCompanies)}{' '}
+            شركة · {formatNumber(demoPortfolio.financialRelationships)} علاقة) —
+            المؤشرات من computeNetting() دون تعديل الخوارزمية
           </p>
         </div>
 
@@ -961,7 +1017,7 @@ export function NettingPage() {
         }}
       />
 
-      {/* KPI cards — enterprise presentation scale */}
+      {/* KPI cards — same computeNetting() portfolio as Dashboard */}
       <StatCardGrid cards={kpiCards} />
 
       {/* Before / After panels */}

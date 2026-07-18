@@ -1,0 +1,2942 @@
+[
+  {
+    "id": "c001",
+    "name": "شركة ألف للتجارة",
+    "nameEn": "Alif Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c002",
+    "name": "شركة ألف القابضة",
+    "nameEn": "Alif Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c003",
+    "name": "شركة ألف للمقاولات",
+    "nameEn": "Alif Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c004",
+    "name": "شركة ألف للخدمات",
+    "nameEn": "Alif Services Co.",
+    "sector": "توريد",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c005",
+    "name": "شركة ألف للتمويل",
+    "nameEn": "Alif Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c006",
+    "name": "شركة ألف للتوريد",
+    "nameEn": "Alif Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c007",
+    "name": "شركة ألف للاستثمار",
+    "nameEn": "Alif Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c008",
+    "name": "شركة ألف للتقنية",
+    "nameEn": "Alif Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c009",
+    "name": "شركة ألف للصناعة",
+    "nameEn": "Alif Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c010",
+    "name": "شركة ألف للنقل",
+    "nameEn": "Alif Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c011",
+    "name": "شركة ألف للطاقة",
+    "nameEn": "Alif Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c012",
+    "name": "شركة ألف الطبية",
+    "nameEn": "Alif Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c013",
+    "name": "شركة ألف العقارية",
+    "nameEn": "Alif Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c014",
+    "name": "شركة ألف للتطوير",
+    "nameEn": "Alif Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c015",
+    "name": "شركة ألف للاستشارات",
+    "nameEn": "Alif Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "ألف"
+  },
+  {
+    "id": "c016",
+    "name": "شركة باء للتجارة",
+    "nameEn": "Ba Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c017",
+    "name": "شركة باء القابضة",
+    "nameEn": "Ba Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c018",
+    "name": "شركة باء للمقاولات",
+    "nameEn": "Ba Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c019",
+    "name": "شركة باء للخدمات",
+    "nameEn": "Ba Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c020",
+    "name": "شركة باء للتمويل",
+    "nameEn": "Ba Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c021",
+    "name": "شركة باء للتوريد",
+    "nameEn": "Ba Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c022",
+    "name": "شركة باء للاستثمار",
+    "nameEn": "Ba Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c023",
+    "name": "شركة باء للتقنية",
+    "nameEn": "Ba Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c024",
+    "name": "شركة باء للصناعة",
+    "nameEn": "Ba Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c025",
+    "name": "شركة باء للنقل",
+    "nameEn": "Ba Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c026",
+    "name": "شركة باء للطاقة",
+    "nameEn": "Ba Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c027",
+    "name": "شركة باء الطبية",
+    "nameEn": "Ba Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c028",
+    "name": "شركة باء العقارية",
+    "nameEn": "Ba Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c029",
+    "name": "شركة باء للتطوير",
+    "nameEn": "Ba Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c030",
+    "name": "شركة باء للاستشارات",
+    "nameEn": "Ba Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "باء"
+  },
+  {
+    "id": "c031",
+    "name": "شركة جيم للتجارة",
+    "nameEn": "Jim Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c032",
+    "name": "شركة جيم القابضة",
+    "nameEn": "Jim Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c033",
+    "name": "شركة جيم للمقاولات",
+    "nameEn": "Jim Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c034",
+    "name": "شركة جيم للخدمات",
+    "nameEn": "Jim Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c035",
+    "name": "شركة جيم للتمويل",
+    "nameEn": "Jim Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c036",
+    "name": "شركة جيم للتوريد",
+    "nameEn": "Jim Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c037",
+    "name": "شركة جيم للاستثمار",
+    "nameEn": "Jim Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c038",
+    "name": "شركة جيم للتقنية",
+    "nameEn": "Jim Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c039",
+    "name": "شركة جيم للصناعة",
+    "nameEn": "Jim Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c040",
+    "name": "شركة جيم للنقل",
+    "nameEn": "Jim Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c041",
+    "name": "شركة جيم للطاقة",
+    "nameEn": "Jim Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c042",
+    "name": "شركة جيم الطبية",
+    "nameEn": "Jim Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c043",
+    "name": "شركة جيم العقارية",
+    "nameEn": "Jim Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c044",
+    "name": "شركة جيم للتطوير",
+    "nameEn": "Jim Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c045",
+    "name": "شركة جيم للاستشارات",
+    "nameEn": "Jim Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "جيم"
+  },
+  {
+    "id": "c046",
+    "name": "شركة دال للتجارة",
+    "nameEn": "Dal Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c047",
+    "name": "شركة دال القابضة",
+    "nameEn": "Dal Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c048",
+    "name": "شركة دال للمقاولات",
+    "nameEn": "Dal Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c049",
+    "name": "شركة دال للخدمات",
+    "nameEn": "Dal Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c050",
+    "name": "شركة دال للتمويل",
+    "nameEn": "Dal Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c051",
+    "name": "شركة دال للتوريد",
+    "nameEn": "Dal Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c052",
+    "name": "شركة دال للاستثمار",
+    "nameEn": "Dal Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c053",
+    "name": "شركة دال للتقنية",
+    "nameEn": "Dal Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c054",
+    "name": "شركة دال للصناعة",
+    "nameEn": "Dal Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c055",
+    "name": "شركة دال للنقل",
+    "nameEn": "Dal Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c056",
+    "name": "شركة دال للطاقة",
+    "nameEn": "Dal Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c057",
+    "name": "شركة دال الطبية",
+    "nameEn": "Dal Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c058",
+    "name": "شركة دال العقارية",
+    "nameEn": "Dal Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c059",
+    "name": "شركة دال للتطوير",
+    "nameEn": "Dal Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c060",
+    "name": "شركة دال للاستشارات",
+    "nameEn": "Dal Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "دال"
+  },
+  {
+    "id": "c061",
+    "name": "شركة هاء للتجارة",
+    "nameEn": "Ha Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c062",
+    "name": "شركة هاء القابضة",
+    "nameEn": "Ha Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c063",
+    "name": "شركة هاء للمقاولات",
+    "nameEn": "Ha Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c064",
+    "name": "شركة هاء للخدمات",
+    "nameEn": "Ha Services Co.",
+    "sector": "توريد",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c065",
+    "name": "شركة هاء للتمويل",
+    "nameEn": "Ha Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c066",
+    "name": "شركة هاء للتوريد",
+    "nameEn": "Ha Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c067",
+    "name": "شركة هاء للاستثمار",
+    "nameEn": "Ha Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c068",
+    "name": "شركة هاء للتقنية",
+    "nameEn": "Ha Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c069",
+    "name": "شركة هاء للصناعة",
+    "nameEn": "Ha Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c070",
+    "name": "شركة هاء للنقل",
+    "nameEn": "Ha Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c071",
+    "name": "شركة هاء للطاقة",
+    "nameEn": "Ha Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c072",
+    "name": "شركة هاء الطبية",
+    "nameEn": "Ha Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c073",
+    "name": "شركة هاء العقارية",
+    "nameEn": "Ha Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c074",
+    "name": "شركة هاء للتطوير",
+    "nameEn": "Ha Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c075",
+    "name": "شركة هاء للاستشارات",
+    "nameEn": "Ha Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "هاء"
+  },
+  {
+    "id": "c076",
+    "name": "شركة واو للتجارة",
+    "nameEn": "Waw Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c077",
+    "name": "شركة واو القابضة",
+    "nameEn": "Waw Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c078",
+    "name": "شركة واو للمقاولات",
+    "nameEn": "Waw Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c079",
+    "name": "شركة واو للخدمات",
+    "nameEn": "Waw Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c080",
+    "name": "شركة واو للتمويل",
+    "nameEn": "Waw Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c081",
+    "name": "شركة واو للتوريد",
+    "nameEn": "Waw Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c082",
+    "name": "شركة واو للاستثمار",
+    "nameEn": "Waw Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c083",
+    "name": "شركة واو للتقنية",
+    "nameEn": "Waw Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c084",
+    "name": "شركة واو للصناعة",
+    "nameEn": "Waw Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c085",
+    "name": "شركة واو للنقل",
+    "nameEn": "Waw Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c086",
+    "name": "شركة واو للطاقة",
+    "nameEn": "Waw Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c087",
+    "name": "شركة واو الطبية",
+    "nameEn": "Waw Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c088",
+    "name": "شركة واو العقارية",
+    "nameEn": "Waw Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c089",
+    "name": "شركة واو للتطوير",
+    "nameEn": "Waw Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c090",
+    "name": "شركة واو للاستشارات",
+    "nameEn": "Waw Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "واو"
+  },
+  {
+    "id": "c091",
+    "name": "شركة زاي للتجارة",
+    "nameEn": "Zay Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c092",
+    "name": "شركة زاي القابضة",
+    "nameEn": "Zay Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c093",
+    "name": "شركة زاي للمقاولات",
+    "nameEn": "Zay Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c094",
+    "name": "شركة زاي للخدمات",
+    "nameEn": "Zay Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c095",
+    "name": "شركة زاي للتمويل",
+    "nameEn": "Zay Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c096",
+    "name": "شركة زاي للتوريد",
+    "nameEn": "Zay Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c097",
+    "name": "شركة زاي للاستثمار",
+    "nameEn": "Zay Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c098",
+    "name": "شركة زاي للتقنية",
+    "nameEn": "Zay Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c099",
+    "name": "شركة زاي للصناعة",
+    "nameEn": "Zay Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c100",
+    "name": "شركة زاي للنقل",
+    "nameEn": "Zay Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c101",
+    "name": "شركة زاي للطاقة",
+    "nameEn": "Zay Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c102",
+    "name": "شركة زاي الطبية",
+    "nameEn": "Zay Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c103",
+    "name": "شركة زاي العقارية",
+    "nameEn": "Zay Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c104",
+    "name": "شركة زاي للتطوير",
+    "nameEn": "Zay Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c105",
+    "name": "شركة زاي للاستشارات",
+    "nameEn": "Zay Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "زاي"
+  },
+  {
+    "id": "c106",
+    "name": "شركة حاء للتجارة",
+    "nameEn": "Ha2 Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c107",
+    "name": "شركة حاء القابضة",
+    "nameEn": "Ha2 Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c108",
+    "name": "شركة حاء للمقاولات",
+    "nameEn": "Ha2 Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c109",
+    "name": "شركة حاء للخدمات",
+    "nameEn": "Ha2 Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c110",
+    "name": "شركة حاء للتمويل",
+    "nameEn": "Ha2 Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c111",
+    "name": "شركة حاء للتوريد",
+    "nameEn": "Ha2 Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c112",
+    "name": "شركة حاء للاستثمار",
+    "nameEn": "Ha2 Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c113",
+    "name": "شركة حاء للتقنية",
+    "nameEn": "Ha2 Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c114",
+    "name": "شركة حاء للصناعة",
+    "nameEn": "Ha2 Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c115",
+    "name": "شركة حاء للنقل",
+    "nameEn": "Ha2 Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c116",
+    "name": "شركة حاء للطاقة",
+    "nameEn": "Ha2 Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c117",
+    "name": "شركة حاء الطبية",
+    "nameEn": "Ha2 Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c118",
+    "name": "شركة حاء العقارية",
+    "nameEn": "Ha2 Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c119",
+    "name": "شركة حاء للتطوير",
+    "nameEn": "Ha2 Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c120",
+    "name": "شركة حاء للاستشارات",
+    "nameEn": "Ha2 Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "حاء"
+  },
+  {
+    "id": "c121",
+    "name": "شركة طاء للتجارة",
+    "nameEn": "Ta Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c122",
+    "name": "شركة طاء القابضة",
+    "nameEn": "Ta Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c123",
+    "name": "شركة طاء للمقاولات",
+    "nameEn": "Ta Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c124",
+    "name": "شركة طاء للخدمات",
+    "nameEn": "Ta Services Co.",
+    "sector": "توريد",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c125",
+    "name": "شركة طاء للتمويل",
+    "nameEn": "Ta Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c126",
+    "name": "شركة طاء للتوريد",
+    "nameEn": "Ta Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c127",
+    "name": "شركة طاء للاستثمار",
+    "nameEn": "Ta Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c128",
+    "name": "شركة طاء للتقنية",
+    "nameEn": "Ta Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c129",
+    "name": "شركة طاء للصناعة",
+    "nameEn": "Ta Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c130",
+    "name": "شركة طاء للنقل",
+    "nameEn": "Ta Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c131",
+    "name": "شركة طاء للطاقة",
+    "nameEn": "Ta Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c132",
+    "name": "شركة طاء الطبية",
+    "nameEn": "Ta Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c133",
+    "name": "شركة طاء العقارية",
+    "nameEn": "Ta Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c134",
+    "name": "شركة طاء للتطوير",
+    "nameEn": "Ta Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c135",
+    "name": "شركة طاء للاستشارات",
+    "nameEn": "Ta Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "طاء"
+  },
+  {
+    "id": "c136",
+    "name": "شركة ياء للتجارة",
+    "nameEn": "Ya Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c137",
+    "name": "شركة ياء القابضة",
+    "nameEn": "Ya Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c138",
+    "name": "شركة ياء للمقاولات",
+    "nameEn": "Ya Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c139",
+    "name": "شركة ياء للخدمات",
+    "nameEn": "Ya Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c140",
+    "name": "شركة ياء للتمويل",
+    "nameEn": "Ya Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c141",
+    "name": "شركة ياء للتوريد",
+    "nameEn": "Ya Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c142",
+    "name": "شركة ياء للاستثمار",
+    "nameEn": "Ya Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c143",
+    "name": "شركة ياء للتقنية",
+    "nameEn": "Ya Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c144",
+    "name": "شركة ياء للصناعة",
+    "nameEn": "Ya Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c145",
+    "name": "شركة ياء للنقل",
+    "nameEn": "Ya Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c146",
+    "name": "شركة ياء للطاقة",
+    "nameEn": "Ya Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c147",
+    "name": "شركة ياء الطبية",
+    "nameEn": "Ya Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c148",
+    "name": "شركة ياء العقارية",
+    "nameEn": "Ya Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c149",
+    "name": "شركة ياء للتطوير",
+    "nameEn": "Ya Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c150",
+    "name": "شركة ياء للاستشارات",
+    "nameEn": "Ya Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "ياء"
+  },
+  {
+    "id": "c151",
+    "name": "شركة كاف للتجارة",
+    "nameEn": "Kaf Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c152",
+    "name": "شركة كاف القابضة",
+    "nameEn": "Kaf Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c153",
+    "name": "شركة كاف للمقاولات",
+    "nameEn": "Kaf Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c154",
+    "name": "شركة كاف للخدمات",
+    "nameEn": "Kaf Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c155",
+    "name": "شركة كاف للتمويل",
+    "nameEn": "Kaf Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c156",
+    "name": "شركة كاف للتوريد",
+    "nameEn": "Kaf Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c157",
+    "name": "شركة كاف للاستثمار",
+    "nameEn": "Kaf Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c158",
+    "name": "شركة كاف للتقنية",
+    "nameEn": "Kaf Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c159",
+    "name": "شركة كاف للصناعة",
+    "nameEn": "Kaf Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c160",
+    "name": "شركة كاف للنقل",
+    "nameEn": "Kaf Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c161",
+    "name": "شركة كاف للطاقة",
+    "nameEn": "Kaf Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c162",
+    "name": "شركة كاف الطبية",
+    "nameEn": "Kaf Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c163",
+    "name": "شركة كاف العقارية",
+    "nameEn": "Kaf Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c164",
+    "name": "شركة كاف للتطوير",
+    "nameEn": "Kaf Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c165",
+    "name": "شركة كاف للاستشارات",
+    "nameEn": "Kaf Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "كاف"
+  },
+  {
+    "id": "c166",
+    "name": "شركة لام للتجارة",
+    "nameEn": "Lam Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c167",
+    "name": "شركة لام القابضة",
+    "nameEn": "Lam Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c168",
+    "name": "شركة لام للمقاولات",
+    "nameEn": "Lam Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c169",
+    "name": "شركة لام للخدمات",
+    "nameEn": "Lam Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c170",
+    "name": "شركة لام للتمويل",
+    "nameEn": "Lam Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c171",
+    "name": "شركة لام للتوريد",
+    "nameEn": "Lam Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c172",
+    "name": "شركة لام للاستثمار",
+    "nameEn": "Lam Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c173",
+    "name": "شركة لام للتقنية",
+    "nameEn": "Lam Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c174",
+    "name": "شركة لام للصناعة",
+    "nameEn": "Lam Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c175",
+    "name": "شركة لام للنقل",
+    "nameEn": "Lam Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c176",
+    "name": "شركة لام للطاقة",
+    "nameEn": "Lam Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c177",
+    "name": "شركة لام الطبية",
+    "nameEn": "Lam Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c178",
+    "name": "شركة لام العقارية",
+    "nameEn": "Lam Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c179",
+    "name": "شركة لام للتطوير",
+    "nameEn": "Lam Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c180",
+    "name": "شركة لام للاستشارات",
+    "nameEn": "Lam Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "لام"
+  },
+  {
+    "id": "c181",
+    "name": "شركة ميم للتجارة",
+    "nameEn": "Mim Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c182",
+    "name": "شركة ميم القابضة",
+    "nameEn": "Mim Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c183",
+    "name": "شركة ميم للمقاولات",
+    "nameEn": "Mim Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c184",
+    "name": "شركة ميم للخدمات",
+    "nameEn": "Mim Services Co.",
+    "sector": "توريد",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c185",
+    "name": "شركة ميم للتمويل",
+    "nameEn": "Mim Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c186",
+    "name": "شركة ميم للتوريد",
+    "nameEn": "Mim Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c187",
+    "name": "شركة ميم للاستثمار",
+    "nameEn": "Mim Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c188",
+    "name": "شركة ميم للتقنية",
+    "nameEn": "Mim Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c189",
+    "name": "شركة ميم للصناعة",
+    "nameEn": "Mim Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c190",
+    "name": "شركة ميم للنقل",
+    "nameEn": "Mim Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c191",
+    "name": "شركة ميم للطاقة",
+    "nameEn": "Mim Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c192",
+    "name": "شركة ميم الطبية",
+    "nameEn": "Mim Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c193",
+    "name": "شركة ميم العقارية",
+    "nameEn": "Mim Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c194",
+    "name": "شركة ميم للتطوير",
+    "nameEn": "Mim Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c195",
+    "name": "شركة ميم للاستشارات",
+    "nameEn": "Mim Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "ميم"
+  },
+  {
+    "id": "c196",
+    "name": "شركة نون للتجارة",
+    "nameEn": "Nun Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c197",
+    "name": "شركة نون القابضة",
+    "nameEn": "Nun Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c198",
+    "name": "شركة نون للمقاولات",
+    "nameEn": "Nun Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c199",
+    "name": "شركة نون للخدمات",
+    "nameEn": "Nun Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c200",
+    "name": "شركة نون للتمويل",
+    "nameEn": "Nun Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c201",
+    "name": "شركة نون للتوريد",
+    "nameEn": "Nun Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c202",
+    "name": "شركة نون للاستثمار",
+    "nameEn": "Nun Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c203",
+    "name": "شركة نون للتقنية",
+    "nameEn": "Nun Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c204",
+    "name": "شركة نون للصناعة",
+    "nameEn": "Nun Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c205",
+    "name": "شركة نون للنقل",
+    "nameEn": "Nun Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c206",
+    "name": "شركة نون للطاقة",
+    "nameEn": "Nun Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c207",
+    "name": "شركة نون الطبية",
+    "nameEn": "Nun Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c208",
+    "name": "شركة نون العقارية",
+    "nameEn": "Nun Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c209",
+    "name": "شركة نون للتطوير",
+    "nameEn": "Nun Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c210",
+    "name": "شركة نون للاستشارات",
+    "nameEn": "Nun Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "نون"
+  },
+  {
+    "id": "c211",
+    "name": "شركة سين للتجارة",
+    "nameEn": "Sin Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c212",
+    "name": "شركة سين القابضة",
+    "nameEn": "Sin Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c213",
+    "name": "شركة سين للمقاولات",
+    "nameEn": "Sin Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c214",
+    "name": "شركة سين للخدمات",
+    "nameEn": "Sin Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c215",
+    "name": "شركة سين للتمويل",
+    "nameEn": "Sin Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c216",
+    "name": "شركة سين للتوريد",
+    "nameEn": "Sin Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c217",
+    "name": "شركة سين للاستثمار",
+    "nameEn": "Sin Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c218",
+    "name": "شركة سين للتقنية",
+    "nameEn": "Sin Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c219",
+    "name": "شركة سين للصناعة",
+    "nameEn": "Sin Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c220",
+    "name": "شركة سين للنقل",
+    "nameEn": "Sin Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c221",
+    "name": "شركة سين للطاقة",
+    "nameEn": "Sin Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c222",
+    "name": "شركة سين الطبية",
+    "nameEn": "Sin Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c223",
+    "name": "شركة سين العقارية",
+    "nameEn": "Sin Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c224",
+    "name": "شركة سين للتطوير",
+    "nameEn": "Sin Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c225",
+    "name": "شركة سين للاستشارات",
+    "nameEn": "Sin Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "سين"
+  },
+  {
+    "id": "c226",
+    "name": "شركة عين للتجارة",
+    "nameEn": "Ayn Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c227",
+    "name": "شركة عين القابضة",
+    "nameEn": "Ayn Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c228",
+    "name": "شركة عين للمقاولات",
+    "nameEn": "Ayn Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c229",
+    "name": "شركة عين للخدمات",
+    "nameEn": "Ayn Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c230",
+    "name": "شركة عين للتمويل",
+    "nameEn": "Ayn Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c231",
+    "name": "شركة عين للتوريد",
+    "nameEn": "Ayn Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c232",
+    "name": "شركة عين للاستثمار",
+    "nameEn": "Ayn Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c233",
+    "name": "شركة عين للتقنية",
+    "nameEn": "Ayn Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c234",
+    "name": "شركة عين للصناعة",
+    "nameEn": "Ayn Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c235",
+    "name": "شركة عين للنقل",
+    "nameEn": "Ayn Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c236",
+    "name": "شركة عين للطاقة",
+    "nameEn": "Ayn Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c237",
+    "name": "شركة عين الطبية",
+    "nameEn": "Ayn Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c238",
+    "name": "شركة عين العقارية",
+    "nameEn": "Ayn Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c239",
+    "name": "شركة عين للتطوير",
+    "nameEn": "Ayn Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c240",
+    "name": "شركة عين للاستشارات",
+    "nameEn": "Ayn Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "عين"
+  },
+  {
+    "id": "c241",
+    "name": "شركة فاء للتجارة",
+    "nameEn": "Fa Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c242",
+    "name": "شركة فاء القابضة",
+    "nameEn": "Fa Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c243",
+    "name": "شركة فاء للمقاولات",
+    "nameEn": "Fa Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c244",
+    "name": "شركة فاء للخدمات",
+    "nameEn": "Fa Services Co.",
+    "sector": "توريد",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c245",
+    "name": "شركة فاء للتمويل",
+    "nameEn": "Fa Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c246",
+    "name": "شركة فاء للتوريد",
+    "nameEn": "Fa Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c247",
+    "name": "شركة فاء للاستثمار",
+    "nameEn": "Fa Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c248",
+    "name": "شركة فاء للتقنية",
+    "nameEn": "Fa Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c249",
+    "name": "شركة فاء للصناعة",
+    "nameEn": "Fa Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c250",
+    "name": "شركة فاء للنقل",
+    "nameEn": "Fa Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c251",
+    "name": "شركة فاء للطاقة",
+    "nameEn": "Fa Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c252",
+    "name": "شركة فاء الطبية",
+    "nameEn": "Fa Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c253",
+    "name": "شركة فاء العقارية",
+    "nameEn": "Fa Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c254",
+    "name": "شركة فاء للتطوير",
+    "nameEn": "Fa Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c255",
+    "name": "شركة فاء للاستشارات",
+    "nameEn": "Fa Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "فاء"
+  },
+  {
+    "id": "c256",
+    "name": "شركة صاد للتجارة",
+    "nameEn": "Sad Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c257",
+    "name": "شركة صاد القابضة",
+    "nameEn": "Sad Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c258",
+    "name": "شركة صاد للمقاولات",
+    "nameEn": "Sad Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c259",
+    "name": "شركة صاد للخدمات",
+    "nameEn": "Sad Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c260",
+    "name": "شركة صاد للتمويل",
+    "nameEn": "Sad Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c261",
+    "name": "شركة صاد للتوريد",
+    "nameEn": "Sad Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c262",
+    "name": "شركة صاد للاستثمار",
+    "nameEn": "Sad Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c263",
+    "name": "شركة صاد للتقنية",
+    "nameEn": "Sad Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c264",
+    "name": "شركة صاد للصناعة",
+    "nameEn": "Sad Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c265",
+    "name": "شركة صاد للنقل",
+    "nameEn": "Sad Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c266",
+    "name": "شركة صاد للطاقة",
+    "nameEn": "Sad Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c267",
+    "name": "شركة صاد الطبية",
+    "nameEn": "Sad Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c268",
+    "name": "شركة صاد العقارية",
+    "nameEn": "Sad Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c269",
+    "name": "شركة صاد للتطوير",
+    "nameEn": "Sad Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c270",
+    "name": "شركة صاد للاستشارات",
+    "nameEn": "Sad Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "صاد"
+  },
+  {
+    "id": "c271",
+    "name": "شركة قاف للتجارة",
+    "nameEn": "Qaf Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c272",
+    "name": "شركة قاف القابضة",
+    "nameEn": "Qaf Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c273",
+    "name": "شركة قاف للمقاولات",
+    "nameEn": "Qaf Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c274",
+    "name": "شركة قاف للخدمات",
+    "nameEn": "Qaf Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c275",
+    "name": "شركة قاف للتمويل",
+    "nameEn": "Qaf Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c276",
+    "name": "شركة قاف للتوريد",
+    "nameEn": "Qaf Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c277",
+    "name": "شركة قاف للاستثمار",
+    "nameEn": "Qaf Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c278",
+    "name": "شركة قاف للتقنية",
+    "nameEn": "Qaf Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c279",
+    "name": "شركة قاف للصناعة",
+    "nameEn": "Qaf Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c280",
+    "name": "شركة قاف للنقل",
+    "nameEn": "Qaf Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c281",
+    "name": "شركة قاف للطاقة",
+    "nameEn": "Qaf Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c282",
+    "name": "شركة قاف الطبية",
+    "nameEn": "Qaf Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c283",
+    "name": "شركة قاف العقارية",
+    "nameEn": "Qaf Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c284",
+    "name": "شركة قاف للتطوير",
+    "nameEn": "Qaf Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c285",
+    "name": "شركة قاف للاستشارات",
+    "nameEn": "Qaf Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "قاف"
+  },
+  {
+    "id": "c286",
+    "name": "شركة راء للتجارة",
+    "nameEn": "Ra Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c287",
+    "name": "شركة راء القابضة",
+    "nameEn": "Ra Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c288",
+    "name": "شركة راء للمقاولات",
+    "nameEn": "Ra Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c289",
+    "name": "شركة راء للخدمات",
+    "nameEn": "Ra Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c290",
+    "name": "شركة راء للتمويل",
+    "nameEn": "Ra Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c291",
+    "name": "شركة راء للتوريد",
+    "nameEn": "Ra Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c292",
+    "name": "شركة راء للاستثمار",
+    "nameEn": "Ra Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c293",
+    "name": "شركة راء للتقنية",
+    "nameEn": "Ra Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c294",
+    "name": "شركة راء للصناعة",
+    "nameEn": "Ra Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c295",
+    "name": "شركة راء للنقل",
+    "nameEn": "Ra Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c296",
+    "name": "شركة راء للطاقة",
+    "nameEn": "Ra Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c297",
+    "name": "شركة راء الطبية",
+    "nameEn": "Ra Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c298",
+    "name": "شركة راء العقارية",
+    "nameEn": "Ra Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c299",
+    "name": "شركة راء للتطوير",
+    "nameEn": "Ra Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c300",
+    "name": "شركة راء للاستشارات",
+    "nameEn": "Ra Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "راء"
+  },
+  {
+    "id": "c301",
+    "name": "شركة شين للتجارة",
+    "nameEn": "Shin Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c302",
+    "name": "شركة شين القابضة",
+    "nameEn": "Shin Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c303",
+    "name": "شركة شين للمقاولات",
+    "nameEn": "Shin Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c304",
+    "name": "شركة شين للخدمات",
+    "nameEn": "Shin Services Co.",
+    "sector": "توريد",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c305",
+    "name": "شركة شين للتمويل",
+    "nameEn": "Shin Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c306",
+    "name": "شركة شين للتوريد",
+    "nameEn": "Shin Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c307",
+    "name": "شركة شين للاستثمار",
+    "nameEn": "Shin Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c308",
+    "name": "شركة شين للتقنية",
+    "nameEn": "Shin Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c309",
+    "name": "شركة شين للصناعة",
+    "nameEn": "Shin Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c310",
+    "name": "شركة شين للنقل",
+    "nameEn": "Shin Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c311",
+    "name": "شركة شين للطاقة",
+    "nameEn": "Shin Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c312",
+    "name": "شركة شين الطبية",
+    "nameEn": "Shin Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c313",
+    "name": "شركة شين العقارية",
+    "nameEn": "Shin Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c314",
+    "name": "شركة شين للتطوير",
+    "nameEn": "Shin Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c315",
+    "name": "شركة شين للاستشارات",
+    "nameEn": "Shin Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "شين"
+  },
+  {
+    "id": "c316",
+    "name": "شركة تاء للتجارة",
+    "nameEn": "Taa Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c317",
+    "name": "شركة تاء القابضة",
+    "nameEn": "Taa Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c318",
+    "name": "شركة تاء للمقاولات",
+    "nameEn": "Taa Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c319",
+    "name": "شركة تاء للخدمات",
+    "nameEn": "Taa Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c320",
+    "name": "شركة تاء للتمويل",
+    "nameEn": "Taa Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c321",
+    "name": "شركة تاء للتوريد",
+    "nameEn": "Taa Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c322",
+    "name": "شركة تاء للاستثمار",
+    "nameEn": "Taa Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c323",
+    "name": "شركة تاء للتقنية",
+    "nameEn": "Taa Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c324",
+    "name": "شركة تاء للصناعة",
+    "nameEn": "Taa Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c325",
+    "name": "شركة تاء للنقل",
+    "nameEn": "Taa Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c326",
+    "name": "شركة تاء للطاقة",
+    "nameEn": "Taa Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c327",
+    "name": "شركة تاء الطبية",
+    "nameEn": "Taa Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c328",
+    "name": "شركة تاء العقارية",
+    "nameEn": "Taa Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c329",
+    "name": "شركة تاء للتطوير",
+    "nameEn": "Taa Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c330",
+    "name": "شركة تاء للاستشارات",
+    "nameEn": "Taa Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "تاء"
+  },
+  {
+    "id": "c331",
+    "name": "شركة ثاء للتجارة",
+    "nameEn": "Tha Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c332",
+    "name": "شركة ثاء القابضة",
+    "nameEn": "Tha Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c333",
+    "name": "شركة ثاء للمقاولات",
+    "nameEn": "Tha Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c334",
+    "name": "شركة ثاء للخدمات",
+    "nameEn": "Tha Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c335",
+    "name": "شركة ثاء للتمويل",
+    "nameEn": "Tha Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c336",
+    "name": "شركة ثاء للتوريد",
+    "nameEn": "Tha Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c337",
+    "name": "شركة ثاء للاستثمار",
+    "nameEn": "Tha Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c338",
+    "name": "شركة ثاء للتقنية",
+    "nameEn": "Tha Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c339",
+    "name": "شركة ثاء للصناعة",
+    "nameEn": "Tha Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c340",
+    "name": "شركة ثاء للنقل",
+    "nameEn": "Tha Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c341",
+    "name": "شركة ثاء للطاقة",
+    "nameEn": "Tha Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c342",
+    "name": "شركة ثاء الطبية",
+    "nameEn": "Tha Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c343",
+    "name": "شركة ثاء العقارية",
+    "nameEn": "Tha Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c344",
+    "name": "شركة ثاء للتطوير",
+    "nameEn": "Tha Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c345",
+    "name": "شركة ثاء للاستشارات",
+    "nameEn": "Tha Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "ثاء"
+  },
+  {
+    "id": "c346",
+    "name": "شركة خاء للتجارة",
+    "nameEn": "Kha Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c347",
+    "name": "شركة خاء القابضة",
+    "nameEn": "Kha Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c348",
+    "name": "شركة خاء للمقاولات",
+    "nameEn": "Kha Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c349",
+    "name": "شركة خاء للخدمات",
+    "nameEn": "Kha Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c350",
+    "name": "شركة خاء للتمويل",
+    "nameEn": "Kha Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c351",
+    "name": "شركة خاء للتوريد",
+    "nameEn": "Kha Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c352",
+    "name": "شركة خاء للاستثمار",
+    "nameEn": "Kha Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c353",
+    "name": "شركة خاء للتقنية",
+    "nameEn": "Kha Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c354",
+    "name": "شركة خاء للصناعة",
+    "nameEn": "Kha Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c355",
+    "name": "شركة خاء للنقل",
+    "nameEn": "Kha Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c356",
+    "name": "شركة خاء للطاقة",
+    "nameEn": "Kha Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c357",
+    "name": "شركة خاء الطبية",
+    "nameEn": "Kha Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c358",
+    "name": "شركة خاء العقارية",
+    "nameEn": "Kha Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c359",
+    "name": "شركة خاء للتطوير",
+    "nameEn": "Kha Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c360",
+    "name": "شركة خاء للاستشارات",
+    "nameEn": "Kha Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "خاء"
+  },
+  {
+    "id": "c361",
+    "name": "شركة ذال للتجارة",
+    "nameEn": "Dhal Trading Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c362",
+    "name": "شركة ذال القابضة",
+    "nameEn": "Dhal Holding Co.",
+    "sector": "خدمات",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c363",
+    "name": "شركة ذال للمقاولات",
+    "nameEn": "Dhal Contracting Co.",
+    "sector": "تمويل",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c364",
+    "name": "شركة ذال للخدمات",
+    "nameEn": "Dhal Services Co.",
+    "sector": "توريد",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c365",
+    "name": "شركة ذال للتمويل",
+    "nameEn": "Dhal Finance Co.",
+    "sector": "استثمار",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c366",
+    "name": "شركة ذال للتوريد",
+    "nameEn": "Dhal Supply Co.",
+    "sector": "تقنية",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c367",
+    "name": "شركة ذال للاستثمار",
+    "nameEn": "Dhal Invest Co.",
+    "sector": "صناعة",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c368",
+    "name": "شركة ذال للتقنية",
+    "nameEn": "Dhal Tech Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c369",
+    "name": "شركة ذال للصناعة",
+    "nameEn": "Dhal Industry Co.",
+    "sector": "طاقة",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c370",
+    "name": "شركة ذال للنقل",
+    "nameEn": "Dhal Logistics Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c371",
+    "name": "شركة ذال للطاقة",
+    "nameEn": "Dhal Energy Co.",
+    "sector": "عقارات",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c372",
+    "name": "شركة ذال الطبية",
+    "nameEn": "Dhal Health Co.",
+    "sector": "تجارة",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c373",
+    "name": "شركة ذال العقارية",
+    "nameEn": "Dhal Realty Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c374",
+    "name": "شركة ذال للتطوير",
+    "nameEn": "Dhal Dev Co.",
+    "sector": "خدمات",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c375",
+    "name": "شركة ذال للاستشارات",
+    "nameEn": "Dhal Advisory Co.",
+    "sector": "تمويل",
+    "shortLabel": "ذال"
+  },
+  {
+    "id": "c376",
+    "name": "شركة ضاد للتجارة",
+    "nameEn": "Dad Trading Co.",
+    "sector": "توريد",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c377",
+    "name": "شركة ضاد القابضة",
+    "nameEn": "Dad Holding Co.",
+    "sector": "استثمار",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c378",
+    "name": "شركة ضاد للمقاولات",
+    "nameEn": "Dad Contracting Co.",
+    "sector": "تقنية",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c379",
+    "name": "شركة ضاد للخدمات",
+    "nameEn": "Dad Services Co.",
+    "sector": "صناعة",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c380",
+    "name": "شركة ضاد للتمويل",
+    "nameEn": "Dad Finance Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c381",
+    "name": "شركة ضاد للتوريد",
+    "nameEn": "Dad Supply Co.",
+    "sector": "طاقة",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c382",
+    "name": "شركة ضاد للاستثمار",
+    "nameEn": "Dad Invest Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c383",
+    "name": "شركة ضاد للتقنية",
+    "nameEn": "Dad Tech Co.",
+    "sector": "عقارات",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c384",
+    "name": "شركة ضاد للصناعة",
+    "nameEn": "Dad Industry Co.",
+    "sector": "تجارة",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c385",
+    "name": "شركة ضاد للنقل",
+    "nameEn": "Dad Logistics Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c386",
+    "name": "شركة ضاد للطاقة",
+    "nameEn": "Dad Energy Co.",
+    "sector": "خدمات",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c387",
+    "name": "شركة ضاد الطبية",
+    "nameEn": "Dad Health Co.",
+    "sector": "تمويل",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c388",
+    "name": "شركة ضاد العقارية",
+    "nameEn": "Dad Realty Co.",
+    "sector": "توريد",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c389",
+    "name": "شركة ضاد للتطوير",
+    "nameEn": "Dad Dev Co.",
+    "sector": "استثمار",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c390",
+    "name": "شركة ضاد للاستشارات",
+    "nameEn": "Dad Advisory Co.",
+    "sector": "تقنية",
+    "shortLabel": "ضاد"
+  },
+  {
+    "id": "c391",
+    "name": "شركة ظاء للتجارة",
+    "nameEn": "Zha Trading Co.",
+    "sector": "صناعة",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c392",
+    "name": "شركة ظاء القابضة",
+    "nameEn": "Zha Holding Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c393",
+    "name": "شركة ظاء للمقاولات",
+    "nameEn": "Zha Contracting Co.",
+    "sector": "طاقة",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c394",
+    "name": "شركة ظاء للخدمات",
+    "nameEn": "Zha Services Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c395",
+    "name": "شركة ظاء للتمويل",
+    "nameEn": "Zha Finance Co.",
+    "sector": "عقارات",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c396",
+    "name": "شركة ظاء للتوريد",
+    "nameEn": "Zha Supply Co.",
+    "sector": "تجارة",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c397",
+    "name": "شركة ظاء للاستثمار",
+    "nameEn": "Zha Invest Co.",
+    "sector": "مقاولات",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c398",
+    "name": "شركة ظاء للتقنية",
+    "nameEn": "Zha Tech Co.",
+    "sector": "خدمات",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c399",
+    "name": "شركة ظاء للصناعة",
+    "nameEn": "Zha Industry Co.",
+    "sector": "تمويل",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c400",
+    "name": "شركة ظاء للنقل",
+    "nameEn": "Zha Logistics Co.",
+    "sector": "توريد",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c401",
+    "name": "شركة ظاء للطاقة",
+    "nameEn": "Zha Energy Co.",
+    "sector": "استثمار",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c402",
+    "name": "شركة ظاء الطبية",
+    "nameEn": "Zha Health Co.",
+    "sector": "تقنية",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c403",
+    "name": "شركة ظاء العقارية",
+    "nameEn": "Zha Realty Co.",
+    "sector": "صناعة",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c404",
+    "name": "شركة ظاء للتطوير",
+    "nameEn": "Zha Dev Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c405",
+    "name": "شركة ظاء للاستشارات",
+    "nameEn": "Zha Advisory Co.",
+    "sector": "طاقة",
+    "shortLabel": "ظاء"
+  },
+  {
+    "id": "c406",
+    "name": "شركة غين للتجارة",
+    "nameEn": "Ghayn Trading Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c407",
+    "name": "شركة غين القابضة",
+    "nameEn": "Ghayn Holding Co.",
+    "sector": "عقارات",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c408",
+    "name": "شركة غين للمقاولات",
+    "nameEn": "Ghayn Contracting Co.",
+    "sector": "تجارة",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c409",
+    "name": "شركة غين للخدمات",
+    "nameEn": "Ghayn Services Co.",
+    "sector": "مقاولات",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c410",
+    "name": "شركة غين للتمويل",
+    "nameEn": "Ghayn Finance Co.",
+    "sector": "خدمات",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c411",
+    "name": "شركة غين للتوريد",
+    "nameEn": "Ghayn Supply Co.",
+    "sector": "تمويل",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c412",
+    "name": "شركة غين للاستثمار",
+    "nameEn": "Ghayn Invest Co.",
+    "sector": "توريد",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c413",
+    "name": "شركة غين للتقنية",
+    "nameEn": "Ghayn Tech Co.",
+    "sector": "استثمار",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c414",
+    "name": "شركة غين للصناعة",
+    "nameEn": "Ghayn Industry Co.",
+    "sector": "تقنية",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c415",
+    "name": "شركة غين للنقل",
+    "nameEn": "Ghayn Logistics Co.",
+    "sector": "صناعة",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c416",
+    "name": "شركة غين للطاقة",
+    "nameEn": "Ghayn Energy Co.",
+    "sector": "لوجستيات",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c417",
+    "name": "شركة غين الطبية",
+    "nameEn": "Ghayn Health Co.",
+    "sector": "طاقة",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c418",
+    "name": "شركة غين العقارية",
+    "nameEn": "Ghayn Realty Co.",
+    "sector": "رعاية صحية",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c419",
+    "name": "شركة غين للتطوير",
+    "nameEn": "Ghayn Dev Co.",
+    "sector": "عقارات",
+    "shortLabel": "غين"
+  },
+  {
+    "id": "c420",
+    "name": "شركة غين للاستشارات",
+    "nameEn": "Ghayn Advisory Co.",
+    "sector": "تجارة",
+    "shortLabel": "غين"
+  }
+]
