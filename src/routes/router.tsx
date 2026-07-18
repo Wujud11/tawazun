@@ -3,6 +3,11 @@ import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { AppLayout, RootLayout } from '@/components/layout'
 import { CompaniesPage, DashboardPage, DebtsPage, NettingPage } from '@/pages'
 
+/**
+ * Landing: `/` → `/dashboard`.
+ * `/netting` is reachable only via sidebar NavLink or explicit Review deep-links
+ * (`?workflow=1&...`). There is no startup navigate() to Netting.
+ */
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -30,6 +35,10 @@ export const router = createBrowserRouter([
           {
             path: 'netting',
             element: <NettingPage />,
+          },
+          {
+            path: '*',
+            element: <Navigate to="/dashboard" replace />,
           },
         ],
       },

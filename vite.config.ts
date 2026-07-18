@@ -12,6 +12,8 @@ export default defineConfig({
     },
   },
   server: {
+    // Fresh `npm run dev` / browser open must land on Dashboard — never /netting.
+    open: '/dashboard',
     proxy: {
       '/api': {
         target: 'http://localhost:3001',

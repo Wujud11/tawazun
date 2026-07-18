@@ -5,10 +5,11 @@ Single-service deployment: Express serves the React build and the API from the s
 ## Production (Railway)
 
 ```
-https://tawazun-production-e0ed.up.railway.app/          → React app
-https://tawazun-production-e0ed.up.railway.app/netting   → Smart netting (live demo)
-https://tawazun-production-e0ed.up.railway.app/health    → API health check
-https://tawazun-production-e0ed.up.railway.app/api/ai/*  → API routes
+https://tawazun-production-e0ed.up.railway.app/            → redirects to /dashboard
+https://tawazun-production-e0ed.up.railway.app/dashboard   → Dashboard (default landing)
+https://tawazun-production-e0ed.up.railway.app/netting     → Smart netting (via menu / Review)
+https://tawazun-production-e0ed.up.railway.app/health      → API health check
+https://tawazun-production-e0ed.up.railway.app/api/ai/*    → API routes
 ```
 
 ## Legacy Fly.io reference
@@ -93,7 +94,7 @@ fly deploy
 fly open
 ```
 
-Or visit: `https://tawazun-production-e0ed.up.railway.app/netting`
+Or visit: `https://tawazun-production-e0ed.up.railway.app/dashboard`
 
 ### 6. Keep the machine warm for demos (optional)
 
