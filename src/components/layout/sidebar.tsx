@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 const navItems = [
   {
-    to: '/',
+    to: '/dashboard',
     label: 'لوحة التحكم',
     icon: LayoutDashboard,
   },

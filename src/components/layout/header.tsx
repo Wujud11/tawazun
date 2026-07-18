@@ -1,4 +1,5 @@
 import { Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 import { NotificationCenter } from '@/components/layout/notification-center'
 import { Badge } from '@/components/ui/badge'
@@ -10,15 +11,22 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
       <div className="flex h-14 items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-3">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-sm">
-            <Sparkles className="size-4" />
-          </div>
-          <div>
-            <p className="text-sm font-bold leading-none tracking-tight">توازن</p>
-            <p className="text-[10px] font-medium text-muted-foreground">
-              Tawazun Treasury
-            </p>
-          </div>
+          <Link
+            to="/dashboard"
+            className="flex items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-sm">
+              <Sparkles className="size-4" />
+            </div>
+            <div>
+              <p className="text-sm font-bold leading-none tracking-tight">
+                توازن
+              </p>
+              <p className="text-[10px] font-medium text-muted-foreground">
+                Tawazun Treasury
+              </p>
+            </div>
+          </Link>
           <Separator orientation="vertical" className="mx-1 hidden h-6 sm:block" />
           <Badge variant="secondary" className="hidden font-normal sm:inline-flex">
             منصة المقاصة الذكية
