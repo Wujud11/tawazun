@@ -2,11 +2,11 @@ import {
   ArrowDownLeft,
   ArrowUpRight,
   Building2,
+  GitBranch,
   Minus,
+  PiggyBank,
   Search,
-  TrendingDown,
   TrendingUp,
-  Wallet,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -27,10 +27,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { companies } from '@/data/dashboard-mock'
-import { formatNumber, formatSar } from '@/lib/format'
-import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  SAMPLE_PARTICIPANTS_LABEL_AR,
+  demoPortfolio,
+  demoSampleCompanies,
+} from '@/data/demo-data'
+import { formatNumber, formatPercent, formatSar } from '@/lib/format'
+import { cn } from '@/lib/utils'
 import type { Company } from '@/types/dashboard'
 
 type CompanyStatus = 'creditor' | 'debtor' | 'balanced'
@@ -50,45 +55,40 @@ const statusConfig: Record<
   balanced: { label: 'متوازن', variant: 'secondary' },
 }
 
-const totalPayable = companies.reduce((s, c) => s + c.totalPayable, 0)
-const totalReceivable = companies.reduce((s, c) => s + c.totalReceivable, 0)
-const totalNet = companies.reduce((s, c) => s + c.netBalance, 0)
+const companies = demoSampleCompanies
 
 const summaryCards: StatCard[] = [
   {
     id: 'count',
-    label: 'عدد الشركات',
-    value: formatNumber(companies.length),
-    sub: 'شركة في الشبكة',
+    label: 'الشركات المشاركة',
+    value: formatNumber(demoPortfolio.participatingCompanies),
+    sub: DEMO_DATA_DISCLAIMER_AR,
     icon: Building2,
     colorClass: 'bg-primary/10 text-primary',
   },
   {
-    id: 'payable',
-    label: 'إجمالي المستحق الدفع',
-    value: formatSar(totalPayable, true),
-    sub: 'على جميع الشركات',
-    icon: TrendingDown,
+    id: 'relationships',
+    label: 'العلاقات المالية',
+    value: formatNumber(demoPortfolio.financialRelationships),
+    sub: 'علاقة في المحفظة التجريبية',
+    icon: GitBranch,
+    colorClass: 'bg-blue-500/10 text-blue-600',
+  },
+  {
+    id: 'gross',
+    label: 'إجمالي الديون',
+    value: formatSar(demoPortfolio.grossDebtSar, true),
+    sub: `${formatNumber(demoPortfolio.transfersBefore)} → ${formatNumber(demoPortfolio.transfersAfter)} تحويل`,
+    icon: TrendingUp,
     colorClass: 'bg-red-500/10 text-red-600',
   },
   {
-    id: 'receivable',
-    label: 'إجمالي المستحق القبض',
-    value: formatSar(totalReceivable, true),
-    sub: 'لجميع الشركات',
-    icon: TrendingUp,
+    id: 'savings',
+    label: 'السيولة المحررة',
+    value: formatSar(demoPortfolio.savingsSar, true),
+    sub: formatPercent(demoPortfolio.savingsPct),
+    icon: PiggyBank,
     colorClass: 'bg-emerald-500/10 text-emerald-600',
-  },
-  {
-    id: 'net',
-    label: 'الصافي الإجمالي للشبكة',
-    value: formatSar(Math.abs(totalNet), true),
-    sub: totalNet <= 0 ? 'صافي مدين' : 'صافي دائن',
-    icon: Wallet,
-    colorClass:
-      totalNet < 0
-        ? 'bg-amber-500/10 text-amber-600'
-        : 'bg-emerald-500/10 text-emerald-600',
   },
 ]
 
@@ -199,8 +199,9 @@ export function CompaniesPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight">الشركات</h1>
-        <p className="text-sm text-muted-foreground">
-          إدارة ومتابعة جميع الشركات المشاركة في شبكة المقاصة
+        <p className="mt-1 text-sm text-muted-foreground">
+          محفظة تجريبية بـ {formatNumber(demoPortfolio.participatingCompanies)}{' '}
+          شركة — الجدول أدناه {SAMPLE_PARTICIPANTS_LABEL_AR}
         </p>
       </div>
 
@@ -210,9 +211,10 @@ export function CompaniesPage() {
         <CardHeader>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <CardTitle>قائمة الشركات</CardTitle>
+              <CardTitle>{SAMPLE_PARTICIPANTS_LABEL_AR}</CardTitle>
               <CardDescription className="mt-1">
-                {formatNumber(companies.length)} شركة —&nbsp;
+                {formatNumber(companies.length)} من أصل{' '}
+                {formatNumber(demoPortfolio.participatingCompanies)} —&nbsp;
                 <span className="text-emerald-600">{creditors} دائن</span>
                 &nbsp;·&nbsp;
                 <span className="text-red-600">{debtors} مدين</span>

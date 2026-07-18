@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { debts } from '@/data/dashboard-mock'
+import { demoRecentDebts as debts } from '@/data/demo-data'
 import { formatDate, formatNumber, formatSar } from '@/lib/format'
 import type { DebtStatus } from '@/types/dashboard'
 

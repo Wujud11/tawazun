@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/card'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  enterprisePortfolioScale,
-} from '@/data/enterprise-demo-scale'
+  demoPortfolio,
+} from '@/data/demo-data'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
@@ -24,7 +24,7 @@ const presentationKpis = [
   {
     id: 'companies',
     label: 'الشركات المشاركة',
-    value: formatNumber(enterprisePortfolioScale.participatingCompanies),
+    value: formatNumber(demoPortfolio.participatingCompanies),
     change: 11.2,
     changeLabel: 'في شبكة التسوية التجريبية',
     icon: Building2,
@@ -35,7 +35,7 @@ const presentationKpis = [
   {
     id: 'gross',
     label: 'إجمالي الديون',
-    value: formatSar(enterprisePortfolioScale.grossDebtSar, true),
+    value: formatSar(demoPortfolio.grossDebtSar, true),
     change: 9.6,
     changeLabel: 'الحجم قبل المقاصة',
     icon: TrendingUp,
@@ -46,8 +46,8 @@ const presentationKpis = [
   {
     id: 'net',
     label: 'صافي التسوية',
-    value: formatSar(enterprisePortfolioScale.netSettlementSar, true),
-    change: enterprisePortfolioScale.transferReductionPct,
+    value: formatSar(demoPortfolio.netSettlementSar, true),
+    change: demoPortfolio.transferReductionPct,
     changeLabel: 'تخفيض عدد التحويلات',
     icon: Scale,
     accent:
@@ -57,8 +57,8 @@ const presentationKpis = [
   {
     id: 'savings',
     label: 'التوفير المتوقع',
-    value: formatSar(enterprisePortfolioScale.savingsSar, true),
-    change: enterprisePortfolioScale.savingsPct,
+    value: formatSar(demoPortfolio.savingsSar, true),
+    change: demoPortfolio.savingsPct,
     changeLabel: 'تخفيض في حجم التحويلات',
     icon: PiggyBank,
     accent:
@@ -72,10 +72,9 @@ export function KpiCards() {
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs text-muted-foreground">
-          {formatNumber(enterprisePortfolioScale.financialRelationships)} علاقة
-          مالية · {formatNumber(enterprisePortfolioScale.transfersBefore)} تحويل
-          قبل المقاصة · {formatNumber(enterprisePortfolioScale.transfersAfter)}{' '}
-          بعد المقاصة
+          {formatNumber(demoPortfolio.financialRelationships)} علاقة مالية ·{' '}
+          {formatNumber(demoPortfolio.transfersBefore)} تحويل قبل المقاصة ·{' '}
+          {formatNumber(demoPortfolio.transfersAfter)} بعد المقاصة
         </p>
         <span className="rounded-md border bg-muted/40 px-2 py-1 text-[10px] font-medium text-muted-foreground">
           {DEMO_DATA_DISCLAIMER_AR}

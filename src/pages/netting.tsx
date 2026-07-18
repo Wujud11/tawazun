@@ -29,13 +29,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { companies } from '@/data/dashboard-mock'
-import { debtRecords } from '@/data/debts-mock'
 import {
-  SAMPLE_PARTICIPANT_COUNT,
-  enterprisePortfolioScale,
-} from '@/data/enterprise-demo-scale'
-import { PRIMARY_OPPORTUNITY_ID } from '@/data/workflow-mock'
+  PRIMARY_OPPORTUNITY_ID,
+  demoPortfolio,
+  demoSampleCompanies as sampleCompanies,
+} from '@/data/demo-data'
+import { debtRecords } from '@/data/debts-mock'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
@@ -90,13 +89,12 @@ type DialogProps = {
 
 const activeRecords = debtRecords.filter((r) => r.status !== 'settled')
 
-/** Presentation KPIs — enterprise demo scale (UI storytelling). */
-const portfolioGross = enterprisePortfolioScale.grossDebtSar
-const portfolioCountBefore = enterprisePortfolioScale.transfersBefore
-const portfolioCountAfter = enterprisePortfolioScale.transfersAfter
-const portfolioSavings = enterprisePortfolioScale.savingsSar
+/** Presentation KPIs — single demo-data source of truth. */
+const portfolioGross = demoPortfolio.grossDebtSar
+const portfolioCountBefore = demoPortfolio.transfersBefore
+const portfolioCountAfter = demoPortfolio.transfersAfter
+const portfolioSavings = demoPortfolio.savingsSar
 
-const sampleCompanies = companies.slice(0, SAMPLE_PARTICIPANT_COUNT)
 const sampleCompanyNames = new Set(sampleCompanies.map((c) => c.name))
 
 /** Detailed relationship sample — only among the 6 displayed participants. */
@@ -242,9 +240,9 @@ function NettingResultDialog({
   const countAfter = portfolioCountAfter
   const savedTransfers = before - countAfter
   const volumeSaved = portfolioSavings
-  const efficiencyPct = enterprisePortfolioScale.savingsPct
-  const volumeAfter = enterprisePortfolioScale.netSettlementSar
-  const countReduction = enterprisePortfolioScale.transferReductionPct
+  const efficiencyPct = demoPortfolio.savingsPct
+  const volumeAfter = demoPortfolio.netSettlementSar
+  const countReduction = demoPortfolio.transferReductionPct
 
   async function handleExportPdf() {
     if (!analysis || isExporting) return
@@ -253,7 +251,7 @@ function NettingResultDialog({
       const { exportNettingPdf } = await import('@/lib/export-netting-pdf')
       await exportNettingPdf({
         analysis,
-        companies,
+        companies: sampleCompanies,
         countBefore: before,
         grossVolume,
       })
@@ -666,7 +664,7 @@ function AfterPanel({
             <div className="flex items-center justify-between rounded-lg border border-dashed border-emerald-300 p-3 text-sm dark:border-emerald-800">
               <span className="text-muted-foreground">صافي المحفظة التجريبية</span>
               <span className="font-mono font-bold tabular-nums text-emerald-700 dark:text-emerald-400">
-                {formatSar(enterprisePortfolioScale.netSettlementSar, true)}
+                {formatSar(demoPortfolio.netSettlementSar, true)}
               </span>
             </div>
             <div className="rounded-lg bg-emerald-50 p-3 dark:bg-emerald-950/40">
@@ -674,7 +672,7 @@ function AfterPanel({
                 <CheckCircle2 className="size-4 text-emerald-600" />
                 <span className="font-medium text-emerald-700 dark:text-emerald-400">
                   وُفِّر {formatSar(portfolioSavings, true)} —{' '}
-                  {formatPercent(enterprisePortfolioScale.savingsPct)} تخفيض في
+                  {formatPercent(demoPortfolio.savingsPct)} تخفيض في
                   الحجم
                 </span>
               </div>
@@ -839,7 +837,7 @@ export function NettingPage() {
       id: 'savings',
       label: 'التوفير المتوقع',
       value: formatSar(portfolioSavings, true),
-      sub: formatPercent(enterprisePortfolioScale.savingsPct),
+      sub: formatPercent(demoPortfolio.savingsPct),
       icon: Minus,
       colorClass: 'bg-primary/10 text-primary',
     },
@@ -847,7 +845,7 @@ export function NettingPage() {
       id: 'total',
       label: 'إجمالي قيمة الديون',
       value: formatSar(portfolioGross, true),
-      sub: `${formatNumber(enterprisePortfolioScale.participatingCompanies)} شركة مشاركة`,
+      sub: `${formatNumber(demoPortfolio.participatingCompanies)} شركة مشاركة`,
       icon: Zap,
       colorClass: 'bg-amber-500/10 text-amber-600',
     },

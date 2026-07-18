@@ -14,8 +14,8 @@ import {
 } from '@/components/ui/chart'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  enterpriseMonthlyTrend,
-} from '@/data/enterprise-demo-scale'
+  demoMonthlyTrend as enterpriseMonthlyTrend,
+} from '@/data/demo-data'
 import { formatAxisMillions } from '@/lib/format'
 
 const chartConfig = {

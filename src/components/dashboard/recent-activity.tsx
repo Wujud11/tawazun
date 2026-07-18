@@ -16,8 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { recentActivity } from '@/data/dashboard-mock'
-import { PRIMARY_OPPORTUNITY_ID } from '@/data/workflow-mock'
+import { PRIMARY_OPPORTUNITY_ID, demoRecentActivity as recentActivity } from '@/data/demo-data'
 import { formatRelativeTime, formatSar } from '@/lib/format'
 import type { ActivityType } from '@/types/dashboard'
 import { cn } from '@/lib/utils'

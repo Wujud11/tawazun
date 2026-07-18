@@ -15,8 +15,8 @@ import {
   DEMO_DATA_DISCLAIMER_AR,
   SAMPLE_PARTICIPANTS_LABEL_AR,
   SAMPLE_PARTICIPANT_COUNT,
-  enterprisePortfolioScale,
-} from '@/data/enterprise-demo-scale'
+  demoPortfolio,
+} from '@/data/demo-data'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import {
@@ -96,7 +96,7 @@ export function EnterpriseNettingSessionPanel({
       const created = await service.createSession({ companies: sampleCompanies })
       setSession({
         ...created,
-        statusLabel: `جاري تجهيز جلسة المقاصة · ${formatNumber(enterprisePortfolioScale.participatingCompanies)} شركة في المحفظة التجريبية`,
+        statusLabel: `جاري تجهيز جلسة المقاصة · ${formatNumber(demoPortfolio.participatingCompanies)} شركة في المحفظة التجريبية`,
       })
     } finally {
       setIsCreating(false)
@@ -114,11 +114,11 @@ export function EnterpriseNettingSessionPanel({
             </CardDescription>
             <div className="mt-2 flex flex-wrap gap-2">
               <Badge variant="secondary">
-                {formatNumber(enterprisePortfolioScale.participatingCompanies)}{' '}
+                {formatNumber(demoPortfolio.participatingCompanies)}{' '}
                 شركة مشاركة
               </Badge>
               <Badge variant="outline">
-                {formatNumber(enterprisePortfolioScale.financialRelationships)}{' '}
+                {formatNumber(demoPortfolio.financialRelationships)}{' '}
                 علاقة مالية
               </Badge>
               <Badge variant="outline">{DEMO_DATA_DISCLAIMER_AR}</Badge>
@@ -160,7 +160,7 @@ export function EnterpriseNettingSessionPanel({
                   Sample Participants —{' '}
                   {formatNumber(sampleCompanies.length)} من أصل{' '}
                   {formatNumber(
-                    enterprisePortfolioScale.participatingCompanies,
+                    demoPortfolio.participatingCompanies,
                   )}
                 </p>
               </div>
@@ -220,7 +220,7 @@ export function EnterpriseNettingSessionPanel({
                     Sample Participants —{' '}
                     {formatNumber(sampleTotal)} من أصل{' '}
                     {formatNumber(
-                      enterprisePortfolioScale.participatingCompanies,
+                      demoPortfolio.participatingCompanies,
                     )}
                   </p>
                 </div>

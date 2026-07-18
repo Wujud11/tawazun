@@ -13,8 +13,8 @@ import {
 import {
   DEMO_DATA_DISCLAIMER_AR,
   SAMPLE_PARTICIPANTS_LABEL_AR,
-} from '@/data/enterprise-demo-scale'
-import { settlementOpportunities } from '@/data/workflow-mock'
+  settlementOpportunities,
+} from '@/data/demo-data'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 

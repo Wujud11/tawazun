@@ -14,16 +14,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { companies } from '@/data/dashboard-mock'
 import {
   SAMPLE_PARTICIPANT_COUNT,
   SAMPLE_PARTICIPANTS_LABEL_AR,
-  enterprisePortfolioScale,
-} from '@/data/enterprise-demo-scale'
+  demoPortfolio,
+  demoSampleCompanies,
+} from '@/data/demo-data'
 import { formatNumber, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
-
-const sampleCompanies = companies.slice(0, SAMPLE_PARTICIPANT_COUNT)
 
 export function CompaniesSummary() {
   return (
@@ -31,9 +29,9 @@ export function CompaniesSummary() {
       <CardHeader>
         <CardTitle>{SAMPLE_PARTICIPANTS_LABEL_AR}</CardTitle>
         <CardDescription>
-          Sample Participants — {formatNumber(sampleCompanies.length)} من أصل{' '}
-          {formatNumber(enterprisePortfolioScale.participatingCompanies)} شركة في
-          المحفظة التجريبية
+          Sample Participants — {formatNumber(SAMPLE_PARTICIPANT_COUNT)} من أصل{' '}
+          {formatNumber(demoPortfolio.participatingCompanies)} شركة في المحفظة
+          التجريبية
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -49,7 +47,7 @@ export function CompaniesSummary() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sampleCompanies.map((company) => (
+            {demoSampleCompanies.map((company) => (
               <TableRow key={company.id}>
                 <TableCell>
                   <div className="font-medium">{company.name}</div>

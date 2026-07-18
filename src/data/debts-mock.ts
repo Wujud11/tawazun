@@ -1,3 +1,10 @@
+/**
+ * Operational debt cycle for the netting engine / AI API payload ONLY.
+ *
+ * Do NOT use these rows for Dashboard KPIs, Companies summaries, charts,
+ * workflow metrics, or other presentation UI — import `@/data/demo-data` instead.
+ */
+
 export type DebtRecordStatus = 'pending' | 'overdue' | 'settled'
 
 export type DebtRecord = {

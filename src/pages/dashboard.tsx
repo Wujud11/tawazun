@@ -13,8 +13,8 @@ import {
 import { Badge } from '@/components/ui/badge'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  enterprisePortfolioScale,
-} from '@/data/enterprise-demo-scale'
+  demoPortfolio,
+} from '@/data/demo-data'
 import { formatNumber } from '@/lib/format'
 import { defaultTransition } from '@/lib/motion'
 
@@ -42,15 +42,13 @@ export function DashboardPage() {
             </h1>
             <p className="mt-1.5 text-sm text-muted-foreground">
               نظرة على محفظة مقاصة مؤسسية تجريبية —{' '}
-              {formatNumber(enterprisePortfolioScale.participatingCompanies)}{' '}
-              شركة ·{' '}
-              {formatNumber(enterprisePortfolioScale.financialRelationships)}{' '}
-              علاقة مالية
+              {formatNumber(demoPortfolio.participatingCompanies)} شركة ·{' '}
+              {formatNumber(demoPortfolio.financialRelationships)} علاقة مالية
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
               <Badge variant="outline">{DEMO_DATA_DISCLAIMER_AR}</Badge>
               <Badge variant="secondary">
-                {formatNumber(enterprisePortfolioScale.activeCycles)} دورة نشطة
+                {formatNumber(demoPortfolio.activeCycles)} دورة نشطة
               </Badge>
             </div>
           </div>

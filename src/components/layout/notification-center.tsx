@@ -14,7 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   PRIMARY_OPPORTUNITY_ID,
   workflowNotifications as initialNotifications,
-} from '@/data/workflow-mock'
+} from '@/data/demo-data'
 import { formatRelativeTime } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { NotificationKind, WorkflowNotification } from '@/types/workflow'

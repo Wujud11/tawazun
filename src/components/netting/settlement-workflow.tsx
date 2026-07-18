@@ -14,12 +14,12 @@ import { createPortal } from 'react-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { SAMPLE_PARTICIPANTS_LABEL_AR } from '@/data/enterprise-demo-scale'
 import {
+  SAMPLE_PARTICIPANTS_LABEL_AR,
   getOpportunityById,
   getPrimaryOpportunity,
   settlementWorkflowSteps,
-} from '@/data/workflow-mock'
+} from '@/data/demo-data'
 import { formatDateTime, formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type {

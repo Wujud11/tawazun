@@ -14,8 +14,8 @@ import {
 } from '@/components/ui/chart'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  enterpriseCompanyDebtShares,
-} from '@/data/enterprise-demo-scale'
+  demoCompanyDebtShares as enterpriseCompanyDebtShares,
+} from '@/data/demo-data'
 import { formatAxisThousands } from '@/lib/format'
 
 const chartConfig = {

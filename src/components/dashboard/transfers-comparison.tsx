@@ -10,18 +10,18 @@ import {
 import { Separator } from '@/components/ui/separator'
 import {
   DEMO_DATA_DISCLAIMER_AR,
-  enterprisePortfolioScale,
-} from '@/data/enterprise-demo-scale'
+  demoPortfolio,
+} from '@/data/demo-data'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 
 export function TransfersComparison() {
-  const beforeCount = enterprisePortfolioScale.transfersBefore
-  const afterCount = enterprisePortfolioScale.transfersAfter
-  const beforeVolume = enterprisePortfolioScale.grossDebtSar
-  const afterVolume = enterprisePortfolioScale.netSettlementSar
-  const countReduction = enterprisePortfolioScale.transferReductionPct
-  const volumeReduction = enterprisePortfolioScale.savingsPct
-  const savedVolume = enterprisePortfolioScale.savingsSar
+  const beforeCount = demoPortfolio.transfersBefore
+  const afterCount = demoPortfolio.transfersAfter
+  const beforeVolume = demoPortfolio.grossDebtSar
+  const afterVolume = demoPortfolio.netSettlementSar
+  const countReduction = demoPortfolio.transferReductionPct
+  const volumeReduction = demoPortfolio.savingsPct
+  const savedVolume = demoPortfolio.savingsSar
 
   return (
     <Card className="treasury-card h-full">

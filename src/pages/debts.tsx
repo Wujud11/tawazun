@@ -1,12 +1,12 @@
 import {
   AlertCircle,
-  ArrowUpDown,
+  ArrowLeftRight,
   CheckCircle2,
   Clock,
   FileText,
+  PiggyBank,
   Search,
   TrendingUp,
-  Wallet,
 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
@@ -28,19 +28,20 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import {
-  debtCompanies,
-  debtRecords,
-  type DebtRecord,
-  type DebtRecordStatus,
-} from '@/data/debts-mock'
-import { formatDate, formatNumber, formatSar } from '@/lib/format'
-import { cn } from '@/lib/utils'
 import { StatCardGrid, type StatCard } from '@/components/ui/stat-cards'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  SAMPLE_PARTICIPANTS_LABEL_AR,
+  demoDebtCompanyNames,
+  demoDebtLedger,
+  demoPortfolio,
+} from '@/data/demo-data'
+import { formatDate, formatNumber, formatPercent, formatSar } from '@/lib/format'
+import { cn } from '@/lib/utils'
 
-// ─── constants ────────────────────────────────────────────────────────────────
+type DebtLedgerStatus = (typeof demoDebtLedger)[number]['status']
 
-const STATUS_OPTIONS: { value: 'all' | DebtRecordStatus; label: string }[] = [
+const STATUS_OPTIONS: { value: 'all' | DebtLedgerStatus; label: string }[] = [
   { value: 'all', label: 'الكل' },
   { value: 'pending', label: 'معلق' },
   { value: 'overdue', label: 'متأخر' },
@@ -48,7 +49,7 @@ const STATUS_OPTIONS: { value: 'all' | DebtRecordStatus; label: string }[] = [
 ]
 
 const statusConfig: Record<
-  DebtRecordStatus,
+  DebtLedgerStatus,
   {
     label: string
     variant: 'warning' | 'destructive' | 'success'
@@ -60,50 +61,42 @@ const statusConfig: Record<
   settled: { label: 'مسوّى', variant: 'success', icon: CheckCircle2 },
 }
 
-// ─── computed totals (static — full dataset) ──────────────────────────────────
-
-const totalValue = debtRecords.reduce((s, d) => s + d.amount, 0)
-const avgValue = Math.round(totalValue / debtRecords.length)
-const maxValue = Math.max(...debtRecords.map((d) => d.amount))
-
 const kpiCards: StatCard[] = [
   {
     id: 'total-value',
     label: 'إجمالي قيمة الديون',
-    value: formatSar(totalValue, true),
-    sub: `${formatNumber(debtRecords.length)} سجل`,
+    value: formatSar(demoPortfolio.grossDebtSar, true),
+    sub: DEMO_DATA_DISCLAIMER_AR,
     icon: TrendingUp,
     colorClass: 'bg-primary/10 text-primary',
   },
   {
-    id: 'count',
-    label: 'عدد سجلات الدين',
-    value: formatNumber(debtRecords.length),
-    sub: 'سجل نشط',
+    id: 'before',
+    label: 'التحويلات قبل المقاصة',
+    value: formatNumber(demoPortfolio.transfersBefore),
+    sub: `${formatNumber(demoPortfolio.financialRelationships)} علاقة مالية`,
+    icon: ArrowLeftRight,
+    colorClass: 'bg-red-500/10 text-red-600',
+  },
+  {
+    id: 'after',
+    label: 'التحويلات بعد المقاصة',
+    value: formatNumber(demoPortfolio.transfersAfter),
+    sub: `${formatNumber(demoPortfolio.transfersBefore)} → ${formatNumber(demoPortfolio.transfersAfter)}`,
     icon: FileText,
     colorClass: 'bg-blue-500/10 text-blue-600',
   },
   {
-    id: 'average',
-    label: 'متوسط الدين',
-    value: formatSar(avgValue, true),
-    sub: 'لكل سجل',
-    icon: ArrowUpDown,
-    colorClass: 'bg-violet-500/10 text-violet-600',
-  },
-  {
-    id: 'max',
-    label: 'أكبر دين',
-    value: formatSar(maxValue, true),
-    sub: 'في الشبكة',
-    icon: Wallet,
-    colorClass: 'bg-amber-500/10 text-amber-600',
+    id: 'savings',
+    label: 'السيولة المحررة',
+    value: formatSar(demoPortfolio.savingsSar, true),
+    sub: formatPercent(demoPortfolio.savingsPct),
+    icon: PiggyBank,
+    colorClass: 'bg-emerald-500/10 text-emerald-600',
   },
 ]
 
-// ─── sub-components ───────────────────────────────────────────────────────────
-
-function DebtStatusBadge({ status }: { status: DebtRecordStatus }) {
+function DebtStatusBadge({ status }: { status: DebtLedgerStatus }) {
   const { label, variant, icon: Icon } = statusConfig[status]
   return (
     <Badge variant={variant} className="gap-1">
@@ -123,7 +116,7 @@ function EmptyState() {
   )
 }
 
-function DebtTable({ rows }: { rows: DebtRecord[] }) {
+function DebtTable({ rows }: { rows: typeof demoDebtLedger }) {
   if (rows.length === 0) return <EmptyState />
   return (
     <Table>
@@ -184,18 +177,16 @@ function DebtTable({ rows }: { rows: DebtRecord[] }) {
   )
 }
 
-// ─── page ─────────────────────────────────────────────────────────────────────
-
 export function DebtsPage() {
   const [query, setQuery] = useState('')
-  const [statusFilter, setStatusFilter] = useState<'all' | DebtRecordStatus>(
+  const [statusFilter, setStatusFilter] = useState<'all' | DebtLedgerStatus>(
     'all',
   )
   const [companyFilter, setCompanyFilter] = useState('all')
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return debtRecords.filter((d) => {
+    return demoDebtLedger.filter((d) => {
       const matchesSearch =
         !q ||
         d.creditor.includes(q) ||
@@ -203,8 +194,7 @@ export function DebtsPage() {
         d.creditor.toLowerCase().includes(q) ||
         d.debtor.toLowerCase().includes(q)
 
-      const matchesStatus =
-        statusFilter === 'all' || d.status === statusFilter
+      const matchesStatus = statusFilter === 'all' || d.status === statusFilter
 
       const matchesCompany =
         companyFilter === 'all' ||
@@ -215,20 +205,21 @@ export function DebtsPage() {
     })
   }, [query, statusFilter, companyFilter])
 
-  const pendingCount = debtRecords.filter((d) => d.status === 'pending').length
-  const overdueCount = debtRecords.filter((d) => d.status === 'overdue').length
-  const settledCount = debtRecords.filter((d) => d.status === 'settled').length
+  const pendingCount = demoDebtLedger.filter((d) => d.status === 'pending').length
+  const overdueCount = demoDebtLedger.filter((d) => d.status === 'overdue').length
+  const settledCount = demoDebtLedger.filter((d) => d.status === 'settled').length
 
   const isFiltered =
     query.trim() !== '' || statusFilter !== 'all' || companyFilter !== 'all'
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight">الديون</h1>
         <p className="text-sm text-muted-foreground">
-          عرض وإدارة جميع سجلات الديون في الشبكة —&nbsp;
+          محفظة {formatNumber(demoPortfolio.participatingCompanies)} شركة — مؤشرات
+          من مصدر العرض الموحّد · الجدول {SAMPLE_PARTICIPANTS_LABEL_AR}
+          &nbsp;·&nbsp;
           <span className="text-amber-600">{pendingCount} معلق</span>
           &nbsp;·&nbsp;
           <span className="text-red-600">{overdueCount} متأخر</span>
@@ -237,25 +228,21 @@ export function DebtsPage() {
         </p>
       </div>
 
-      {/* KPI Cards */}
       <StatCardGrid cards={kpiCards} />
 
-      {/* Table Card */}
       <Card className="shadow-sm">
         <CardHeader>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <CardTitle>سجلات الديون</CardTitle>
+              <CardTitle>{SAMPLE_PARTICIPANTS_LABEL_AR}</CardTitle>
               <CardDescription>
                 {isFiltered
-                  ? `${formatNumber(filtered.length)} نتيجة من أصل ${formatNumber(debtRecords.length)}`
-                  : `${formatNumber(debtRecords.length)} سجل إجمالي`}
+                  ? `${formatNumber(filtered.length)} نتيجة من أصل ${formatNumber(demoDebtLedger.length)}`
+                  : `${formatNumber(demoDebtLedger.length)} سجلات عيّنة — إجمالي المحفظة ${formatSar(demoPortfolio.grossDebtSar, true)}`}
               </CardDescription>
             </div>
 
-            {/* Filters row */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              {/* Search */}
               <div className="relative flex-1">
                 <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -266,7 +253,6 @@ export function DebtsPage() {
                 />
               </div>
 
-              {/* Status filter */}
               <div className="flex items-center gap-1 rounded-lg border bg-muted/40 p-1">
                 {STATUS_OPTIONS.map((opt) => (
                   <Button
@@ -285,14 +271,13 @@ export function DebtsPage() {
                 ))}
               </div>
 
-              {/* Company filter */}
               <select
                 value={companyFilter}
                 onChange={(e) => setCompanyFilter(e.target.value)}
                 className="flex h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <option value="all">جميع الشركات</option>
-                {debtCompanies.map((company) => (
+                {demoDebtCompanyNames.map((company) => (
                   <option key={company} value={company}>
                     {company}
                   </option>
