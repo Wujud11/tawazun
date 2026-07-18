@@ -2,11 +2,17 @@ import { Navigate, createBrowserRouter } from 'react-router-dom'
 
 import { AppLayout, RootLayout } from '@/components/layout'
 import { CompaniesPage, DashboardPage, DebtsPage, NettingPage } from '@/pages'
+import { APP_LANDING_PATH } from '@/lib/app-entry'
 
 /**
- * Landing: `/` → `/dashboard`.
- * `/netting` is reachable only via sidebar NavLink or explicit Review deep-links
- * (`?workflow=1&...`). There is no startup navigate() to Netting.
+ * Route table. Landing is `/dashboard`.
+ *
+ * Hard loads of `/` or `/netting` are rewritten to `/dashboard` in
+ * `normalizeAppEntryUrl()` (main.tsx) before this router mounts — that is what
+ * stops restored browser tabs from reopening Netting.
+ *
+ * In-app paths to `/netting` (sidebar NavLink, notification Review) use
+ * client-side navigation after mount and still work.
  */
 export const router = createBrowserRouter([
   {
@@ -18,7 +24,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Navigate to="/dashboard" replace />,
+            element: <Navigate to={APP_LANDING_PATH} replace />,
           },
           {
             path: 'dashboard',
@@ -38,7 +44,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '*',
-            element: <Navigate to="/dashboard" replace />,
+            element: <Navigate to={APP_LANDING_PATH} replace />,
           },
         ],
       },
