@@ -10,6 +10,12 @@ import {
   SettlementOpportunities,
   TransfersComparison,
 } from '@/components/dashboard'
+import { Badge } from '@/components/ui/badge'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  enterprisePortfolioScale,
+} from '@/data/enterprise-demo-scale'
+import { formatNumber } from '@/lib/format'
 import { defaultTransition } from '@/lib/motion'
 
 const sectionVariants = {
@@ -35,11 +41,21 @@ export function DashboardPage() {
               لوحة التحكم
             </h1>
             <p className="mt-1.5 text-sm text-muted-foreground">
-              نظرة شاملة على شبكة الديون والمقاصة الذكية — يونيو 2026
+              نظرة على محفظة مقاصة مؤسسية تجريبية —{' '}
+              {formatNumber(enterprisePortfolioScale.participatingCompanies)}{' '}
+              شركة ·{' '}
+              {formatNumber(enterprisePortfolioScale.financialRelationships)}{' '}
+              علاقة مالية
             </p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Badge variant="outline">{DEMO_DATA_DISCLAIMER_AR}</Badge>
+              <Badge variant="secondary">
+                {formatNumber(enterprisePortfolioScale.activeCycles)} دورة نشطة
+              </Badge>
+            </div>
           </div>
           <div className="hidden rounded-lg border bg-muted/40 px-4 py-2 text-xs text-muted-foreground sm:block">
-            آخر تحديث: 29 يونيو 2026
+            آخر تحديث تجريبي: 29 يونيو 2026
           </div>
         </div>
       </motion.div>

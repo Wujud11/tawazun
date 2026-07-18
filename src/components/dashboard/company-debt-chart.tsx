@@ -12,7 +12,10 @@ import {
   ChartTooltip,
   type ChartConfig,
 } from '@/components/ui/chart'
-import { companyDebtShares } from '@/data/dashboard-mock'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  enterpriseCompanyDebtShares,
+} from '@/data/enterprise-demo-scale'
 import { formatAxisThousands } from '@/lib/format'
 
 const chartConfig = {
@@ -32,12 +35,12 @@ export function CompanyDebtChart() {
       <CardHeader>
         <CardTitle>توزيع الديون حسب الشركة</CardTitle>
         <CardDescription>
-          مقارنة المبالغ المستحقة الدفع والقبض
+          عينة من أكبر المراكز في الشبكة — {DEMO_DATA_DISCLAIMER_AR}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[280px] w-full">
-          <BarChart data={companyDebtShares} barGap={4}>
+          <BarChart data={[...enterpriseCompanyDebtShares]} barGap={4}>
             <CartesianGrid vertical={false} strokeDasharray="3 3" />
             <XAxis
               dataKey="company"

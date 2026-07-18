@@ -11,6 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  SAMPLE_PARTICIPANTS_LABEL_AR,
+  SAMPLE_PARTICIPANT_COUNT,
+  enterprisePortfolioScale,
+} from '@/data/enterprise-demo-scale'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import {
@@ -42,6 +48,10 @@ export function EnterpriseNettingSessionPanel({
   resetToken = 0,
 }: Props) {
   const service = useMemo(() => getNettingSessionService(), [])
+  const sampleCompanies = useMemo(
+    () => companies.slice(0, SAMPLE_PARTICIPANT_COUNT),
+    [companies],
+  )
   const [session, setSession] = useState<NettingSession | null>(null)
   const [isCreating, setIsCreating] = useState(false)
 
@@ -53,7 +63,6 @@ export function EnterpriseNettingSessionPanel({
   useEffect(() => {
     if (!session) return
 
-    // Bind once per session id. Approval stream updates must not resubscribe.
     const stop = service.watchApprovals(session, (next) => {
       setSession(next)
     })
@@ -68,21 +77,27 @@ export function EnterpriseNettingSessionPanel({
 
   const approvedCount =
     session?.participants.filter((p) => p.status === 'approved').length ?? 0
-  const totalCount = session?.participants.length ?? companies.length
+  const sampleTotal = session?.participants.length ?? sampleCompanies.length
   const allApproved = Boolean(
     session &&
       session.participants.length > 0 &&
       session.participants.every((p) => p.status === 'approved'),
   )
   const canExecute =
-    allApproved && !isExecuting && !nettingDone && session?.phase === 'ready_to_execute'
+    allApproved &&
+    !isExecuting &&
+    !nettingDone &&
+    session?.phase === 'ready_to_execute'
 
   async function handleCreateSession() {
     if (isCreating || session) return
     setIsCreating(true)
     try {
-      const created = await service.createSession({ companies })
-      setSession(created)
+      const created = await service.createSession({ companies: sampleCompanies })
+      setSession({
+        ...created,
+        statusLabel: `جاري تجهيز جلسة المقاصة · ${formatNumber(enterprisePortfolioScale.participatingCompanies)} شركة في المحفظة التجريبية`,
+      })
     } finally {
       setIsCreating(false)
     }
@@ -95,8 +110,19 @@ export function EnterpriseNettingSessionPanel({
           <div>
             <CardTitle className="text-base">سير عمل جلسة المقاصة</CardTitle>
             <CardDescription className="mt-1">
-              مسار خزينة متعدد الأطراف قبل تنفيذ خوارزمية المقاصة
+              محفظة تجريبية بحجم مؤسسي — الاعتماد التفصيلي يعرض عينة فقط
             </CardDescription>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Badge variant="secondary">
+                {formatNumber(enterprisePortfolioScale.participatingCompanies)}{' '}
+                شركة مشاركة
+              </Badge>
+              <Badge variant="outline">
+                {formatNumber(enterprisePortfolioScale.financialRelationships)}{' '}
+                علاقة مالية
+              </Badge>
+              <Badge variant="outline">{DEMO_DATA_DISCLAIMER_AR}</Badge>
+            </div>
           </div>
           {session ? (
             <div className="rounded-lg border bg-background px-3 py-2 text-start sm:text-end">
@@ -126,8 +152,9 @@ export function EnterpriseNettingSessionPanel({
           {!session ? (
             <div className="flex flex-col items-start gap-3 rounded-xl border border-dashed p-5">
               <p className="text-sm text-muted-foreground">
-                ابدأ بإنشاء جلسة مقاصة رسمية. سيتم إشعار الشركات المشاركة ومحاكاة
-                الاعتمادات قبل تفعيل التنفيذ.
+                ابدأ بإنشاء جلسة مقاصة. النظام يعرض اعتماد{' '}
+                {formatNumber(SAMPLE_PARTICIPANT_COUNT)} شركات كعيّنة فقط، بينما
+                مؤشرات الجلسة تعكس نطاقًا مؤسسيًا تجريبيًا أوسع.
               </p>
               <Button
                 className="gap-2"
@@ -150,13 +177,22 @@ export function EnterpriseNettingSessionPanel({
           ) : (
             <>
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="flex items-center gap-2 text-sm font-semibold">
-                  <Building2 className="size-4 text-primary" />
-                  الشركات المشاركة
-                </p>
+                <div>
+                  <p className="flex items-center gap-2 text-sm font-semibold">
+                    <Building2 className="size-4 text-primary" />
+                    {SAMPLE_PARTICIPANTS_LABEL_AR}
+                  </p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">
+                    Sample Participants —{' '}
+                    {formatNumber(sampleTotal)} من أصل{' '}
+                    {formatNumber(
+                      enterprisePortfolioScale.participatingCompanies,
+                    )}
+                  </p>
+                </div>
                 <Badge variant={allApproved ? 'success' : 'warning'}>
-                  {formatNumber(approvedCount)} / {formatNumber(totalCount)} شركات
-                  وافقت
+                  {formatNumber(approvedCount)} / {formatNumber(sampleTotal)}{' '}
+                  من العينة وافقت
                 </Badge>
               </div>
 
@@ -222,7 +258,7 @@ export function EnterpriseNettingSessionPanel({
                 </Button>
                 {!allApproved && (
                   <p className="text-xs text-muted-foreground">
-                    يُفعَّل زر التنفيذ بعد اعتماد جميع الشركات.
+                    يُفعَّل زر التنفيذ بعد اعتماد جميع شركات العينة المعروضة.
                   </p>
                 )}
               </div>

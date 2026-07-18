@@ -8,24 +8,20 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { transferComparison } from '@/data/dashboard-mock'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  enterprisePortfolioScale,
+} from '@/data/enterprise-demo-scale'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 
 export function TransfersComparison() {
-  const {
-    beforeCount,
-    afterCount,
-    beforeVolume,
-    afterVolume,
-  } = transferComparison
-
-  const countReduction = Math.round(
-    ((beforeCount - afterCount) / beforeCount) * 100,
-  )
-  const volumeReduction = Math.round(
-    ((beforeVolume - afterVolume) / beforeVolume) * 100,
-  )
-  const savedVolume = beforeVolume - afterVolume
+  const beforeCount = enterprisePortfolioScale.transfersBefore
+  const afterCount = enterprisePortfolioScale.transfersAfter
+  const beforeVolume = enterprisePortfolioScale.grossDebtSar
+  const afterVolume = enterprisePortfolioScale.netSettlementSar
+  const countReduction = enterprisePortfolioScale.transferReductionPct
+  const volumeReduction = enterprisePortfolioScale.savingsPct
+  const savedVolume = enterprisePortfolioScale.savingsSar
 
   return (
     <Card className="treasury-card h-full">
@@ -35,7 +31,7 @@ export function TransfersComparison() {
           قبل vs بعد المقاصة
         </CardTitle>
         <CardDescription>
-          تأثير المقاصة الذكية على عدد وحجم التحويلات
+          أثر المقاصة على محفظة التحويلات — {DEMO_DATA_DISCLAIMER_AR}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">

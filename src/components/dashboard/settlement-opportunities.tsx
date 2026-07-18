@@ -10,6 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  SAMPLE_PARTICIPANTS_LABEL_AR,
+} from '@/data/enterprise-demo-scale'
 import { settlementOpportunities } from '@/data/workflow-mock'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
@@ -46,7 +50,7 @@ export function SettlementOpportunities() {
             فرص التسوية
           </CardTitle>
           <CardDescription className="mt-1">
-            فرص مقاصة متعددة الأطراف جاهزة للمراجعة والتنفيذ
+            فرص مقاصة متعددة الأطراف — {DEMO_DATA_DISCLAIMER_AR}
           </CardDescription>
         </div>
         <Badge variant="secondary" className="w-fit">
@@ -77,7 +81,7 @@ export function SettlementOpportunities() {
                 <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
                   <span className="inline-flex items-center gap-1">
                     <Building2 className="size-3.5" />
-                    {formatNumber(opportunity.companyCount)} شركات
+                    {formatNumber(opportunity.companyCount)} شركات في الدورة
                   </span>
                   <span>
                     قبل {formatNumber(opportunity.transfersBefore)} → بعد{' '}
@@ -88,6 +92,10 @@ export function SettlementOpportunities() {
                     {formatPercent(opportunity.savingsPct)})
                   </span>
                 </div>
+                <p className="mt-2 text-[11px] text-muted-foreground">
+                  {SAMPLE_PARTICIPANTS_LABEL_AR}:{' '}
+                  {opportunity.companies.slice(0, 6).join(' · ')}
+                </p>
               </div>
               <Button asChild size="sm" className="shrink-0 gap-1.5">
                 <Link

@@ -24,7 +24,7 @@ export function CompaniesSummary() {
       <CardHeader>
         <CardTitle>ملخص الشركات</CardTitle>
         <CardDescription>
-          أرصدة صافية وموقف الديون لكل شركة في الشبكة
+          عرض عينة من الشركات — للتفاصيل التشغيلية داخل الدورة التجريبية
         </CardDescription>
       </CardHeader>
       <CardContent>

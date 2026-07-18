@@ -12,7 +12,10 @@ import {
   ChartTooltip,
   type ChartConfig,
 } from '@/components/ui/chart'
-import { monthlyTrend } from '@/data/dashboard-mock'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  enterpriseMonthlyTrend,
+} from '@/data/enterprise-demo-scale'
 import { formatAxisMillions } from '@/lib/format'
 
 const chartConfig = {
@@ -36,12 +39,12 @@ export function NettingTrendChart() {
       <CardHeader>
         <CardTitle>اتجاه المقاصة الشهري</CardTitle>
         <CardDescription>
-          الحجم الإجمالي مقابل الحجم بعد المقاصة والتوفير
+          حجم محفظة مؤسسية تجريبية — {DEMO_DATA_DISCLAIMER_AR}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[280px] w-full">
-          <AreaChart data={monthlyTrend}>
+          <AreaChart data={[...enterpriseMonthlyTrend]}>
             <defs>
               <linearGradient id="fillNetted" x1="0" y1="0" x2="0" y2="1">
                 <stop

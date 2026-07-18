@@ -384,9 +384,13 @@ function OpportunityStep({
         />
       </div>
       <div className="rounded-xl border p-4">
-        <p className="mb-3 flex items-center gap-2 text-sm font-semibold">
+        <p className="mb-1 flex items-center gap-2 text-sm font-semibold">
           <Building2 className="size-4 text-primary" />
-          الشركات المشاركة
+          عرض عينة من الشركات المشاركة
+        </p>
+        <p className="mb-3 text-[11px] text-muted-foreground">
+          Sample Participants — {formatNumber(opportunity.companies.length)} من
+          أصل {formatNumber(opportunity.companyCount)} شركة في الدورة التجريبية
         </p>
         <div className="flex flex-wrap gap-2">
           {opportunity.companies.map((name) => (

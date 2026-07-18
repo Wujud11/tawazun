@@ -41,8 +41,8 @@ export function DebtSummary() {
       <CardHeader>
         <CardTitle>ملخص الديون</CardTitle>
         <CardDescription>
-          {formatNumber(debts.length)} ديون نشطة — إجمالي{' '}
-          {formatSar(total)}
+          عينة تفصيلية للتشغيل — {formatNumber(debts.length)} سجلات معروضة من
+          محفظة أوسع (إجمالي العينة {formatSar(total)})
         </CardDescription>
       </CardHeader>
       <CardContent>

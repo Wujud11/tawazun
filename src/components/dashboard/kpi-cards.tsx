@@ -13,24 +13,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { companies, transferComparison } from '@/data/dashboard-mock'
+import {
+  DEMO_DATA_DISCLAIMER_AR,
+  enterprisePortfolioScale,
+} from '@/data/enterprise-demo-scale'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
-
-const savings =
-  transferComparison.beforeVolume - transferComparison.afterVolume
-const savingsPct =
-  transferComparison.beforeVolume > 0
-    ? Math.round((savings / transferComparison.beforeVolume) * 100)
-    : 0
 
 const presentationKpis = [
   {
     id: 'companies',
-    label: 'إجمالي الشركات',
-    value: formatNumber(companies.length),
-    change: 8.3,
-    changeLabel: 'في شبكة التسوية',
+    label: 'الشركات المشاركة',
+    value: formatNumber(enterprisePortfolioScale.participatingCompanies),
+    change: 11.2,
+    changeLabel: 'في شبكة التسوية التجريبية',
     icon: Building2,
     accent:
       'from-blue-500/10 to-blue-600/5 border-blue-200/50 dark:border-blue-900/50',
@@ -39,8 +35,8 @@ const presentationKpis = [
   {
     id: 'gross',
     label: 'إجمالي الديون',
-    value: formatSar(transferComparison.beforeVolume),
-    change: 12.4,
+    value: formatSar(enterprisePortfolioScale.grossDebtSar),
+    change: 9.6,
     changeLabel: 'الحجم قبل المقاصة',
     icon: TrendingUp,
     accent:
@@ -50,16 +46,8 @@ const presentationKpis = [
   {
     id: 'net',
     label: 'صافي التسوية',
-    value: formatSar(transferComparison.afterVolume),
-    change:
-      transferComparison.beforeCount > 0
-        ? Math.round(
-            (1 -
-              transferComparison.afterCount /
-                transferComparison.beforeCount) *
-              100,
-          )
-        : 0,
+    value: formatSar(enterprisePortfolioScale.netSettlementSar),
+    change: enterprisePortfolioScale.transferReductionPct,
     changeLabel: 'تخفيض عدد التحويلات',
     icon: Scale,
     accent:
@@ -69,8 +57,8 @@ const presentationKpis = [
   {
     id: 'savings',
     label: 'التوفير المتوقع',
-    value: formatSar(savings),
-    change: savingsPct,
+    value: formatSar(enterprisePortfolioScale.savingsSar),
+    change: enterprisePortfolioScale.savingsPct,
     changeLabel: 'تخفيض في حجم التحويلات',
     icon: PiggyBank,
     accent:
@@ -81,57 +69,70 @@ const presentationKpis = [
 
 export function KpiCards() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {presentationKpis.map((kpi) => {
-        const Icon = kpi.icon
-        const isPositive = kpi.change >= 0
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-muted-foreground">
+          {formatNumber(enterprisePortfolioScale.financialRelationships)} علاقة
+          مالية · {formatNumber(enterprisePortfolioScale.transfersBefore)} تحويل
+          قبل المقاصة · {formatNumber(enterprisePortfolioScale.transfersAfter)}{' '}
+          بعد المقاصة
+        </p>
+        <span className="rounded-md border bg-muted/40 px-2 py-1 text-[10px] font-medium text-muted-foreground">
+          {DEMO_DATA_DISCLAIMER_AR}
+        </span>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {presentationKpis.map((kpi) => {
+          const Icon = kpi.icon
+          const isPositive = kpi.change >= 0
 
-        return (
-          <Card
-            key={kpi.id}
-            className={cn(
-              'treasury-card group bg-gradient-to-br transition-all duration-200 hover:-translate-y-0.5',
-              kpi.accent,
-            )}
-          >
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                {kpi.label}
-              </CardTitle>
-              <div
-                className={cn(
-                  'rounded-xl p-2.5 transition-transform duration-200 group-hover:scale-105',
-                  kpi.iconColor,
-                )}
-              >
-                <Icon className="size-4" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight tabular-nums">
-                {kpi.value}
-              </div>
-              <div className="mt-2.5 flex items-center gap-1.5 text-xs">
-                {isPositive ? (
-                  <ArrowUpRight className="size-3.5 text-emerald-600" />
-                ) : (
-                  <ArrowDownLeft className="size-3.5 text-red-500" />
-                )}
-                <span
+          return (
+            <Card
+              key={kpi.id}
+              className={cn(
+                'treasury-card group bg-gradient-to-br transition-all duration-200 hover:-translate-y-0.5',
+                kpi.accent,
+              )}
+            >
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  {kpi.label}
+                </CardTitle>
+                <div
                   className={cn(
-                    'font-semibold tabular-nums',
-                    isPositive ? 'text-emerald-600' : 'text-red-500',
+                    'rounded-xl p-2.5 transition-transform duration-200 group-hover:scale-105',
+                    kpi.iconColor,
                   )}
                 >
-                  {isPositive ? '+' : ''}
-                  {formatPercent(Math.abs(kpi.change))}
-                </span>
-                <span className="text-muted-foreground">{kpi.changeLabel}</span>
-              </div>
-            </CardContent>
-          </Card>
-        )
-      })}
+                  <Icon className="size-4" />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold tracking-tight tabular-nums">
+                  {kpi.value}
+                </div>
+                <div className="mt-2.5 flex items-center gap-1.5 text-xs">
+                  {isPositive ? (
+                    <ArrowUpRight className="size-3.5 text-emerald-600" />
+                  ) : (
+                    <ArrowDownLeft className="size-3.5 text-red-500" />
+                  )}
+                  <span
+                    className={cn(
+                      'font-semibold tabular-nums',
+                      isPositive ? 'text-emerald-600' : 'text-red-500',
+                    )}
+                  >
+                    {isPositive ? '+' : ''}
+                    {formatPercent(Math.abs(kpi.change))}
+                  </span>
+                  <span className="text-muted-foreground">{kpi.changeLabel}</span>
+                </div>
+              </CardContent>
+            </Card>
+          )
+        })}
+      </div>
     </div>
   )
 }

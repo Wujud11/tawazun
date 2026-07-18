@@ -1,18 +1,11 @@
-import {
-  COUNT_AFTER,
-  COUNT_BEFORE,
-  VOLUME_AFTER,
-  VOLUME_BEFORE,
-  VOLUME_REDUCTION_PCT,
-  VOLUME_SAVED,
-} from '@/data/netting-mock'
+import { enterprisePortfolioScale } from '@/data/enterprise-demo-scale'
 import type {
   SettlementOpportunity,
   WorkflowNotification,
   WorkflowStep,
 } from '@/types/workflow'
 
-/** Canonical demo opportunity — numbers match the existing netting derivation. */
+/** Canonical demo opportunity — portfolio-scale presentation metrics (mock UI). */
 export const PRIMARY_OPPORTUNITY_ID = 'opp-cycle-2026-06'
 
 export const settlementWorkflowSteps: WorkflowStep[] = [
@@ -54,20 +47,18 @@ export const settlementOpportunities: SettlementOpportunity[] = [
       'شركة دال للخدمات',
       'شركة هـ للتمويل',
       'شركة واو للتوريد',
-      'شركة زين للتطوير',
-      'شركة حاء للاستشارات',
     ],
-    companyCount: 8,
-    grossAmount: VOLUME_BEFORE,
-    netAmount: VOLUME_AFTER,
-    transfersBefore: COUNT_BEFORE,
-    transfersAfter: COUNT_AFTER,
-    savings: VOLUME_SAVED,
-    savingsPct: VOLUME_REDUCTION_PCT,
+    companyCount: enterprisePortfolioScale.participatingCompanies,
+    grossAmount: enterprisePortfolioScale.grossDebtSar,
+    netAmount: enterprisePortfolioScale.netSettlementSar,
+    transfersBefore: enterprisePortfolioScale.transfersBefore,
+    transfersAfter: enterprisePortfolioScale.transfersAfter,
+    savings: enterprisePortfolioScale.savingsSar,
+    savingsPct: enterprisePortfolioScale.savingsPct,
     status: 'detected',
     detectedAt: '2026-06-29T08:05:00',
     summary:
-      'تم اكتشاف شبكة ديون متقاطعة بين 8 شركات. تطبيق المقاصة متعددة الأطراف يقلّص التحويلات من 11 إلى 7 ويوفّر 2.9M ريال من حجم التسوية.',
+      'بيانات تجريبية: شبكة مؤسسية تضم مئات الشركات وآلاف العلاقات المالية. العرض التفصيلي التالي يظهر عينة فقط، بينما مؤشرات المحفظة تعكس نطاقًا أوسع للعرض التقديمي.',
     approvals: [
       {
         id: 'ap-1',
@@ -118,42 +109,30 @@ export const settlementOpportunities: SettlementOpportunity[] = [
         decidedAt: '2026-06-29T09:20:00',
         note: 'طلب تأجيل لدورة يوليو — يمكن إعادة التقديم',
       },
-      {
-        id: 'ap-7',
-        companyName: 'شركة زين للتطوير',
-        companyNameEn: 'Zain Development',
-        role: 'both',
-        status: 'pending',
-      },
-      {
-        id: 'ap-8',
-        companyName: 'شركة حاء للاستشارات',
-        companyNameEn: 'Haa Consulting',
-        role: 'creditor',
-        status: 'approved',
-        decidedAt: '2026-06-29T09:25:00',
-      },
     ],
   },
   {
     id: 'opp-partial-alif-ba-jim',
-    title: 'فرصة مقاصة ثلاثية — ألف / باء / جيم',
+    title: 'فرصة مقاصة قطاعية — مجموعة تجارة ومقاولات',
     companies: [
       'شركة ألف للتجارة',
       'شركة باء القابضة',
       'شركة جيم للمقاولات',
+      'شركة دال للخدمات',
+      'شركة هـ للتمويل',
+      'شركة واو للتوريد',
     ],
-    companyCount: 3,
-    grossAmount: 1_250_000,
-    netAmount: 480_000,
-    transfersBefore: 5,
-    transfersAfter: 2,
-    savings: 770_000,
-    savingsPct: 62,
+    companyCount: 96,
+    grossAmount: 6_400_000,
+    netAmount: 1_850_000,
+    transfersBefore: 210,
+    transfersAfter: 48,
+    savings: 4_550_000,
+    savingsPct: 71,
     status: 'completed',
     detectedAt: '2026-06-27T11:00:00',
     summary:
-      'دورة سابقة اكتملت بنجاح بين ثلاث شركات وحققت تخفيضاً بنسبة 62% في حجم التحويلات.',
+      'دورة قطاعية مكتملة (بيانات تجريبية) — العرض أدناه عينة من الأطراف، ضمن شبكة أوسع.',
     approvals: [
       {
         id: 'ap-p1',
@@ -189,7 +168,7 @@ export const workflowNotifications: WorkflowNotification[] = [
     kind: 'opportunity',
     title: 'فرصة تسوية جديدة',
     description:
-      'تم اكتشاف فرصة مقاصة متعددة الأطراف بين 8 شركات — توفير متوقع 2.9M ريال.',
+      'تم رصد دورة مقاصة مؤسسية تجريبية عبر مئات الشركات — توفير متوقع نحو 17.7M ريال.',
     timestamp: '2026-06-29T08:05:00',
     unread: true,
     opportunityId: PRIMARY_OPPORTUNITY_ID,
@@ -199,7 +178,7 @@ export const workflowNotifications: WorkflowNotification[] = [
     kind: 'approval',
     title: 'موافقات معلّقة',
     description:
-      '3 شركات بانتظار اعتماد دورة المقاصة الحالية قبل التنفيذ.',
+      'بانتظار اعتماد عيّنة من الشركات المشاركة قبل تنفيذ دورة العرض.',
     timestamp: '2026-06-29T09:30:00',
     unread: true,
     opportunityId: PRIMARY_OPPORTUNITY_ID,
@@ -209,7 +188,7 @@ export const workflowNotifications: WorkflowNotification[] = [
     kind: 'execution',
     title: 'جاهزية التنفيذ',
     description:
-      'يمكن بدء محاكاة تنفيذ التسوية بعد استكمال الموافقات المطلوبة.',
+      'يمكن بدء محاكاة تنفيذ التسوية بعد استكمال اعتماد العينة المعروضة.',
     timestamp: '2026-06-29T09:45:00',
     unread: false,
     opportunityId: PRIMARY_OPPORTUNITY_ID,
