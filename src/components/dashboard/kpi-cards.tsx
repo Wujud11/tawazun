@@ -35,7 +35,7 @@ const presentationKpis = [
   {
     id: 'gross',
     label: 'إجمالي الديون',
-    value: formatSar(enterprisePortfolioScale.grossDebtSar),
+    value: formatSar(enterprisePortfolioScale.grossDebtSar, true),
     change: 9.6,
     changeLabel: 'الحجم قبل المقاصة',
     icon: TrendingUp,
@@ -46,7 +46,7 @@ const presentationKpis = [
   {
     id: 'net',
     label: 'صافي التسوية',
-    value: formatSar(enterprisePortfolioScale.netSettlementSar),
+    value: formatSar(enterprisePortfolioScale.netSettlementSar, true),
     change: enterprisePortfolioScale.transferReductionPct,
     changeLabel: 'تخفيض عدد التحويلات',
     icon: Scale,
@@ -57,7 +57,7 @@ const presentationKpis = [
   {
     id: 'savings',
     label: 'التوفير المتوقع',
-    value: formatSar(enterprisePortfolioScale.savingsSar),
+    value: formatSar(enterprisePortfolioScale.savingsSar, true),
     change: enterprisePortfolioScale.savingsPct,
     changeLabel: 'تخفيض في حجم التحويلات',
     icon: PiggyBank,

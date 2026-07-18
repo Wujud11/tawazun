@@ -1,14 +1,7 @@
-import type { Activity, ChartDataPoint } from '@/types/dashboard'
+import type { Activity } from '@/types/dashboard'
 
 import { debtRecords } from '@/data/debts-mock'
-import {
-  deriveCompanies,
-  deriveCompanyDebtShares,
-  deriveDashboardKpis,
-  deriveNetting,
-  deriveRecentDebts,
-  deriveTransferComparison,
-} from '@/lib/derive'
+import { deriveCompanies, deriveRecentDebts } from '@/lib/derive'
 import type { CompanyMeta } from '@/lib/derive'
 
 // ─── Non-derivable company metadata ───────────────────────────────────────────
@@ -26,15 +19,9 @@ const companyMeta: CompanyMeta[] = [
   { id: 'c8', name: 'شركة حاء للاستشارات', nameEn: 'Haa Consulting', sector: 'استشارات' },
 ]
 
-// ─── Single netting pass shared between consumers ──────────────────────────────
-const nettingResult = deriveNetting(debtRecords)
-
 // ─── Derived exports ───────────────────────────────────────────────────────────
 
 export const companies = deriveCompanies(debtRecords, companyMeta)
-export const companyDebtShares = deriveCompanyDebtShares(debtRecords, companyMeta)
-export const transferComparison = deriveTransferComparison(nettingResult)
-export const dashboardKpis = deriveDashboardKpis(debtRecords, nettingResult)
 export const debts = deriveRecentDebts(debtRecords, 5)
 
 // ─── Static / cosmetic data ────────────────────────────────────────────────────
@@ -89,14 +76,4 @@ export const recentActivity: Activity[] = [
     description: 'تحسن كفاءة المقاصة 8% مقارنة بالأسبوع السابق (تجريبي)',
     timestamp: '2026-06-27T09:00:00',
   },
-]
-
-/** @deprecated Prefer enterpriseMonthlyTrend for presentation charts. */
-export const monthlyTrend: ChartDataPoint[] = [
-  { month: 'يناير', grossVolume: 18_400_000, nettedVolume: 6_900_000, savings: 11_500_000 },
-  { month: 'فبراير', grossVolume: 19_200_000, nettedVolume: 7_100_000, savings: 12_100_000 },
-  { month: 'مارس', grossVolume: 21_500_000, nettedVolume: 7_400_000, savings: 14_100_000 },
-  { month: 'أبريل', grossVolume: 20_800_000, nettedVolume: 6_850_000, savings: 13_950_000 },
-  { month: 'مايو', grossVolume: 22_600_000, nettedVolume: 7_050_000, savings: 15_550_000 },
-  { month: 'يونيو', grossVolume: 24_800_000, nettedVolume: 7_140_000, savings: 17_660_000 },
 ]

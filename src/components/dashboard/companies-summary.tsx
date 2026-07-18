@@ -15,16 +15,25 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { companies } from '@/data/dashboard-mock'
+import {
+  SAMPLE_PARTICIPANT_COUNT,
+  SAMPLE_PARTICIPANTS_LABEL_AR,
+  enterprisePortfolioScale,
+} from '@/data/enterprise-demo-scale'
 import { formatNumber, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
+
+const sampleCompanies = companies.slice(0, SAMPLE_PARTICIPANT_COUNT)
 
 export function CompaniesSummary() {
   return (
     <Card className="treasury-card">
       <CardHeader>
-        <CardTitle>ملخص الشركات</CardTitle>
+        <CardTitle>{SAMPLE_PARTICIPANTS_LABEL_AR}</CardTitle>
         <CardDescription>
-          عرض عينة من الشركات — للتفاصيل التشغيلية داخل الدورة التجريبية
+          Sample Participants — {formatNumber(sampleCompanies.length)} من أصل{' '}
+          {formatNumber(enterprisePortfolioScale.participatingCompanies)} شركة في
+          المحفظة التجريبية
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -40,7 +49,7 @@ export function CompaniesSummary() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {companies.map((company) => (
+            {sampleCompanies.map((company) => (
               <TableRow key={company.id}>
                 <TableCell>
                   <div className="font-medium">{company.name}</div>

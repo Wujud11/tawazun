@@ -14,6 +14,7 @@ import { createPortal } from 'react-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { SAMPLE_PARTICIPANTS_LABEL_AR } from '@/data/enterprise-demo-scale'
 import {
   getOpportunityById,
   getPrimaryOpportunity,
@@ -366,11 +367,11 @@ function OpportunityStep({
       <div className="grid gap-3 sm:grid-cols-2">
         <InfoTile
           label="الحجم الإجمالي"
-          value={formatSar(opportunity.grossAmount)}
+          value={formatSar(opportunity.grossAmount, true)}
         />
         <InfoTile
           label="الحجم الصافي"
-          value={formatSar(opportunity.netAmount)}
+          value={formatSar(opportunity.netAmount, true)}
           accent
         />
         <InfoTile
@@ -386,14 +387,14 @@ function OpportunityStep({
       <div className="rounded-xl border p-4">
         <p className="mb-1 flex items-center gap-2 text-sm font-semibold">
           <Building2 className="size-4 text-primary" />
-          عرض عينة من الشركات المشاركة
+          {SAMPLE_PARTICIPANTS_LABEL_AR}
         </p>
         <p className="mb-3 text-[11px] text-muted-foreground">
           Sample Participants — {formatNumber(opportunity.companies.length)} من
           أصل {formatNumber(opportunity.companyCount)} شركة في الدورة التجريبية
         </p>
         <div className="flex flex-wrap gap-2">
-          {opportunity.companies.map((name) => (
+          {opportunity.companies.slice(0, 6).map((name) => (
             <Badge key={name} variant="secondary" className="font-normal">
               {name}
             </Badge>
@@ -417,6 +418,16 @@ function ApprovalsStep({
 }) {
   return (
     <div className="space-y-4">
+      <div>
+        <p className="flex items-center gap-2 text-sm font-semibold">
+          <Building2 className="size-4 text-primary" />
+          {SAMPLE_PARTICIPANTS_LABEL_AR}
+        </p>
+        <p className="mt-0.5 text-[11px] text-muted-foreground">
+          Sample Participants — {formatNumber(approvals.length)} شركات معروضة
+          للاعتماد
+        </p>
+      </div>
       <div className="flex flex-wrap gap-2">
         <Badge variant="success">
           {formatNumber(approvedCount)} معتمد

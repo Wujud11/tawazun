@@ -46,7 +46,7 @@ export function TransfersComparison() {
             <p className="text-sm text-muted-foreground">تحويل</p>
             <Separator className="my-3" />
             <p className="font-mono text-lg font-semibold tabular-nums">
-              {formatSar(beforeVolume)}
+              {formatSar(beforeVolume, true)}
             </p>
             <p className="text-xs text-muted-foreground">إجمالي الحجم</p>
           </div>
@@ -59,7 +59,7 @@ export function TransfersComparison() {
             <p className="text-sm text-muted-foreground">تحويل</p>
             <Separator className="my-3" />
             <p className="font-mono text-lg font-semibold tabular-nums text-primary">
-              {formatSar(afterVolume)}
+              {formatSar(afterVolume, true)}
             </p>
             <p className="text-xs text-muted-foreground">إجمالي الحجم</p>
           </div>
@@ -83,7 +83,9 @@ export function TransfersComparison() {
             </div>
             <div>
               <p className="text-xs text-muted-foreground">حجم موفر</p>
-              <p className="font-bold tabular-nums">{formatSar(savedVolume)}</p>
+              <p className="font-bold tabular-nums">
+                {formatSar(savedVolume, true)}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 rounded-lg border p-3">

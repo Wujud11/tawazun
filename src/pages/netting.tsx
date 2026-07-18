@@ -31,6 +31,10 @@ import {
 } from '@/components/ui/card'
 import { companies } from '@/data/dashboard-mock'
 import { debtRecords } from '@/data/debts-mock'
+import {
+  SAMPLE_PARTICIPANT_COUNT,
+  enterprisePortfolioScale,
+} from '@/data/enterprise-demo-scale'
 import { PRIMARY_OPPORTUNITY_ID } from '@/data/workflow-mock'
 import { formatNumber, formatPercent, formatSar } from '@/lib/format'
 import { cn } from '@/lib/utils'
@@ -86,15 +90,27 @@ type DialogProps = {
 
 const activeRecords = debtRecords.filter((r) => r.status !== 'settled')
 
-const beforeTxs: TxItem[] = activeRecords.map((r) => ({
-  id: r.id,
-  from: r.debtor,
-  to: r.creditor,
-  amount: r.amount,
-}))
+/** Presentation KPIs — enterprise demo scale (UI storytelling). */
+const portfolioGross = enterprisePortfolioScale.grossDebtSar
+const portfolioCountBefore = enterprisePortfolioScale.transfersBefore
+const portfolioCountAfter = enterprisePortfolioScale.transfersAfter
+const portfolioSavings = enterprisePortfolioScale.savingsSar
 
-const grossVolume = activeRecords.reduce((s, r) => s + r.amount, 0)
-const countBefore = activeRecords.length
+const sampleCompanies = companies.slice(0, SAMPLE_PARTICIPANT_COUNT)
+const sampleCompanyNames = new Set(sampleCompanies.map((c) => c.name))
+
+/** Detailed relationship sample — only among the 6 displayed participants. */
+const beforeTxs: TxItem[] = activeRecords
+  .filter(
+    (r) =>
+      sampleCompanyNames.has(r.debtor) && sampleCompanyNames.has(r.creditor),
+  )
+  .map((r) => ({
+    id: r.id,
+    from: r.debtor,
+    to: r.creditor,
+    amount: r.amount,
+  }))
 
 const SEVERITY_STYLES: Record<RiskFlag['severity'], string> = {
   high: 'border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30',
@@ -221,13 +237,14 @@ function NettingResultDialog({
 
   if (!open) return null
 
-  const countAfter = analysis?.metrics.recommendedTransactions ?? 0
+  // Presentation metrics stay on the enterprise demo scale so the report
+  // matches Dashboard / Netting KPIs (algorithm details remain in AI sections).
+  const countAfter = portfolioCountAfter
   const savedTransfers = before - countAfter
-  const volumeSaved = analysis?.metrics.estimatedSavings ?? 0
-  const efficiencyPct = analysis?.metrics.efficiencyPct ?? 0
-  const volumeAfter = analysis?.metrics.totalNetVolume ?? 0
-  const countReduction =
-    before > 0 ? Math.round((1 - countAfter / before) * 100) : 0
+  const volumeSaved = portfolioSavings
+  const efficiencyPct = enterprisePortfolioScale.savingsPct
+  const volumeAfter = enterprisePortfolioScale.netSettlementSar
+  const countReduction = enterprisePortfolioScale.transferReductionPct
 
   async function handleExportPdf() {
     if (!analysis || isExporting) return
@@ -367,13 +384,13 @@ function NettingResultDialog({
                 <div className="rounded-lg border border-slate-800/10 bg-slate-900 px-4 py-3 text-white dark:bg-slate-800">
                   <p className="text-xs text-white/70">الحجم الإجمالي</p>
                   <p className="mt-1 font-mono text-sm font-semibold tabular-nums">
-                    {formatSar(grossVolume)}
+                    {formatSar(grossVolume, true)}
                   </p>
                 </div>
                 <div className="rounded-lg border bg-primary px-4 py-3 text-primary-foreground">
                   <p className="text-xs text-primary-foreground/80">الحجم الصافي</p>
                   <p className="mt-1 font-mono text-sm font-semibold tabular-nums">
-                    {formatSar(volumeAfter)}
+                    {formatSar(volumeAfter, true)}
                   </p>
                 </div>
                 <div className="rounded-lg border border-emerald-700/20 bg-emerald-700 px-4 py-3 text-white">
@@ -558,20 +575,25 @@ function BeforePanel() {
           </div>
           <div className="text-end">
             <p className="text-lg font-bold tabular-nums text-red-600">
-              {formatNumber(countBefore)}
+              {formatNumber(portfolioCountBefore)}
             </p>
             <p className="text-xs text-muted-foreground">تحويل</p>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-2">
+        <p className="text-[11px] text-muted-foreground">
+          عينة تفصيلية من العلاقات — مؤشرات المحفظة أعلاه تعكس النطاق المؤسسي
+          التجريبي ({formatNumber(portfolioCountBefore)} تحويل ·{' '}
+          {formatSar(portfolioGross, true)})
+        </p>
         {beforeTxs.map((tx) => (
           <TxRow key={tx.id} tx={tx} variant="neutral" />
         ))}
         <div className="flex items-center justify-between rounded-lg border border-dashed p-3 text-sm">
-          <span className="text-muted-foreground">الإجمالي</span>
+          <span className="text-muted-foreground">إجمالي المحفظة التجريبية</span>
           <span className="font-mono font-bold tabular-nums">
-            {formatSar(grossVolume, true)}
+            {formatSar(portfolioGross, true)}
           </span>
         </div>
       </CardContent>
@@ -597,11 +619,6 @@ function AfterPanel({
     }),
   )
 
-  const volumeAfter = analysis?.metrics.totalNetVolume ?? 0
-  const volumeSaved = analysis?.metrics.estimatedSavings ?? 0
-  const efficiencyPct = analysis?.metrics.efficiencyPct ?? 0
-  const countAfter = analysis?.metrics.recommendedTransactions ?? 0
-
   return (
     <Card
       className={cn(
@@ -622,19 +639,22 @@ function AfterPanel({
               الشبكة بعد تنفيذ المقاصة
             </CardDescription>
           </div>
-          {done && analysis && (
-            <div className="text-end">
-              <p className="text-lg font-bold tabular-nums text-emerald-600">
-                {formatNumber(countAfter)}
-              </p>
-              <p className="text-xs text-muted-foreground">تحويل</p>
-            </div>
-          )}
+          <div className="text-end">
+            <p className="text-lg font-bold tabular-nums text-emerald-600">
+              {formatNumber(portfolioCountAfter)}
+            </p>
+            <p className="text-xs text-muted-foreground">تحويل</p>
+          </div>
         </div>
       </CardHeader>
       <CardContent>
         {done && analysis ? (
           <div className="space-y-2">
+            <p className="text-[11px] text-muted-foreground">
+              عينة نتائج تشغيلية — مؤشرات المحفظة:{' '}
+              {formatNumber(portfolioCountAfter)} تحويل · توفير{' '}
+              {formatSar(portfolioSavings, true)}
+            </p>
             {afterTxs.map((tx, i) => (
               <TxRow
                 key={tx.id}
@@ -644,17 +664,18 @@ function AfterPanel({
               />
             ))}
             <div className="flex items-center justify-between rounded-lg border border-dashed border-emerald-300 p-3 text-sm dark:border-emerald-800">
-              <span className="text-muted-foreground">الإجمالي</span>
+              <span className="text-muted-foreground">صافي المحفظة التجريبية</span>
               <span className="font-mono font-bold tabular-nums text-emerald-700 dark:text-emerald-400">
-                {formatSar(volumeAfter, true)}
+                {formatSar(enterprisePortfolioScale.netSettlementSar, true)}
               </span>
             </div>
             <div className="rounded-lg bg-emerald-50 p-3 dark:bg-emerald-950/40">
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="size-4 text-emerald-600" />
                 <span className="font-medium text-emerald-700 dark:text-emerald-400">
-                  وُفِّر {formatSar(volumeSaved, true)} —{' '}
-                  {formatPercent(efficiencyPct)} تخفيض في الحجم
+                  وُفِّر {formatSar(portfolioSavings, true)} —{' '}
+                  {formatPercent(enterprisePortfolioScale.savingsPct)} تخفيض في
+                  الحجم
                 </span>
               </div>
             </div>
@@ -797,40 +818,36 @@ export function NettingPage() {
     }
   }, [searchParams])
 
-  const countAfter = analysis?.metrics.recommendedTransactions ?? 0
-  const countReductionPct =
-    countBefore > 0 ? Math.round((1 - countAfter / countBefore) * 100) : 0
-
   const kpiCards: StatCard[] = [
     {
       id: 'before',
       label: 'التحويلات قبل المقاصة',
-      value: formatNumber(countBefore),
-      sub: 'تحويل في الشبكة',
+      value: formatNumber(portfolioCountBefore),
+      sub: 'تحويل في المحفظة التجريبية',
       icon: TrendingUp,
       colorClass: 'bg-red-500/10 text-red-600',
     },
     {
       id: 'after',
       label: 'التحويلات بعد المقاصة',
-      value: analysis ? formatNumber(countAfter) : '—',
-      sub: 'تحويل بعد المقاصة',
+      value: formatNumber(portfolioCountAfter),
+      sub: `${formatNumber(portfolioCountBefore)} → ${formatNumber(portfolioCountAfter)}`,
       icon: TrendingDown,
       colorClass: 'bg-emerald-500/10 text-emerald-600',
     },
     {
-      id: 'reduction',
-      label: 'نسبة التخفيض',
-      value: analysis ? formatPercent(countReductionPct) : '—',
-      sub: 'تقليل في عدد التحويلات',
+      id: 'savings',
+      label: 'التوفير المتوقع',
+      value: formatSar(portfolioSavings, true),
+      sub: formatPercent(enterprisePortfolioScale.savingsPct),
       icon: Minus,
       colorClass: 'bg-primary/10 text-primary',
     },
     {
       id: 'total',
       label: 'إجمالي قيمة الديون',
-      value: formatSar(grossVolume, true),
-      sub: 'قبل تطبيق المقاصة',
+      value: formatSar(portfolioGross, true),
+      sub: `${formatNumber(enterprisePortfolioScale.participatingCompanies)} شركة مشاركة`,
       icon: Zap,
       colorClass: 'bg-amber-500/10 text-amber-600',
     },
@@ -845,7 +862,7 @@ export function NettingPage() {
       const res = await fetch(`${API_BASE}/api/ai/netting-analysis`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ companies, debtRecords }),
+        body: JSON.stringify({ companies: sampleCompanies, debtRecords }),
       })
 
       if (res.ok) {
@@ -933,7 +950,7 @@ export function NettingPage() {
       </div>
 
       <EnterpriseNettingSessionPanel
-        companies={companies.map((c) => ({
+        companies={sampleCompanies.map((c) => ({
           id: c.id,
           name: c.name,
           nameEn: c.nameEn,
@@ -946,7 +963,7 @@ export function NettingPage() {
         }}
       />
 
-      {/* KPI cards */}
+      {/* KPI cards — enterprise presentation scale */}
       <StatCardGrid cards={kpiCards} />
 
       {/* Before / After panels */}
@@ -964,8 +981,8 @@ export function NettingPage() {
         onClose={() => setDialogOpen(false)}
         analysis={analysis}
         apiError={apiError}
-        countBefore={countBefore}
-        grossVolume={grossVolume}
+        countBefore={portfolioCountBefore}
+        grossVolume={portfolioGross}
       />
 
       <SettlementWorkflow

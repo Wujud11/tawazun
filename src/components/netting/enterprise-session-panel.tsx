@@ -150,29 +150,63 @@ export function EnterpriseNettingSessionPanel({
 
         <div className="space-y-4">
           {!session ? (
-            <div className="flex flex-col items-start gap-3 rounded-xl border border-dashed p-5">
-              <p className="text-sm text-muted-foreground">
-                ابدأ بإنشاء جلسة مقاصة. النظام يعرض اعتماد{' '}
-                {formatNumber(SAMPLE_PARTICIPANT_COUNT)} شركات كعيّنة فقط، بينما
-                مؤشرات الجلسة تعكس نطاقًا مؤسسيًا تجريبيًا أوسع.
-              </p>
-              <Button
-                className="gap-2"
-                onClick={() => void handleCreateSession()}
-                disabled={isCreating}
-              >
-                {isCreating ? (
-                  <>
-                    <Loader2 className="size-4 animate-spin" />
-                    جاري تجهيز الجلسة…
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="size-4" />
-                    إنشاء جلسة مقاصة
-                  </>
-                )}
-              </Button>
+            <div className="space-y-4">
+              <div>
+                <p className="flex items-center gap-2 text-sm font-semibold">
+                  <Building2 className="size-4 text-primary" />
+                  {SAMPLE_PARTICIPANTS_LABEL_AR}
+                </p>
+                <p className="mt-0.5 text-[11px] text-muted-foreground">
+                  Sample Participants —{' '}
+                  {formatNumber(sampleCompanies.length)} من أصل{' '}
+                  {formatNumber(
+                    enterprisePortfolioScale.participatingCompanies,
+                  )}
+                </p>
+              </div>
+              <div className="space-y-2">
+                {sampleCompanies.map((company) => (
+                  <div
+                    key={company.id}
+                    className="flex items-center justify-between gap-3 rounded-xl border bg-background px-3 py-2.5"
+                  >
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium">
+                        {company.name}
+                      </p>
+                      <p className="truncate text-[11px] text-muted-foreground">
+                        {company.nameEn}
+                      </p>
+                    </div>
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      جاهزة للاعتماد
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col items-start gap-3 rounded-xl border border-dashed p-4">
+                <p className="text-sm text-muted-foreground">
+                  ابدأ بإنشاء جلسة مقاصة. الاعتماد التفصيلي يبقى على هذه العينة
+                  فقط، بينما مؤشرات الجلسة تعكس النطاق المؤسسي التجريبي.
+                </p>
+                <Button
+                  className="gap-2"
+                  onClick={() => void handleCreateSession()}
+                  disabled={isCreating}
+                >
+                  {isCreating ? (
+                    <>
+                      <Loader2 className="size-4 animate-spin" />
+                      جاري تجهيز الجلسة…
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="size-4" />
+                      إنشاء جلسة مقاصة
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           ) : (
             <>
